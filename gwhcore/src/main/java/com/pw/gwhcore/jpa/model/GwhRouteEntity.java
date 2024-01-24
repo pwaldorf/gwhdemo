@@ -9,10 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "route_template_params")
+@Table(name = "routes")
 @ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
-public class RouteTemplateEntity {
-
+public class GwhRouteEntity {
+    
     @Id
     @GeneratedValue
     private Long id;
@@ -23,11 +23,8 @@ public class RouteTemplateEntity {
     @Column(name = "route_id")
     private String routeId;
 
-    @Column(name = "template_param_name")
-    private String templateParamName;
-
-    @Column(name = "template_param_value")
-    private String templateParamValue;
+    @Column(name = "route")
+    private String route;
 
     public Long getId() {
         return id;
@@ -53,26 +50,17 @@ public class RouteTemplateEntity {
         this.routeId = routeId;
     }
 
-    public String getTemplateParamName() {
-        return templateParamName;
+    public String getRoute() {
+        return route;
     }
 
-    public void setTemplateParamName(String templateParamName) {
-        this.templateParamName = templateParamName;
-    }
-
-    public String getTemplateParamValue() {
-        return templateParamValue;
-    }
-
-    public void setTemplateParamValue(String templateParamValue) {
-        this.templateParamValue = templateParamValue;
+    public void setRoute(String route) {
+        this.route = route;
     }
 
     @Override
     public String toString() {
-        return "RouteTemplateParams [id=" + id + ", routeId=" + routeId + ", templateParamName=" + templateParamName
-                + ", templateParamValue=" + templateParamValue + "]";
+        return "RouteEntity [id=" + id + ", profile=" + profile + ", routeId=" + routeId + ", route=" + route + "]";
     }
-
+    
 }

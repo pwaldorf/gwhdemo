@@ -26,7 +26,8 @@ public class RouteTemplateBuilder implements RouteTemplateParameterSource {
     
 
     public RouteTemplateBuilder(RouteTemplateService routeTemplateService) {
-        List<RouteTemplateEntity> routeTemplateEntities = routeTemplateService.getAllRouteTemplates();                
+        //List<RouteTemplateEntity> routeTemplateEntities = routeTemplateService.getAllRouteTemplates();
+        List<RouteTemplateEntity> routeTemplateEntities = routeTemplateService.getByProfile("dispatcher");
         routeTemplateEntities.stream().forEach(routeTemplateEntity -> {
             parameters.computeIfAbsent(routeTemplateEntity.getRouteId(), 
                                         k -> new HashMap<>()).put(routeTemplateEntity.getTemplateParamName(), 

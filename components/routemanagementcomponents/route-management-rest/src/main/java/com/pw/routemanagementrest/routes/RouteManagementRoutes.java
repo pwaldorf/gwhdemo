@@ -1,4 +1,4 @@
-package com.pw.routeManagementRestTemplate.routetemplates;
+package com.pw.routemanagementrest.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

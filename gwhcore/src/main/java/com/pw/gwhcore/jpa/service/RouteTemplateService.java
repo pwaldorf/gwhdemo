@@ -24,7 +24,16 @@ public class RouteTemplateService {
             return routeTemplates;
         } else {
             return new ArrayList<RouteTemplateEntity>();
-        }      
-        
+        }              
+    }
+
+    public List<RouteTemplateEntity> getByProfile(String profile) {
+        List<RouteTemplateEntity> routeTemplates = routeTemplateRepository.findByProfile(profile);
+
+        if(routeTemplates.size() > 0) {
+            return routeTemplates;
+        } else {
+            return new ArrayList<RouteTemplateEntity>();
+        }              
     }
 }

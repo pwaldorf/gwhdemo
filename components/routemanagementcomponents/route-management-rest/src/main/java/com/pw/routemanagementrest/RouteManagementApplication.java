@@ -1,4 +1,4 @@
-package com.pw.kafkacomponents;
+package com.pw.routemanagementrest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

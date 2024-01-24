@@ -1,4 +1,4 @@
-package com.pw.kafkacomponents;
+package com.pw.routemanagementrest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

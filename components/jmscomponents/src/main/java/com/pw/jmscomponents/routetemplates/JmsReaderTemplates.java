@@ -19,7 +19,7 @@ public class JmsReaderTemplates extends RouteBuilder {
         .templateParameter("directname")        
         .from( new StringBuilder("jmsConsumerTransacted:queue:")
                         .append("{{queue}}")
-                        .toString())
+                        .toString())        
         .transacted("{{transactionRef}}")        
         .setHeader("GWHOriginalMessageID").simple("${headerAs('JMSMessageID', String)}")        
         .setHeader("GWHOriginalCorrelationID").simple("${headerAs('JMSCorrelationID', String)}")
