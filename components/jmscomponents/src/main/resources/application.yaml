@@ -1,0 +1,18 @@
+gwh:
+  activemqtest:
+    component:
+      broker-url: tcp://192.168.6.1:61616
+      username: artemis
+      password: artemis
+      session-cache-size: 10
+
+  framework:
+    routes:
+      load:
+        params:
+          enabled: true
+    component:
+      activemqtest:
+        enabled: true
+      kafka:
+        enabled: true

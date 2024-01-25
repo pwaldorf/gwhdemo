@@ -11,7 +11,7 @@ import com.pw.gwhcore.jpa.repository.GwhRouteTemplateRepository;
 
 
 @Service
-@ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteTemplateService {
     
     @Autowired

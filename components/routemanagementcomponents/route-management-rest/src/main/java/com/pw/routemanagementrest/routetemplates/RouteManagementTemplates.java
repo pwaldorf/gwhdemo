@@ -2,9 +2,11 @@ package com.pw.routemanagementrest.routetemplates;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(value = "gwh.framework.component.routemanagement.rest.enabled", havingValue = "true", matchIfMissing = false)
 public class RouteManagementTemplates extends RouteBuilder{
 
     @Override

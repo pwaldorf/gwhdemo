@@ -3,10 +3,12 @@ package com.pw.routemanagementrest.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.Route;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 
 @Component("stopRouteProcessor")
+@ConditionalOnProperty(value = "gwh.framework.component.routemanagement.rest.enabled", havingValue = "true", matchIfMissing = false)
 public class StopRouteProcessor implements Processor {
     
     @Override

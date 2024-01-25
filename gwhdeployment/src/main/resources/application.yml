@@ -19,24 +19,29 @@ management:
     camel:
       enabled: true
 
-gtw:
+gwh:
   framework:
     routes:
       load:
         params:
           enabled: true
     component:
-      jms:
+      activemqtest:
         enabled: true
       kafka:
         enabled: true
+      pgpencryption:
+        enabled: true
+      routemanagement:
+        rest:
+          enabled: true
 
 db:
   datasource:
     className: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.6.2:3306/gwh
     userName: root
-    password: xxxxxxx
+    password: Adriana77!
     minpoolsize: 0
     maxpoolsize: 50
     increment: 2

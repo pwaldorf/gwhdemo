@@ -1,4 +1,4 @@
-package com.pw.jmscomponents.routetemplates;
+package com.pw.activemqtest.routetemplates;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
@@ -7,17 +7,17 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@ConditionalOnProperty(value = "gtw.framework.component.jms.enabled", havingValue = "true", matchIfMissing = false)
-public class JmsReaderTemplates extends RouteBuilder {
+@ConditionalOnProperty(value = "gwh.framework.component.activemqtest.enabled", havingValue = "true", matchIfMissing = false)
+public class ActiveMqTestReaderTemplates extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
 
-        routeTemplate("jms_reader")
+        routeTemplate("activemqtest_reader_tx_v1")
         .templateParameter("queue")
-        .templateParameter("transactionRef", "txRequired")
+        .templateParameter("transactionRef", "txRequiredActiveMqTest")
         .templateParameter("directname")        
-        .from( new StringBuilder("jmsConsumerTransacted:queue:")
+        .from( new StringBuilder("activeMqTestConsumerTx:queue:")
                         .append("{{queue}}")
                         .toString())        
         .transacted("{{transactionRef}}")        

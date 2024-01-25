@@ -1,21 +1,20 @@
-package com.pw.jmscomponents.routeconfigurations;
+package com.pw.activemqtest.routeconfigurations;
 
 import org.apache.camel.builder.RouteConfigurationBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gtw.framework.component.jms.enabled", havingValue = "true", matchIfMissing = false)
-public class JMSRouteConfigurations extends RouteConfigurationBuilder {
+@ConditionalOnProperty(value = "gw.framework.component.activemqtest.enabled", havingValue = "true", matchIfMissing = false)
+public class ActiveMqTestRouteConfigurations extends RouteConfigurationBuilder {
 
     @Override
     public void configuration() throws Exception {
         
-        routeConfiguration("jmsError")
+        routeConfiguration("activeMqTestError")
             .onException(Exception.class)
             .handled(true)            
-            .log("JMS Error: ${exception.message}")
+            .log("ActiveMqTest Error: ${exception.message}")
             .end();
-
     }    
 }

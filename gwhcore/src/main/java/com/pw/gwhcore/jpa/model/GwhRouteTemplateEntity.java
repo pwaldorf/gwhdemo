@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-@ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteTemplateEntity {
 
     @Id

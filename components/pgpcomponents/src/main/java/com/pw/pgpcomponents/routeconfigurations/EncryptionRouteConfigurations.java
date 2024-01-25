@@ -4,10 +4,12 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteConfigurationBuilder;
 import org.apache.camel.converter.crypto.PGPDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@ConditionalOnProperty(value = "gwh.framework.component.pgpencryption.enabled", havingValue = "true", matchIfMissing = false)
 public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
 
     @Autowired

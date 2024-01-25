@@ -1,12 +1,12 @@
-package com.pw.kafkacomponents;
+package com.pw.kafkadefault;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KafkaComponentsApplication {
+public class KafkaDefaultComponentsApplication {
 
     public static void main(String[] args) {
-		SpringApplication.run(KafkaComponentsApplication.class, args);
+		SpringApplication.run(KafkaDefaultComponentsApplication.class, args);
     }
 }

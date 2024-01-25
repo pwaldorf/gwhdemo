@@ -1,6 +1,18 @@
 server:
     port: 8081
 
+gwh:
+  framework:
+    routes:
+      load:
+        params:
+          enabled: true
+    component:
+      activemqtest:
+        enabled: true
+      kafka:
+        enabled: true
+
 management:
   server:
     port: 8085
@@ -19,24 +31,12 @@ management:
     camel:
       enabled: true
 
-gtw:
-  framework:
-    routes:
-      load:
-        params:
-          enabled: true
-    component:
-      jms:
-        enabled: true
-      kafka:
-        enabled: true
-
 db:
   datasource:
     className: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.6.2:3306/gwh
     userName: root
-    password: xxxxxxx
+    password: Adriana77!
     minpoolsize: 0
     maxpoolsize: 50
     increment: 2

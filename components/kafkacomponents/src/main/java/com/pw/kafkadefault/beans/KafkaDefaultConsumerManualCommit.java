@@ -1,4 +1,4 @@
-package com.pw.kafkacomponents.beans;
+package com.pw.kafkadefault.beans;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.component.kafka.KafkaConstants;
@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gtw.framework.component.kafka.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaConsumerManualCommit {
+@ConditionalOnProperty(value = "gwh.framework.component.kafka.enabled", havingValue = "true", matchIfMissing = false)
+public class KafkaDefaultConsumerManualCommit {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerManualCommit.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDefaultConsumerManualCommit.class);
     
     public void process(Exchange exchange) {
         KafkaManualCommit manual =

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-@ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public interface GwhRouteTemplateRepository extends JpaRepository<GwhRouteTemplateEntity, Long> {    
 
     List<GwhRouteTemplateEntity> findByProfile(String profile);

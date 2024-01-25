@@ -8,9 +8,11 @@ import org.apache.camel.Processor;
 import org.apache.camel.Route;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(value = "gwh.framework.component.routemanagement.rest.enabled", havingValue = "true", matchIfMissing = false)
 public class ListRoutesProcessor implements Processor{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ListRoutesProcessor.class);
