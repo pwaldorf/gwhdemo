@@ -11,7 +11,7 @@ public class PgpFrameworkComponent {
     public PGPDataFormat pgpPublicDataFormat() {
         PGPDataFormat pgpDataFormat = new PGPDataFormat();
         pgpDataFormat.setKeyUserid("pw company <philip.waldorf@gmail.com>");        
-        pgpDataFormat.setPassword("Adriana77!");
+        pgpDataFormat.setPassword("xxxxxxx");
         pgpDataFormat.setKeyFileName("file:/home/pwaldorf/.gnupg/pubring.gpg");        
         return pgpDataFormat;
     }
@@ -20,7 +20,7 @@ public class PgpFrameworkComponent {
     public PGPDataFormat pgpPrivateDataFormat() {
         PGPDataFormat pgpDataFormat = new PGPDataFormat();
         pgpDataFormat.setKeyUserid("pw company <philip.waldorf@gmail.com>");        
-        pgpDataFormat.setPassword("Adriana77!");
+        pgpDataFormat.setPassword("xxxxxxx");
         pgpDataFormat.setKeyFileName("file:/home/pwaldorf/.gnupg/secring.gpg");        
         return pgpDataFormat;
     }
