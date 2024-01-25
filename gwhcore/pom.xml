@@ -94,6 +94,12 @@
 			</exclusions>
         </dependency>
 
+		<!-- utility dependencies-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>			
+		</dependency>
+
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>com.pw</groupId>

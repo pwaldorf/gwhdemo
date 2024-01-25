@@ -8,11 +8,11 @@ import java.util.Set;
 import org.apache.camel.spi.RouteTemplateParameterSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import com.pw.gwhcore.jpa.model.GwhRouteTemplateEntity;
+import com.pw.gwhcore.jpa.service.GwhRouteTemplateService;
+import lombok.extern.slf4j.Slf4j;
 
-import com.pw.gwhcore.jpa.model.RouteTemplateEntity;
-import com.pw.gwhcore.jpa.service.RouteTemplateService;
-
-
+@Slf4j
 @Component
 @ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class RouteTemplateBuilder implements RouteTemplateParameterSource {
@@ -20,14 +20,14 @@ public class RouteTemplateBuilder implements RouteTemplateParameterSource {
     private final String TEMPLATE_ID = "templateId";    
     private final String LOCATION = "location";
 
-    private RouteTemplateService routeTemplateService;
+    private GwhRouteTemplateService routeTemplateService;
 
     private final Map<String, Map<String, Object>> parameters = new LinkedHashMap<>();
     
 
-    public RouteTemplateBuilder(RouteTemplateService routeTemplateService) {
-        //List<RouteTemplateEntity> routeTemplateEntities = routeTemplateService.getAllRouteTemplates();
-        List<RouteTemplateEntity> routeTemplateEntities = routeTemplateService.getByProfile("dispatcher");
+    public RouteTemplateBuilder(GwhRouteTemplateService routeTemplateService) {
+        log.debug("Adding new routes from template params");        
+        List<GwhRouteTemplateEntity> routeTemplateEntities = routeTemplateService.getByProfile("dispatcher");
         routeTemplateEntities.stream().forEach(routeTemplateEntity -> {
             parameters.computeIfAbsent(routeTemplateEntity.getRouteId(), 
                                         k -> new HashMap<>()).put(routeTemplateEntity.getTemplateParamName(), 

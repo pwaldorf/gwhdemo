@@ -14,15 +14,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "routes")
+@Table(name = "route_template_params")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
 @ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
-public class GwhRouteEntity {
-    
+public class GwhRouteTemplateEntity {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -33,7 +33,10 @@ public class GwhRouteEntity {
     @Column(name = "route_id")
     private String routeId;
 
-    @Column(name = "route")
-    private String route;    
-    
+    @Column(name = "template_param_name")
+    private String templateParamName;
+
+    @Column(name = "template_param_value")
+    private String templateParamValue;
+
 }

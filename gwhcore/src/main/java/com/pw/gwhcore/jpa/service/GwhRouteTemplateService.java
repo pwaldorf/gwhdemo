@@ -6,34 +6,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-import com.pw.gwhcore.jpa.model.RouteTemplateEntity;
-import com.pw.gwhcore.jpa.repository.RouteTemplateRepository;
+import com.pw.gwhcore.jpa.model.GwhRouteTemplateEntity;
+import com.pw.gwhcore.jpa.repository.GwhRouteTemplateRepository;
 
 
 @Service
 @ConditionalOnProperty(value = "gtw.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
-public class RouteTemplateService {
+public class GwhRouteTemplateService {
     
     @Autowired
-    RouteTemplateRepository routeTemplateRepository;
+    GwhRouteTemplateRepository routeTemplateRepository;
 
-    public List<RouteTemplateEntity> getAllRouteTemplates() {
-        List<RouteTemplateEntity> routeTemplates = routeTemplateRepository.findAll();
+    public List<GwhRouteTemplateEntity> getAllRouteTemplates() {
+        List<GwhRouteTemplateEntity> routeTemplates = routeTemplateRepository.findAll();
 
         if(routeTemplates.size() > 0) {
             return routeTemplates;
         } else {
-            return new ArrayList<RouteTemplateEntity>();
+            return new ArrayList<GwhRouteTemplateEntity>();
         }              
     }
 
-    public List<RouteTemplateEntity> getByProfile(String profile) {
-        List<RouteTemplateEntity> routeTemplates = routeTemplateRepository.findByProfile(profile);
+    public List<GwhRouteTemplateEntity> getByProfile(String profile) {
+        List<GwhRouteTemplateEntity> routeTemplates = routeTemplateRepository.findByProfile(profile);
 
         if(routeTemplates.size() > 0) {
             return routeTemplates;
         } else {
-            return new ArrayList<RouteTemplateEntity>();
+            return new ArrayList<GwhRouteTemplateEntity>();
         }              
     }
 }

@@ -1,30 +1,22 @@
 package com.pw.gwhcore.beans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.ResourceHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.pw.gwhcore.jpa.model.GwhRouteEntity;
-import com.pw.gwhcore.jpa.model.RouteTemplateEntity;
 import com.pw.gwhcore.jpa.service.GwhRouteService;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Configuration
 public class CustomCamelContextConfig {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomCamelContextConfig.class);
 
     @Autowired
     GwhRouteService gwhRouteService;
@@ -32,7 +24,7 @@ public class CustomCamelContextConfig {
     @Bean
     public CamelContextConfiguration camelContextConfiguration() {
 
-        String newLine = System.getProperty("line.separator");
+        //String newLine = System.getProperty("line.separator");
         
         // XML DSL Example
         // String newRoute = new StringBuilder("<route id=\"testdata\">")
@@ -52,7 +44,7 @@ public class CustomCamelContextConfig {
             @Override
             public void beforeApplicationStart(CamelContext camelContext) {
 
-                LOGGER.debug("Adding new route {} ", newRoute);
+                log.debug("Adding new routes");
 
                 List<Resource> resourceList = new ArrayList<>();
 
