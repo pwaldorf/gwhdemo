@@ -1,10 +1,10 @@
-package com.pw.kafkacomponents;
+package com.pw.kafkadefault;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KafkacomponentsApplicationTests {
+class KafkaDefaultComponentsApplicationTests {
 
 	@Test
 	void contextLoads() {

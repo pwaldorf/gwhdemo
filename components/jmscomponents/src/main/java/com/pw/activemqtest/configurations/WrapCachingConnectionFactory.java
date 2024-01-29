@@ -1,4 +1,4 @@
-package com.pw.activemqtest.components.config;
+package com.pw.activemqtest.configurations;
 
 import org.springframework.core.InfrastructureProxy;
 import org.springframework.jms.connection.CachingConnectionFactory;

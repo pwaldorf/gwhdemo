@@ -3,11 +3,13 @@ package com.pw.gwhcore.beans;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.camel.CamelContext;
+import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.pw.gwhcore.jpa.model.GwhRouteEntity;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
+@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class CustomCamelContextConfig {
 
     @Autowired
@@ -49,10 +52,10 @@ public class CustomCamelContextConfig {
                 List<Resource> resourceList = new ArrayList<>();
 
                 List<GwhRouteEntity> routeEntities = gwhRouteService.getByProfile("dispatcher");
-                routeEntities.stream().forEach(routeEntity -> resourceList.add(ResourceHelper.fromString("MyRoute.xml", routeEntity.getRoute())));
+                routeEntities.stream().forEach(routeEntity -> resourceList.add(ResourceHelper.fromString("MyRoute.xml", routeEntity.getRoute())));                
 
                 try {
-                    PluginHelper.getRoutesLoader(camelContext.getCamelContextExtension()).loadRoutes(resourceList);
+                    PluginHelper.getRoutesLoader(camelContext.getCamelContextExtension()).loadRoutes(resourceList);                    
                 } catch (Exception e) {                    
                     e.printStackTrace();
                 }

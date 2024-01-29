@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.camel.spi.RouteTemplateParameterSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import com.pw.gwhcore.jpa.model.GwhRouteTemplateEntity;
@@ -20,6 +21,9 @@ public class RouteTemplateBuilder implements RouteTemplateParameterSource {
     private final String TEMPLATE_ID = "templateId";    
     private final String LOCATION = "location";
 
+    @Value("${gwh.service.profile}")
+    private String profile;
+
     private GwhRouteTemplateService routeTemplateService;
 
     private final Map<String, Map<String, Object>> parameters = new LinkedHashMap<>();
@@ -27,7 +31,7 @@ public class RouteTemplateBuilder implements RouteTemplateParameterSource {
 
     public RouteTemplateBuilder(GwhRouteTemplateService routeTemplateService) {
         log.debug("Adding new routes from template params");        
-        List<GwhRouteTemplateEntity> routeTemplateEntities = routeTemplateService.getByProfile("dispatcher");
+        List<GwhRouteTemplateEntity> routeTemplateEntities = routeTemplateService.getByProfile(profile);
         routeTemplateEntities.stream().forEach(routeTemplateEntity -> {
             parameters.computeIfAbsent(routeTemplateEntity.getRouteId(), 
                                         k -> new HashMap<>()).put(routeTemplateEntity.getTemplateParamName(), 

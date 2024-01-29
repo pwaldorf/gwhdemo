@@ -24,6 +24,7 @@ public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
         routeConfiguration()        
         .interceptFrom("^(jms|kafka).*")
         .marshal(pgpPublicDataFormat)
+        .marshal().base64()
         .setHeader("GWHBodyEncrypted").constant("true", String.class)
         .log(LoggingLevel.DEBUG, "Encrypted Message: ${body}");
 
@@ -31,6 +32,7 @@ public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
         .interceptSendToEndpoint("^(jms|kafka).*")
         .choice()
             .when(header("GWHBodyEncrypted").isEqualTo("true"))
+                .unmarshal().base64()
                 .unmarshal(pgpPrivateDataFormat)
                 .removeHeaders("GWHBodyEncrypted")
             .end();

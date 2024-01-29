@@ -1,4 +1,4 @@
-package com.pw.activemqtest.components.config;
+package com.pw.activemqtest.configurations;
 
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;

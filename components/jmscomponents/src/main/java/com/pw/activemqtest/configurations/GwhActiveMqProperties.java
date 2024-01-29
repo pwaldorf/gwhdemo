@@ -1,4 +1,4 @@
-package com.pw.activemqtest.components.config;
+package com.pw.activemqtest.configurations;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

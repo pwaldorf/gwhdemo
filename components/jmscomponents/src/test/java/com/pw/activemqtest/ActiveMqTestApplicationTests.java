@@ -1,11 +1,11 @@
-package com.pw.jmscomponents;
+package com.pw.activemqtest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JmscomponentsApplicationTests {
+class ActiveMqTestApplicationTests {
 
 	@Test
 	void contextLoads() {

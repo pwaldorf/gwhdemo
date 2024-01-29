@@ -20,6 +20,8 @@ management:
       enabled: true
 
 gwh:
+  service:
+    profile: dispatcher
   framework:
     routes:
       load:
@@ -36,26 +38,21 @@ gwh:
         rest:
           enabled: true
 
-db:
-  datasource:
-    className: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.6.2:3306/gwh
-    userName: root
-    password: Adriana77!
-    minpoolsize: 0
-    maxpoolsize: 50
-    increment: 2
-    maxidleTime: 300
-    retryDelay: 600000
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect        
-    hibernate:
-      ddl-auto: validate
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-        
+  core:
+    db:
+      datasource:
+        className: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.6.2:3306/gwh
+        userName: root
+        password: Adriana77!
+        minpoolsize: 0
+        maxpoolsize: 50
+        increment: 2
+        maxidleTime: 300
+        retryDelay: 600000                
+        jpa-dialect: org.hibernate.dialect.MySQLDialect        
+        jpa-ddl-auto: validate          
+        jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
 
 camel:
   main:
