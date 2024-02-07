@@ -3,17 +3,16 @@ package com.pw.gwhcore.beans;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.camel.CamelContext;
-import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.pw.gwhcore.jpa.model.GwhRouteEntity;
-import com.pw.gwhcore.jpa.service.GwhRouteService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,8 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class CustomCamelContextConfig {
 
+    @Autowired    
+    GwhRoutesLoader gwhRoutesLoader;
+
     @Autowired
-    GwhRouteService gwhRouteService;
+    GwhCacheLoader gwhCacheLoader;
 
     @Bean
     public CamelContextConfiguration camelContextConfiguration() {
@@ -48,17 +50,10 @@ public class CustomCamelContextConfig {
             public void beforeApplicationStart(CamelContext camelContext) {
 
                 log.debug("Adding new routes");
+                gwhRoutesLoader.loadRoutes();
 
-                List<Resource> resourceList = new ArrayList<>();
-
-                List<GwhRouteEntity> routeEntities = gwhRouteService.getByProfile("dispatcher");
-                routeEntities.stream().forEach(routeEntity -> resourceList.add(ResourceHelper.fromString("MyRoute.xml", routeEntity.getRoute())));                
-
-                try {
-                    PluginHelper.getRoutesLoader(camelContext.getCamelContextExtension()).loadRoutes(resourceList);                    
-                } catch (Exception e) {                    
-                    e.printStackTrace();
-                }
+                log.debug("Adding new caches");
+                gwhCacheLoader.load();
                 
                 // // Load YAML or XML DSL Route from String.
                 // try {

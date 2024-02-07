@@ -1,9 +1,13 @@
 package com.pw.activemqtest.configurations;
 
 
+import java.util.List;
+
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.apache.camel.spi.Resource;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +23,7 @@ public class GwhActiveMqConfigurations {
 
     @Autowired
     GwhActiveMqProperties gwhActiveMqProperties;
-    
+
     @Bean("activeMqTestConnectionFactory")
 	public ConnectionFactory activeMqTestConnectionFactory() {		
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();

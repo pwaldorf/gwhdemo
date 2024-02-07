@@ -16,7 +16,7 @@ public class ActiveMqTestWriterTemplates extends RouteBuilder{
         .templateParameter("queue")
         .templateParameter("targetclient","0")
         .from("direct:{{directname}}")        
-        .setHeader("CamleJmsDestinationName", constant("queue://{{queue}}?targetclient={{targetclient}}"))
+        .setHeader("CamelJmsDestinationName", constant("queue://{{queue}}?targetclient={{targetclient}}"))
         .to(new StringBuilder("activeMqTestProducerTx:queue:")
                     .append("{{queue}}")
                     .toString());
