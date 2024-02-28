@@ -42,6 +42,12 @@
 			<artifactId>spring-boot-starter-artemis</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.parser</groupId>
+			<artifactId>gwhparser</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!-- camel dependencies -->
 		<dependency>
   			<groupId>org.apache.camel.springboot</groupId>

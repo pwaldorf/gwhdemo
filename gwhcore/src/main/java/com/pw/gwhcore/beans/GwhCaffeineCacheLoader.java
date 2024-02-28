@@ -44,7 +44,7 @@ public class GwhCaffeineCacheLoader implements GwhCacheLoader {
         configuration.setEvictionType(EvictionType.SIZE_BASED);
         configuration.setInitialCapacity(1000);
         configuration.setMaximumSize(100000);
-        configuration.setCacheLoader(context.getBean("gwhRouteTemplateCacheLoader", CacheLoader.class));
+        //configuration.setCacheLoader(context.getBean("gwhRouteTemplateCacheLoader", CacheLoader.class));
         configs.put("gwhRouteTemplateCache", configuration);
         
         return configs;

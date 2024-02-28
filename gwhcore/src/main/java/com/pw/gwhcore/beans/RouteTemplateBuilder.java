@@ -28,7 +28,8 @@ public class RouteTemplateBuilder implements RouteTemplateParameterSource {
 
     private final Map<String, Map<String, Object>> parameters = new LinkedHashMap<>();    
 
-    public RouteTemplateBuilder(GwhRouteTemplateService routeTemplateService) {
+    //public RouteTemplateBuilder(GwhRouteTemplateService routeTemplateService) {
+    public RouteTemplateBuilder(List<GwhRouteTemplateEntity> gwhRouteTemplateEntities) {        
         log.debug("Adding new routes from template params");                
         gwhRouteTemplateEntities.stream().forEach(routeTemplateEntity -> {
             parameters.computeIfAbsent(routeTemplateEntity.getRouteId(), 

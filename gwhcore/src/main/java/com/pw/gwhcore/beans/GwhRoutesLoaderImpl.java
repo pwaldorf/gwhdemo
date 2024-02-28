@@ -9,9 +9,11 @@ import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.pw.gwhcore.jpa.model.GwhRouteEntity;
 
+@Component
 public class GwhRoutesLoaderImpl implements GwhRoutesLoader {
 
     @Autowired
