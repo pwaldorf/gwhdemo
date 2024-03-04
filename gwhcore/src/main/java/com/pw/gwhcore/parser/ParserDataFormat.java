@@ -4,12 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
@@ -19,27 +16,18 @@ import org.apache.camel.spi.DataFormatName;
 import org.apache.camel.support.service.ServiceSupport;
 import org.apache.camel.util.IOHelper;
 
+import com.parser.gwhparser.loader.ConfigLoaderStrategy;
+import com.parser.gwhparser.loader.appconfig.XmlAppConfigLoader;
+import com.parser.gwhparser.loader.dictionaryconfig.ConfigDictionaryLoader;
+import com.parser.gwhparser.loader.parserconfig.XmlParserConfigLoader;
 import com.parser.gwhparser.parser.Parser;
 import com.parser.gwhparser.parser.ParserFactory;
-import com.parser.gwhparser.parser.SampleReader;
-import com.parser.gwhparser.parser.SampleReaderFactory;
 import com.parser.gwhparser.parser.config.GenParserConfig;
-//import com.parser.gwhparser.parser.config.ParserConfig;
-import com.parser.gwhparser.parser.config.ParserFormat;
-import com.parser.gwhparser.parser.config.PathMapping;
-import com.parser.gwhparser.parser.config.ValueType;
-import com.parser.gwhparser.parser.model.ConfigDictionaryLoader;
-import com.parser.gwhparser.parser.model.Dictionary;
-import com.parser.gwhparser.parser.model.DictionaryLoader;
-import com.parser.gwhparser.parser.model.ElementConfig;
-import com.parser.gwhparser.parser.model.ElementConfigs;
+import com.parser.gwhparser.parser.enums.ParserFormat;
+import com.parser.gwhparser.parser.enums.ValueType;
 import com.parser.gwhparser.parser.model.Entity;
 import com.parser.gwhparser.parser.model.EntityFactory;
 import com.parser.gwhparser.parser.model.SimpleEntityFactory;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -63,36 +51,23 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
     private String stringConcatDelimiter = DEFAULT_CONCAT_DELIMITER;
     private List<DateTimeFormatter> timestampFormatters = Collections.emptyList();
 
+    private ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader = null;
+    private String dictionaryConfig = null;
+    private ConfigLoaderStrategy<String, GenParserConfig> parserConfigLoader = null;
+    private String parserConfig = null;
+    private String appConfig = null;
+
     public static final String DEFAULT_DICTIONARY = "<Dictionary>"
             + "<DictionaryName>" + "DEFAULT" + "</DictionaryName>"
-            + "<Element id=\"1\" name=\"FIRST_NAME\" />"
-            + "<Element id=\"2\" name=\"LAST_NAME\" />"
-            + "<Element id=\"3\" name=\"AGE\" type=\"INTEGER\" />"
+            + "<Element id=\"1\" name=\"DEFAULT_ELEMENT\" description=\"Default Element\" />"
             + "</Dictionary>";
 
-    public static final String ELEMENT_CONFIGS = "<ElementConfigs>"
-            + "<ElementConfig>"
-            + "<format></format>"
-            + "<length>10</length>"
-            + "<name>firstname</name>"
-            + "<start>0</start>"
-            + "<type>string</type>"
-            + "</ElementConfig>"
-            + "<ElementConfig>"
-            + "<format></format>"
-            + "<length>10</length>"
-            + "<name>lastname</name>"
-            + "<start>10</start>"
-            + "<type>string</type>"
-            + "</ElementConfig>"
-            + "<ElementConfig>"
-            + "<format></format>"
-            + "<length>2</length>"
-            + "<name>age</name>"
-            + "<start>20</start>"
-            + "<type>string</type>"
-            + "</ElementConfig>"
-            + "</ElementConfigs>";
+    public static final String DEFAULT_PARSER_PROPERTIES = "<ParserConfig>"
+            + "<Property name=\"Format\" value=\"XML\" />"
+            + "<Property name=\"CharacterSet\" value=\"UTF-8\" />"
+            + "<Property name=\"DateFormat\" value=\"yyyy-MM-dd HH:mm:ss\" />"
+            + "<Property name=\"TimestampFormat\" value=\"ISO_OFFSET_DATE_TIME\" />"
+            + "</ParserConfig>";
 
     @Override
     public String getDataFormatName() {
@@ -121,63 +96,22 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
         BufferedReader streamReader = IOHelper.buffered(new InputStreamReader(stream, getCharacterSet()));
         String data = exchange.getContext().getTypeConverter().mandatoryConvertTo(String.class, exchange, streamReader);
 
-        DictionaryLoader<String> dictionaryLoader = new ConfigDictionaryLoader();
-        dictionaryLoader.load(DEFAULT_DICTIONARY);
-        log.info("Dictionary: " + Dictionary.getInstance().toString());
+        //Setup DictionaryConfig                
+        ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader = new ConfigDictionaryLoader(getDictionaryConfig(), new GenParserConfig());
+        
+        //Setup ParserConfig
+        GenParserConfig parserConfig = new GenParserConfig();
+        ConfigLoaderStrategy<String, GenParserConfig> xmlParserConfigLoader = new XmlParserConfigLoader(getParserConfig(), parserConfig);        
 
-        EntityFactory entityFactory = SimpleEntityFactory.getInstance();        
-        GenParserConfig parserConfig = createParserConfig(ELEMENT_CONFIGS);
-        ParserFactory parserFactory = ParserFactory.getInstance();
+        //Setup AppConfig
+        ConfigLoaderStrategy<String, GenParserConfig> appConfigLoader = new XmlAppConfigLoader(getAppConfig(), parserConfig);
+
+        //Parse Message
+        EntityFactory entityFactory = SimpleEntityFactory.getInstance();
+        ParserFactory parserFactory = ParserFactory.getInstance();        
         Parser parser = parserFactory.getParser(null, parserConfig, entityFactory);
         Entity entity = parser.parse(data);
         return entity;
-
-    }
-
-    private GenParserConfig createParserConfig(String elementConfigs) throws JAXBException {
-                
-        GenParserConfig parserConfig = new GenParserConfig();
-        parserConfig.setFormat(getFormat());
-        parserConfig.setCharacterSet(getCharacterSet());
-        parserConfig.setCoalescing(isCoalescing());
-        parserConfig.setDateFormatters(getDateFormatters());
-        parserConfig.setDefaultValueType(getDefaultValueType());
-        parserConfig.setPreserveCDATA(isPreserveCDATA());
-        parserConfig.setRootEntityName(getRootEntityName());
-        parserConfig.setStringConcatDelimiter(getStringConcatDelimiter());
-        parserConfig.setTimestampFormatters(getTimestampFormatters());
-
-        if (parserConfig.getFormat() == ParserFormat.FIXEDLENGTH ||
-            parserConfig.getFormat() == ParserFormat.QREP) {        
-            parserConfig.setEleConfigs(genEleConfig(elementConfigs));            
-        } else {
-            parserConfig.setMappings(setElementMappings(elementConfigs));
-        }
-        
-
-        // Parser Config Name
-        parserConfig.setSampleName("MYAPP");
-        // Message Format
-        parserConfig.setFormat(getFormat());
-        return parserConfig;
-                            
-    }
-
-    private List<ElementConfig> genEleConfig(String context) throws JAXBException {
-
-        JAXBContext jaxbContext = JAXBContext.newInstance(ElementConfigs.class);
-        Unmarshaller Unmarshaller = jaxbContext.createUnmarshaller();
-        ElementConfigs eleConfigs = (ElementConfigs) Unmarshaller.unmarshal(new StringReader(context));
-        return eleConfigs.getElements();
-
-    }
-
-    @SuppressWarnings("unchecked")    
-    private Iterator<Entry<String, List<PathMapping>>> setElementMappings(String context) {
-        
-        SampleReaderFactory readerFactory = SampleReaderFactory.getInstance();
-        SampleReader reader = readerFactory.getReader(ParserFormat.XML);
-        return (Iterator<Entry<String, List<PathMapping>>>) reader.readSample(context);
 
     }
 
@@ -252,6 +186,45 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
     public void setTimestampFormatters(List<DateTimeFormatter> timestampFormatters) {
         this.timestampFormatters = timestampFormatters;
     }
-    
+
+    public ConfigLoaderStrategy<String, GenParserConfig> getDictionaryLoader() {
+        return (dictionaryLoader != null ? dictionaryLoader : new ConfigDictionaryLoader());
+    }
+
+    public void setDictionaryLoader(ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader) {
+        this.dictionaryLoader = dictionaryLoader;
+    }
+
+    public String getDictionaryConfig() {
+        return (dictionaryConfig != null ? dictionaryConfig : DEFAULT_DICTIONARY);
+    }
+
+    public void setDictionaryConfig(String dictionaryConfig) {
+        this.dictionaryConfig = dictionaryConfig;
+    }
+
+    public ConfigLoaderStrategy<String, GenParserConfig> getParserConfigLoader() {
+        return (parserConfigLoader != null ? parserConfigLoader : new XmlParserConfigLoader());
+    }
+
+    public void setParserConfigLoader(ConfigLoaderStrategy<String, GenParserConfig> parserConfigLoader) {
+        this.parserConfigLoader = parserConfigLoader;
+    }
+
+    public String getParserConfig() {
+        return (parserConfig != null ? parserConfig : DEFAULT_PARSER_PROPERTIES);
+    }
+
+    public void setParserConfig(String parserConfig) {
+        this.parserConfig = parserConfig;
+    }
+
+    public String getAppConfig() {
+        return appConfig;
+    }
+
+    public void setAppConfig(String appConfig) {
+        this.appConfig = appConfig;
+    }
     
 }
