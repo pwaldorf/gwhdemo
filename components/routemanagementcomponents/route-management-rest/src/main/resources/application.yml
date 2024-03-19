@@ -35,17 +35,8 @@ camel:
   main:
     dev-console-enabled: true
   springboot:
-    name: GWHDispatcher
-   # tracing-standby: true
-   # tracing: true    
-    dev-console-enabled: true
-                                 
-    #routes-include-pattern: "classpath:camel/routeManagement/v1/*.yaml,\
-    #                         classpath:camel/errorHandelers/v1/*.yaml,\
-    #                         classpath:camel/routeConfigurations/v1/*.yaml,\
-    #                         classpath:camel/routeTemplates/v1/*.yaml,\
-    #                         classpath:camel/routes/dispatcher/v1/*.yaml,\
-    #                         classpath:camel/testRoute/*.yaml"    
+    name: GWHDispatcher    
+    dev-console-enabled: true                       
   servlet:
     mapping:
       context-path: /api/*

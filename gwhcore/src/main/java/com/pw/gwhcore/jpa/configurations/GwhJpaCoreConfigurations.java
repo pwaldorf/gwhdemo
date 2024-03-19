@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,13 +29,16 @@ public class GwhJpaCoreConfigurations {
     @Autowired
     GwhJpaCoreProperties gwhJpaCoreProperties;
 
+    @Value("${MYSQL_PASSWORD}")
+    private String password;
+
     @Bean(name = "gwhCoreDataSource")
     public DataSource dataSource() throws PropertyVetoException{
         ComboPooledDataSource dataSource = new ComboPooledDataSource();        
         dataSource.setDriverClass(gwhJpaCoreProperties.getClassName());        
         dataSource.setJdbcUrl(gwhJpaCoreProperties.getUrl());
         dataSource.setUser(gwhJpaCoreProperties.getUserName());
-        dataSource.setPassword(gwhJpaCoreProperties.getPassword());
+        dataSource.setPassword(password);
         dataSource.setMinPoolSize(gwhJpaCoreProperties.getMinPoolSize());
         dataSource.setMaxPoolSize(gwhJpaCoreProperties.getMaxPoolSize());
         dataSource.setAcquireIncrement(gwhJpaCoreProperties.getIncrement());
