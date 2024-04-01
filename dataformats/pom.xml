@@ -3,18 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
-	<artifactId>components</artifactId>
+	<artifactId>dataformats</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>components</name>
+	<name>dataformats</name>
 
 	<modules>
-		<module>ftpcomponents</module>
-		<module>jmscomponents</module>
-		<module>kafkacomponents</module>
-		<module>pgpcomponents</module>
-		<module>routemanagementcomponents</module>
+		<module>csvdataformats</module>
 	</modules>
 
 	<parent>
@@ -24,6 +20,6 @@
 		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
-	<description>Components Parent POM</description>
+	<description>Dataformats Parent POM</description>
 
 </project>

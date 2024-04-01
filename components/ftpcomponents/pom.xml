@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
-	<artifactId>components</artifactId>
+	<artifactId>ftpcomponents</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -15,9 +15,8 @@
 
 	<parent>
 		<groupId>com.pw</groupId>
-		<artifactId>gwhparent</artifactId>
+		<artifactId>components</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
 	<description>Components Parent POM</description>

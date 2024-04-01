@@ -1,11 +1,11 @@
-package com.pw.ftpcomponent;
+package com.pw.csvdataformats;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FtpcomponentApplicationTests {
+class CsvdataformatsApplicationTests {
 
 	@Test
 	void contextLoads() {
