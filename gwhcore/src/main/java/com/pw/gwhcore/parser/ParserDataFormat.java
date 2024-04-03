@@ -18,13 +18,14 @@ import org.apache.camel.util.IOHelper;
 
 import com.parser.gwhparser.loader.ConfigLoaderStrategy;
 import com.parser.gwhparser.loader.appconfig.XmlAppConfigLoader;
-import com.parser.gwhparser.loader.dictionaryconfig.ConfigDictionaryLoader;
+import com.parser.gwhparser.loader.dictionaryconfig.XmlDictionaryLoader;
 import com.parser.gwhparser.loader.parserconfig.XmlParserConfigLoader;
 import com.parser.gwhparser.parser.Parser;
 import com.parser.gwhparser.parser.ParserFactory;
 import com.parser.gwhparser.parser.config.GenParserConfig;
 import com.parser.gwhparser.parser.enums.ParserFormat;
 import com.parser.gwhparser.parser.enums.ValueType;
+import com.parser.gwhparser.parser.model.Dictionary;
 import com.parser.gwhparser.parser.model.Entity;
 import com.parser.gwhparser.parser.model.EntityFactory;
 import com.parser.gwhparser.parser.model.SimpleEntityFactory;
@@ -51,9 +52,9 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
     private String stringConcatDelimiter = DEFAULT_CONCAT_DELIMITER;
     private List<DateTimeFormatter> timestampFormatters = Collections.emptyList();
 
-    private ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader = null;
+    private ConfigLoaderStrategy<Dictionary, String> dictionaryLoader = null;
     private String dictionaryConfig = null;
-    private ConfigLoaderStrategy<String, GenParserConfig> parserConfigLoader = null;
+    private ConfigLoaderStrategy<GenParserConfig, String> parserConfigLoader = null;
     private String parserConfig = null;
     private String appConfig = null;
 
@@ -92,23 +93,25 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
 
     @Override
     public Object unmarshal(Exchange exchange, InputStream stream) throws Exception {
-        
+
         BufferedReader streamReader = IOHelper.buffered(new InputStreamReader(stream, getCharacterSet()));
         String data = exchange.getContext().getTypeConverter().mandatoryConvertTo(String.class, exchange, streamReader);
 
-        //Setup DictionaryConfig                
-        ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader = new ConfigDictionaryLoader(getDictionaryConfig(), new GenParserConfig());
-        
-        //Setup ParserConfig
         GenParserConfig parserConfig = new GenParserConfig();
-        ConfigLoaderStrategy<String, GenParserConfig> xmlParserConfigLoader = new XmlParserConfigLoader(getParserConfig(), parserConfig);        
+        Dictionary dictionary = new Dictionary();
+
+        ConfigLoaderStrategy<Dictionary, String> dictionaryLoader = new XmlDictionaryLoader();
+        dictionaryLoader.load(dictionary, DEFAULT_DICTIONARY);
+        parserConfig.setDictionary(dictionary);
+
+        ConfigLoaderStrategy<GenParserConfig, String> xmlParserConfigLoader = new XmlParserConfigLoader(parserConfig, DEFAULT_PARSER_PROPERTIES);
 
         //Setup AppConfig
-        ConfigLoaderStrategy<String, GenParserConfig> appConfigLoader = new XmlAppConfigLoader(getAppConfig(), parserConfig);
+        ConfigLoaderStrategy<GenParserConfig, String> appConfigLoader = new XmlAppConfigLoader(parserConfig, getAppConfig());
 
         //Parse Message
         EntityFactory entityFactory = SimpleEntityFactory.getInstance();
-        ParserFactory parserFactory = ParserFactory.getInstance();        
+        ParserFactory parserFactory = ParserFactory.getInstance();
         Parser parser = parserFactory.getParser(null, parserConfig, entityFactory);
         Entity entity = parser.parse(data);
         return entity;
@@ -187,11 +190,11 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
         this.timestampFormatters = timestampFormatters;
     }
 
-    public ConfigLoaderStrategy<String, GenParserConfig> getDictionaryLoader() {
-        return (dictionaryLoader != null ? dictionaryLoader : new ConfigDictionaryLoader());
+    public ConfigLoaderStrategy<Dictionary, String> getDictionaryLoader() {
+        return (dictionaryLoader != null ? dictionaryLoader : new XmlDictionaryLoader());
     }
 
-    public void setDictionaryLoader(ConfigLoaderStrategy<String, GenParserConfig> dictionaryLoader) {
+    public void setDictionaryLoader(ConfigLoaderStrategy<Dictionary, String> dictionaryLoader) {
         this.dictionaryLoader = dictionaryLoader;
     }
 
@@ -203,11 +206,11 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
         this.dictionaryConfig = dictionaryConfig;
     }
 
-    public ConfigLoaderStrategy<String, GenParserConfig> getParserConfigLoader() {
+    public ConfigLoaderStrategy<GenParserConfig, String> getParserConfigLoader() {
         return (parserConfigLoader != null ? parserConfigLoader : new XmlParserConfigLoader());
     }
 
-    public void setParserConfigLoader(ConfigLoaderStrategy<String, GenParserConfig> parserConfigLoader) {
+    public void setParserConfigLoader(ConfigLoaderStrategy<GenParserConfig, String> parserConfigLoader) {
         this.parserConfigLoader = parserConfigLoader;
     }
 
@@ -226,5 +229,5 @@ public class ParserDataFormat extends ServiceSupport implements DataFormat, Data
     public void setAppConfig(String appConfig) {
         this.appConfig = appConfig;
     }
-    
+
 }

@@ -5,7 +5,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-import com.parser.gwhparser.loader.dictionaryconfig.ConfigDictionaryLoader;
+import com.parser.gwhparser.loader.dictionaryconfig.XmlDictionaryLoader;
 import com.parser.gwhparser.loader.parserconfig.XmlParserConfigLoader;
 import com.parser.gwhparser.parser.enums.ParserFormat;
 import com.pw.gwhcore.parser.ParserDataFormat;
@@ -54,19 +54,19 @@ public class LoggingTemplates extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        ParserDataFormat parser = new ParserDataFormat();        
+        ParserDataFormat parser = new ParserDataFormat();
         //parser.setDictionaryLoader(new ConfigDictionaryLoader());
         //parser.setDictionaryConfig(MY_DICTIONARY);
         //parser.setParserConfigLoader(new XmlParserConfigLoader());
         parser.setParserConfig(MY_PARSER_PROPERTIES);
-        parser.setAppConfig(MY_APP_CONFIG);        
+        parser.setAppConfig(MY_APP_CONFIG);
 
-                        
+
         from("timer:foo?period=10000")
         .setBody(constant("PHILIP    WALDORF   26"))
         .unmarshal(parser)
         .log(LoggingLevel.INFO, org.slf4j.LoggerFactory.getLogger("com.mycompany.mylogger"), "Sending message ${body}");
-        
+
     }
-    
+
 }

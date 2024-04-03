@@ -10,7 +10,7 @@
 	<name>dataformats</name>
 
 	<modules>
-		<module>csvdataformats</module>
+		<module>datafiledataformats</module>
 	</modules>
 
 	<parent>
