@@ -20,4 +20,7 @@ public class PgpDefaultProperties {
     private String privateKeyPassword;
     private String privateKeyFileName;
 
+    private String receiverPattern = "^(jms|kafka|activemq).*";
+    private String senderPattern = "^(jms|kafka|activemq).*";
+
 }

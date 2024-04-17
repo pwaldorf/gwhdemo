@@ -3,27 +3,37 @@ package com.pw.pgpcomponents.routeconfigurations;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteConfigurationBuilder;
 import org.apache.camel.converter.crypto.PGPDataFormat;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+
+import com.pw.pgpcomponents.configurations.PgpDefaultProperties;
 
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.pgpencryption.enabled", havingValue = "true", matchIfMissing = false)
 public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
 
-    @Autowired
+    PgpDefaultProperties pgpDefaultProperties;
+
     PGPDataFormat pgpPublicDataFormat;
 
-    @Autowired
     PGPDataFormat pgpPrivateDataFormat;
+
+    public EncryptionRouteConfigurations(PgpDefaultProperties pgpDefaultProperties,
+                                         @Qualifier("pgpPublicDataFormat") PGPDataFormat pgpPublicDataFormat,
+                                         @Qualifier("pgpPrivateDataFormat") PGPDataFormat pgpPrivateDataFormat) {
+        this.pgpDefaultProperties = pgpDefaultProperties;
+        this.pgpPublicDataFormat = pgpPublicDataFormat;
+        this.pgpPrivateDataFormat = pgpPrivateDataFormat;
+    }
 
     @Override
     public void configuration() throws Exception {
 
         routeConfiguration()
         .description("Encrypts messages from JMS and Kafka routes")
-        .interceptFrom("^(jms|kafka|activemq).*")
+        .interceptFrom(pgpDefaultProperties.getReceiverPattern())
         .marshal(pgpPublicDataFormat)
         .marshal().base64()
         .setHeader("GWHBodyEncrypted").constant("true", String.class)
@@ -31,7 +41,7 @@ public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
 
         routeConfiguration()
         .description("Dencrypts messages to JMS and Kafka routes")
-        .interceptSendToEndpoint("^(jms|kafka|activemq).*")
+        .interceptSendToEndpoint(pgpDefaultProperties.getSenderPattern())
         .choice()
             .when(header("GWHBodyEncrypted").isEqualTo("true"))
                 .unmarshal().base64()

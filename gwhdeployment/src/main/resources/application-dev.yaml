@@ -1,5 +1,4 @@
-spring:
-  server:
+server:
     port: 8081
 
 management:
