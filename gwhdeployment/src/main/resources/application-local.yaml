@@ -1,0 +1,135 @@
+spring:
+  server:
+    port: 8081
+  artemis:
+    mode: embedded
+    broker-url: tcp://localhost:61617
+    user: artemis
+    password: artemis
+    embedded:
+      enabled: true
+  jms:
+    template:
+      default-destination: mailbox
+    pub-sub-domain: false
+  sql:
+    init:
+      mode: embedded
+      platform: h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings.trace: false
+      settings.web-allow-others: true
+
+management:
+  server:
+    port: 8085
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - camel
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+    camel:
+      enabled: true
+
+gwh:
+  service:
+    profile: dispatcher
+  framework:
+    routes:
+      load:
+        params:
+          enabled: true
+    component:
+      activemq:
+        default:
+          enabled: true
+      kafka:
+        default:
+          enabled: true
+      ftp:
+        reader:
+          enabled: true
+      pgpencryption:
+        enabled: true
+      routemanagement:
+        rest:
+          enabled: true
+
+  component:
+    activemq:
+      default:
+        broker-url: tcp://localhost:61617
+        username: artemis
+        password: artemis
+        session-cache-size: 10
+
+    kafka:
+      default:
+        consumer:
+          brokers: 192.168.6.50:9093
+        producer:
+          brokers: 192.168.6.50:9093
+
+    pgp:
+      default:
+        publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+        publicKeyPassword: XXXXXXXX
+        publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
+        privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+        privateKeyPassword: XXXXXXXX
+        privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
+
+  core:
+    db:
+      datasource:
+        className: org.h2.Driver
+        url: jdbc:h2:mem:gwh
+        userName: pwaldorf
+        password: pwaldorf
+        minpoolsize: 0
+        maxpoolsize: 50
+        increment: 2
+        maxidleTime: 300
+        retryDelay: 600000
+        databaseType: H2
+        jpa-dialect: org.hibernate.dialect.H2Dialect
+        jpa-ddl-auto: validate
+        jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+
+camel:
+  main:
+    dev-console-enabled: true
+  springboot:
+    name: GWHDispatcher
+   # tracing-standby: true
+   # tracing: true
+    dev-console-enabled: true
+
+logging:
+  level:
+    org:
+      apache:
+        camel: INFO
+      #springframework:
+      #  transaction:
+      #    interceptor: TRACE
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+            BasicBinder: TRACE
+      activemq:
+        audit:
+          base: DEBUG
+          message: DEBUG

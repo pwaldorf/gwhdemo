@@ -2,6 +2,7 @@ package com.pw.gwhcore.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Resource;
@@ -25,16 +26,18 @@ public class GwhRoutesLoaderImpl implements GwhRoutesLoader {
 
     @Override
     public void loadRoutes() {
-        
+
         List<Resource> resourceList = new ArrayList<>();
-        gwhRouteEntities.stream().forEach(routeEntity 
-                -> resourceList.add(ResourceHelper.fromString("MyRoute.xml", routeEntity.getRoute())));
+        AtomicInteger atomicInteger = new AtomicInteger();
+        gwhRouteEntities.stream().forEach(routeEntity
+                -> resourceList.add(ResourceHelper.fromString("MyRoute" + atomicInteger.incrementAndGet() + ".xml", routeEntity.getRoute())));
+
 
         try {
-            PluginHelper.getRoutesLoader(camelContext.getCamelContextExtension()).loadRoutes(resourceList);                    
-        } catch (Exception e) {                    
+            PluginHelper.getRoutesLoader(camelContext.getCamelContextExtension()).loadRoutes(resourceList);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
 }

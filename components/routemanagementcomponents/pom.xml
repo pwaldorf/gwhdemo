@@ -4,22 +4,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
 	<artifactId>routemanagementcomponents</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
+
 	<name>routemanagementcomponents</name>
 
-	<modules>			
+	<modules>
 		<module>route-management-rest</module>
 	</modules>
-	
+
 	<parent>
 		<groupId>com.pw</groupId>
-		<artifactId>gwhparent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
+		<artifactId>components</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
 	</parent>
-	
-	<description>Route Mangement Components Parent POM</description>	
+
+	<description>Route Mangement Components Parent POM</description>
 
 </project>

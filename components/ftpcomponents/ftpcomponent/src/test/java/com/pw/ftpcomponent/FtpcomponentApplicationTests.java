@@ -13,7 +13,6 @@ class FtpcomponentApplicationTests {
 
 	@SpringBootApplication
 	static class TestClass {
-
 	}
 
 }

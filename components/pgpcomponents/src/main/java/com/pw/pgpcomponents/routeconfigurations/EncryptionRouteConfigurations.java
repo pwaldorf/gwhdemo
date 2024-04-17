@@ -14,22 +14,24 @@ public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
 
     @Autowired
     PGPDataFormat pgpPublicDataFormat;
-    
+
     @Autowired
     PGPDataFormat pgpPrivateDataFormat;
 
     @Override
     public void configuration() throws Exception {
-        
-        routeConfiguration()        
-        .interceptFrom("^(jms|kafka).*")
+
+        routeConfiguration()
+        .description("Encrypts messages from JMS and Kafka routes")
+        .interceptFrom("^(jms|kafka|activemq).*")
         .marshal(pgpPublicDataFormat)
         .marshal().base64()
         .setHeader("GWHBodyEncrypted").constant("true", String.class)
         .log(LoggingLevel.DEBUG, "Encrypted Message: ${body}");
 
         routeConfiguration()
-        .interceptSendToEndpoint("^(jms|kafka).*")
+        .description("Dencrypts messages to JMS and Kafka routes")
+        .interceptSendToEndpoint("^(jms|kafka|activemq).*")
         .choice()
             .when(header("GWHBodyEncrypted").isEqualTo("true"))
                 .unmarshal().base64()
@@ -37,5 +39,5 @@ public class EncryptionRouteConfigurations extends RouteConfigurationBuilder {
                 .removeHeaders("GWHBodyEncrypted")
             .end();
     }
-    
+
 }

@@ -4,52 +4,37 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
 	<artifactId>pgpcomponents</artifactId>
-	<version>0.0.1-SNAPSHOT</version>	
-	<packaging>jar</packaging>
+	<version>1.1.1-SNAPSHOT</version>
+
 	<name>pgpcomponents</name>
 	<description>PGP Encryption Component</description>
-	
+
 	<parent>
 		<groupId>com.pw</groupId>
 		<artifactId>components</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		
+		<version>1.1.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<properties>
-		<java.version>17</java.version>
-		<spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+		<!-- <spring-boot.repackage.skip>true</spring-boot.repackage.skip> -->
 	</properties>
 
 	<dependencies>
 
-		<!-- spring dependencies -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		
-
 		<!-- camel dependencies -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-crypto-starter</artifactId>			
-	  	</dependency>	
+			<artifactId>camel-crypto-starter</artifactId>
+	  	</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-base64-starter</artifactId>			
+			<artifactId>camel-base64-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-log-starter</artifactId>			
+			<artifactId>camel-log-starter</artifactId>
 		</dependency>
-		
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
-	
+
 </project>

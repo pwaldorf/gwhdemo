@@ -13,47 +13,47 @@ public class RouteManagementRoutes extends RouteBuilder {
 
         restConfiguration().inlineRoutes(true);
 
-        templatedRoute("routeManagementRestTemplate")
-                .routeId("startRoute")                
+        templatedRoute("routeManagementRestTemplate_v1")
+                .routeId("startRoute")
                 .parameter("command", "start")
                 .parameter("commandRouteId", "startRoute");
 
-        templatedRoute("routeManagementRestTemplate")
-                .routeId("stopRoute")                
+        templatedRoute("routeManagementRestTemplate_v1")
+                .routeId("stopRoute")
                 .parameter("command", "stop")
                 .parameter("commandRouteId", "stopRoute");
 
-        templatedRoute("routeManagementRestTemplate")
-                .routeId("addRoute")                
+        templatedRoute("routeManagementRestTemplate_v1")
+                .routeId("addRoute")
                 .parameter("command", "add")
                 .parameter("commandRouteId", "addRoute");
 
-        templatedRoute("routeManagementRestTemplate")
-                .routeId("listRoutes")                
+        templatedRoute("routeManagementRestTemplate_v1")
+                .routeId("listRoutes")
                 .parameter("command", "list")
                 .parameter("commandRouteId", "listRoutes")
                 .parameter("method", "get")
                 .parameter("path", "");
-                
-        templatedRoute("routeManagementCommandTemplate")
-                .routeId("startRouteDirect")                
+
+        templatedRoute("routeManagementCommandTemplate_v1")
+                .routeId("startRouteDirect")
                 .parameter("commandRoute", "startRoute")
                 .parameter("commandProcessor", "startRouteProcessor");
 
-        templatedRoute("routeManagementCommandTemplate")
-                .routeId("stopRouteDirect")                
+        templatedRoute("routeManagementCommandTemplate_v1")
+                .routeId("stopRouteDirect")
                 .parameter("commandRoute", "stopRoute")
                 .parameter("commandProcessor", "stopRouteProcessor");
 
-        templatedRoute("routeManagementCommandTemplate")
-                .routeId("addRouteDirect")                
+        templatedRoute("routeManagementCommandTemplate_v1")
+                .routeId("addRouteDirect")
                 .parameter("commandRoute", "addRoute")
                 .parameter("commandProcessor", "addRouteProcessor");
 
-        templatedRoute("routeManagementCommandTemplate")
-                .routeId("listRouteDirect")                
+        templatedRoute("routeManagementCommandTemplate_v1")
+                .routeId("listRouteDirect")
                 .parameter("commandRoute", "listRoutes")
                 .parameter("commandProcessor", "listRoutesProcessor");
     }
-    
+
 }

@@ -4,26 +4,27 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
 	<artifactId>components</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>components</name>
+
+	<parent>
+		<groupId>com.pw</groupId>
+		<artifactId>gwhparent</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
+		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+
+	<description>Components Parent POM</description>
 
 	<modules>
 		<module>ftpcomponents</module>
 		<module>jmscomponents</module>
 		<module>kafkacomponents</module>
 		<module>pgpcomponents</module>
+		<module>parsercomponents</module>
 		<module>routemanagementcomponents</module>
 	</modules>
-
-	<parent>
-		<groupId>com.pw</groupId>
-		<artifactId>gwhparent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
-	</parent>
-
-	<description>Components Parent POM</description>
 
 </project>

@@ -10,4 +10,9 @@ class RouteManagementApplicationTests {
 	void contextLoads() {
 	}
 
+	@SpringBootApplication
+	static class TestClass {
+
+	}
+
 }

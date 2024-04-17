@@ -10,4 +10,9 @@ class KafkaDefaultComponentsApplicationTests {
 	void contextLoads() {
 	}
 
+	@SpringBootApplication
+	static class TestClass {
+
+	}
+
 }

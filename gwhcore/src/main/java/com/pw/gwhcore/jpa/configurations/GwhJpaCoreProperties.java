@@ -14,11 +14,13 @@ import lombok.Setter;
 public class GwhJpaCoreProperties {
 
     String className;
-    
+
     String url;
 
     String userName;
-   
+
+    String password;
+
     Integer minPoolSize = 0;
 
     Integer maxPoolSize = 20;
@@ -29,10 +31,12 @@ public class GwhJpaCoreProperties {
 
     Integer retryDelay = 600000;
 
+    String databaseType = "MYSQL";
+
     String jpaDdlAuto = "validate";
 
     String jpaDialect = "org.hibernate.dialect.MySQLDialect";
 
     String jpaPhysicalNamingStrategy = "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy";
-    
+
 }

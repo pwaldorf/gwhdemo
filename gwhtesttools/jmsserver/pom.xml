@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.pw</groupId>
+	<artifactId>jmsserver</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+
+	<name>jmsserver</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>com.pw</groupId>
+		<artifactId>gwhtesttools</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- activemq dependencies-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-artemis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>artemis-jakarta-server</artifactId>
+		</dependency>
+
+		<dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jakarta-client</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+	</dependencies>
+
+</project>

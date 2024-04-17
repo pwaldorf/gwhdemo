@@ -4,61 +4,45 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
 	<artifactId>route-management-rest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>1.1.1-SNAPSHOT</version>
+
 	<name>route-management-rest</name>
 	<description>Route Management using Rest</description>
 
 	<parent>
 		<groupId>com.pw</groupId>
 		<artifactId>routemanagementcomponents</artifactId>
-		<version>0.0.1-SNAPSHOT</version>		
+		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
-		<java.version>17</java.version>
-		<spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+		<!-- <spring-boot.repackage.skip>true</spring-boot.repackage.skip> -->
 	</properties>
 
 	<dependencies>
-		<!-- spring dependencies -->				
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
 		<!-- camel dependencies -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>			
+			<artifactId>camel-spring-boot-starter</artifactId>
 	  	</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-log-starter</artifactId>			
+			<artifactId>camel-log-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-rest-starter</artifactId>			
+			<artifactId>camel-rest-starter</artifactId>
 	  	</dependency>
  	    <dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-servlet-starter</artifactId>			
+			<artifactId>camel-servlet-starter</artifactId>
 	  	</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-xml-io-dsl-starter</artifactId>			
+			<artifactId>camel-xml-io-dsl-starter</artifactId>
 	  	</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 	</dependencies>
-	
+
 </project>

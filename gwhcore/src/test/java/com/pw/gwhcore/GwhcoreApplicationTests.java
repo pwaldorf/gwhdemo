@@ -11,6 +11,11 @@ class GwhcoreApplicationTests {
 	void contextLoads() {
 	}
 
+	@SpringBootApplication
+	static class TestClass {
+
+	}
+
 	// @SpringBootApplication(scanBasePackages = "com.pw.gwhcore")
 	// @EntityScan("com.pw.gwhcore")
     // @EnableJpaRepositories("com.pw.gwhcore")

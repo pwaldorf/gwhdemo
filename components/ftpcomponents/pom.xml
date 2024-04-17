@@ -4,21 +4,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
 	<artifactId>ftpcomponents</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ftpcomponents</name>
 
-	<modules>
-		<module>ftpcomponent</module>
-	</modules>
-
 	<parent>
 		<groupId>com.pw</groupId>
 		<artifactId>components</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<description>Components Parent POM</description>
+	<description>FTP Components Parent POM</description>
+
+	<modules>
+		<module>ftpcomponent</module>
+	</modules>
 
 </project>

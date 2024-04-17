@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,19 +25,19 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhJpaCoreConfigurations {
 
-    @Autowired
     GwhJpaCoreProperties gwhJpaCoreProperties;
 
-    @Value("${MYSQL_PASSWORD}")
-    private String password;
+    public GwhJpaCoreConfigurations(@Autowired GwhJpaCoreProperties gwhJpaCoreProperties) {
+        this.gwhJpaCoreProperties = gwhJpaCoreProperties;
+    }
 
     @Bean(name = "gwhCoreDataSource")
     public DataSource dataSource() throws PropertyVetoException{
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();        
-        dataSource.setDriverClass(gwhJpaCoreProperties.getClassName());        
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(gwhJpaCoreProperties.getClassName());
         dataSource.setJdbcUrl(gwhJpaCoreProperties.getUrl());
         dataSource.setUser(gwhJpaCoreProperties.getUserName());
-        dataSource.setPassword(password);
+        dataSource.setPassword(gwhJpaCoreProperties.getPassword());
         dataSource.setMinPoolSize(gwhJpaCoreProperties.getMinPoolSize());
         dataSource.setMaxPoolSize(gwhJpaCoreProperties.getMaxPoolSize());
         dataSource.setAcquireIncrement(gwhJpaCoreProperties.getIncrement());
@@ -48,15 +47,15 @@ public class GwhJpaCoreConfigurations {
         dataSource.setAutoCommitOnClose(false);
         return dataSource;
     }
-    
+
     @Bean(name = "gwhEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws PropertyVetoException{
         final LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] {"com.pw.gwhcore.jpa.model"});        
+        sessionFactory.setPackagesToScan(new String[] {"com.pw.gwhcore.jpa.model"});
         //JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         sessionFactory.setJpaVendorAdapter(gwhJpaVendorAdapter());
-        sessionFactory.setJpaProperties(hibernateProperties());        
+        sessionFactory.setJpaProperties(hibernateProperties());
         return sessionFactory;
     }
 
@@ -64,12 +63,12 @@ public class GwhJpaCoreConfigurations {
     public PlatformTransactionManager transactionManager() throws PropertyVetoException {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return transactionManager;        
+        return transactionManager;
     }
 
     @Bean(name = "gwhCoreExceptionTranslationPostProcessor")
     public PersistenceExceptionTranslationPostProcessor exceptionTranslationPostProcessor() {
-        return new PersistenceExceptionTranslationPostProcessor();        
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 
     private Properties hibernateProperties() {
@@ -87,10 +86,11 @@ public class GwhJpaCoreConfigurations {
             {
                 setShowSql(true);
                 setGenerateDdl(false);
-                setDatabase(Database.MYSQL);
-                setDatabasePlatform(gwhJpaCoreProperties.getJpaDialect());        
+                //setDatabase(Database.MYSQL);
+                setDatabase(Database.valueOf(gwhJpaCoreProperties.getDatabaseType()));
+                setDatabasePlatform(gwhJpaCoreProperties.getJpaDialect());
             }
         };
     }
-     
+
 }

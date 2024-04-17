@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+
+server:
+    port: 8081
+
+camel:
+  servlet:
+    mapping:
+      context-path: /api/*
+
+logging:
+  level:
+    org:
+      apache:
+        camel: INFO
+      hibernate:
+        SQL: INFO
+        type:
+          descriptor:
+            sql:
+            BasicBinder: INFO
+      activemq:
+        audit:
+          base: INFO
+          message: INFO

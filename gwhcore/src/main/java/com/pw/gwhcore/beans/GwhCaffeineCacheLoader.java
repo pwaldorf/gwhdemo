@@ -26,7 +26,7 @@ public class GwhCaffeineCacheLoader implements GwhCacheLoader {
     public void load() {
 
         Map<String, CaffeineConfiguration> configs = cacheConfigs();
-        
+
         configs.entrySet().stream().forEach(config -> {
             camelContext.getRegistry().bind(config.getKey(), new CaffeineLoadCacheComponent() {
                 {
@@ -38,7 +38,7 @@ public class GwhCaffeineCacheLoader implements GwhCacheLoader {
 
     public Map<String, CaffeineConfiguration> cacheConfigs() {
         Map<String, CaffeineConfiguration> configs = new HashMap<>();
-                
+
         CaffeineConfiguration configuration = new CaffeineConfiguration();
         configuration.setStatsEnabled(true);
         configuration.setEvictionType(EvictionType.SIZE_BASED);
@@ -46,7 +46,7 @@ public class GwhCaffeineCacheLoader implements GwhCacheLoader {
         configuration.setMaximumSize(100000);
         //configuration.setCacheLoader(context.getBean("gwhRouteTemplateCacheLoader", CacheLoader.class));
         configs.put("gwhRouteTemplateCache", configuration);
-        
+
         return configs;
     }
 
