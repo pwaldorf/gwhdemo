@@ -8,7 +8,7 @@ spring:
       enabled: true
   jms:
     template:
-      default-destination: mailbox
+      default-destination: default.queue
     pub-sub-domain: false
   sql:
     init:
@@ -76,10 +76,8 @@ gwh:
 
     kafka:
       default:
-        consumer:
-          brokers: 192.168.6.50:9093
-        producer:
-          brokers: 192.168.6.50:9093
+        consumer-brokers: 192.168.6.50:9093
+        producer-brokers: 192.168.6.50:9093
 
     pgp:
       default:

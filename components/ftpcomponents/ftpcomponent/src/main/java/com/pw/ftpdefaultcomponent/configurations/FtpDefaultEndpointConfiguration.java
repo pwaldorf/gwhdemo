@@ -44,7 +44,7 @@ public class FtpDefaultEndpointConfiguration {
 
         AdvancedSftpEndpointConsumerBuilder sftpEndpointConsumerBuilder =
 
-        sftp("sftp", "{{server}}:{{port}}/{{directory}}")
+            sftp("sftp", "{{server}}:{{port}}/{{directory}}")
                     .username("user")
                     .fileName("resourceAttr.getFileName()")
                     .privateKeyFile("{{privateKeyFile}}")

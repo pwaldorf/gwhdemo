@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.PlatformTransactionManager;
 import jakarta.jms.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +21,19 @@ public class ActiveMqDefaultComponent {
     @Autowired
     private PlatformTransactionManager activeMqDefaultTransactionManager;
 
+    @Bean("activeMqDefaultConsumer")
+    public JmsComponent activeMqDefaultConsumer() throws Exception {
+
+        log.debug("jmsConsumer Component Creation");
+        JmsComponent jmsComponent = new JmsComponent();
+        jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
+        jmsComponent.setTransacted(false);
+        jmsComponent.setCacheLevelName("CACHE_NONE");
+        return jmsComponent;
+    }
+
 
     @Bean("activeMqDefaultConsumerTx")
-    @Profile("!local")
     public JmsComponent activeMqDefaultConsumerTransacted() throws Exception {
 
         log.debug("jmsConsumerTransacted Component Creation");
@@ -36,42 +45,24 @@ public class ActiveMqDefaultComponent {
         return jmsComponent;
     }
 
-    @Bean("activeMqDefaultConsumerTx")
-    @Profile("local")
-    public JmsComponent activeMqDefaultConsumerTransactedLocal() throws Exception {
+    @Bean("activeMqDefaultProducer")
+    public JmsComponent activeMqDefaultProducer() throws Exception {
 
-        log.debug("jmsConsumerTransacted Component Creation");
+        log.debug("jmsProducer Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
-        // jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
-        // jmsComponent.setTransacted(true);
-        // jmsComponent.setCacheLevelName("CACHE_CONSUMER");
-        // jmsComponent.setTransactionManager(activeMqDefaultTransactionManager);
+        jmsComponent.setCacheLevelName("CACHE_PRODUCER");
+        jmsComponent.setHeaderFilterStrategy(activeMqDefaultHeaderFilterStrategy());
         return jmsComponent;
     }
 
     @Bean("activeMqDefaultProducerTx")
-    @Profile("!local")
     public JmsComponent activeMqDefaultProducerTransacted() throws Exception {
 
         log.debug("jmsProducerTransacted Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
         jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
         jmsComponent.setTransacted(true);
-        jmsComponent.setCacheLevelName("CACHE_NONE");
-        jmsComponent.setTransactionManager(activeMqDefaultTransactionManager);
-        jmsComponent.setHeaderFilterStrategy(activeMqDefaultHeaderFilterStrategy());
-        return jmsComponent;
-    }
-
-    @Bean("activeMqDefaultProducerTx")
-    @Profile("local")
-    public JmsComponent activeMqDefaultProducerTransactedLocal() throws Exception {
-
-        log.debug("jmsProducerTransacted Component Creation");
-        JmsComponent jmsComponent = new JmsComponent();
-        jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
-        jmsComponent.setTransacted(true);
-        jmsComponent.setCacheLevelName("CACHE_NONE");
+        jmsComponent.setCacheLevelName("CACHE_PRODUCER");
         jmsComponent.setTransactionManager(activeMqDefaultTransactionManager);
         jmsComponent.setHeaderFilterStrategy(activeMqDefaultHeaderFilterStrategy());
         return jmsComponent;

@@ -21,6 +21,43 @@
 		<!-- <maven.test.skip>true</maven.test.skip> -->
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<!-- <activeByDefault>true</activeByDefault> -->
+				<property>
+					<name>env.GWH_ENVIRONMENT</name>
+					<value>local</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.pw</groupId>
+					<artifactId>jmsserver</artifactId>
+					<version>1.1.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>com.pw</groupId>
+					<artifactId>ftpserver</artifactId>
+					<version>1.1.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>com.pw</groupId>
+					<artifactId>kafkabroker</artifactId>
+					<version>1.1.1-SNAPSHOT</version>
+				</dependency>
+				<!-- local h2 dependencies-->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>2.2.224</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 				<groupId>org.apache.camel.springboot</groupId>
@@ -66,21 +103,6 @@
 			<artifactId>ftpcomponent</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>com.pw</groupId>
-			<artifactId>ftpserver</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pw</groupId>
-			<artifactId>kafkabroker</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pw</groupId>
-			<artifactId>jmsserver</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
-		</dependency>
 
 		<!-- spring dependencies -->
 		<dependency>
@@ -122,14 +144,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
-		</dependency>
-
-		<!-- local h2 dependencies-->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>2.2.224</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Dev Tool dependencies -->

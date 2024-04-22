@@ -9,25 +9,23 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.enabled", havingValue = "true", matchIfMissing = false)
 public class KafkaDefaultConfigurations {
 
-    KafkaDefaultConsumerProperties kafkaDefaultConsumerProperties;
-    KafkaDefaultProducerProperties kafkaDefaultProducerProperties;
+    KafkaDefaultProperties kafkaDefaultProperties;
 
-    public KafkaDefaultConfigurations(KafkaDefaultConsumerProperties kafkaDefaultConsumerProperties, KafkaDefaultProducerProperties kafkaDefaultProducerProperties) {
-        this.kafkaDefaultConsumerProperties = kafkaDefaultConsumerProperties;
-        this.kafkaDefaultProducerProperties = kafkaDefaultProducerProperties;
+    public KafkaDefaultConfigurations(KafkaDefaultProperties kafkaDefaultProperties) {
+        this.kafkaDefaultProperties = kafkaDefaultProperties;
     }
 
     @Bean("kafkaDefaultConsumerConfiguration")
     public KafkaConfiguration kafkaDefaultConsumerConfiguration() {
         KafkaConfiguration kafkaConfiguration = new KafkaConfiguration();
-        kafkaConfiguration.setBrokers(kafkaDefaultConsumerProperties.getBrokers());
+        kafkaConfiguration.setBrokers(kafkaDefaultProperties.getConsumerBrokers());
         return kafkaConfiguration;
     }
 
     @Bean("kafkaDefaultProducerConfiguration")
     public KafkaConfiguration kafkaDefaultProducerConfiguration() {
         KafkaConfiguration kafkaConfiguration = new KafkaConfiguration();
-        kafkaConfiguration.setBrokers(kafkaDefaultConsumerProperties.getBrokers());
+        kafkaConfiguration.setBrokers(kafkaDefaultProperties.getProducerBrokers());
         return kafkaConfiguration;
     }
 }

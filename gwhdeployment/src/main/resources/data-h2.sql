@@ -1,7 +1,7 @@
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
-       VALUES (1, 'dispatcher', 'dispatch_reader_1a', 'templateId', 'activemqdefault_reader_tx_v1');
+       VALUES (1, 'dispatcher', 'dispatch_reader_1a', 'templateId', 'activemqdefault_reader_v1');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
-       VALUES (2, 'dispatcher', 'dispatch_reader_1a', 'queue', 'mailbox');
+       VALUES (2, 'dispatcher', 'dispatch_reader_1a', 'queue', 'test.queue1');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (3, 'dispatcher', 'dispatch_reader_1a', 'directname', 'writeeventstore');
 
@@ -10,7 +10,7 @@ INSERT INTO route_template_params (id, profile, route_id, template_param_name, t
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (5, 'dispatcher', 'dispatch_reader_1b', 'directname', 'writeeventstore');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
-       VALUES (6, 'dispatcher', 'dispatch_reader_1b', 'topic', 'mailbox');
+       VALUES (6, 'dispatcher', 'dispatch_reader_1b', 'topic', 'test_topic');
 
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (7, 'dispatcher', 'dispatch_reader_2a', 'templateId', 'ftp_reader_v1');
@@ -34,3 +34,4 @@ INSERT INTO routes (id, profile, route_id, route)
 
 INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'test', 'test');
 INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
+INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'management.server.port', '8086');

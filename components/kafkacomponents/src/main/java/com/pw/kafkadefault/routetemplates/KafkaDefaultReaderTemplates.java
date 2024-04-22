@@ -1,9 +1,10 @@
 package com.pw.kafkadefault.routetemplates;
 
-import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.kafka;
-
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.builder.EndpointConsumerBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,14 @@ import com.pw.kafkadefault.components.KafkaDefaultComponents;
 @ConditionalOnBean(KafkaDefaultComponents.class)
 public class KafkaDefaultReaderTemplates extends RouteBuilder {
 
+    @Autowired
+    @Qualifier("kafkaEndpointManualCommitConsumer")
+    EndpointConsumerBuilder kafkaEndpointManualCommitConsumer;
+
+    @Autowired
+    @Qualifier("kafkaEndpointAutoCommitConsumer")
+    EndpointConsumerBuilder kafkaEndpointAutoCommitConsumer;
+
     @Override
     public void configure() throws Exception {
 
@@ -25,19 +34,7 @@ public class KafkaDefaultReaderTemplates extends RouteBuilder {
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directname")
-        // .from( new StringBuilder("kafkaDefaultConsumer:")
-        //                  .append("{{topic}}")
-        //                  .append("?groupId={{groupId}}")
-        //                  .append("&allowManualCommit=true")
-        //                  .append("&autoCommitEnable=false")
-        //                  .append("&isolationLevel={{isolationLevel}}")
-        //                  .toString())
-        .from(kafka("kafkaDefaultConsumer", "{{topic}}")
-                .groupId("{{groupId}}")
-                .allowManualCommit(true)
-                .autoCommitEnable(false)
-                .advanced()
-                .isolationLevel("{{isolationLevel}}"))
+        .from(kafkaEndpointManualCommitConsumer)
         .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
                        .bean(KafkaDefaultConsumerManualCommit.class, "process")
                        .end()
@@ -62,19 +59,7 @@ public class KafkaDefaultReaderTemplates extends RouteBuilder {
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directname")
-        // .from( new StringBuilder("kafkaDefaultConsumer:")
-        //                  .append("{{topic}}")
-        //                  .append("?groupId={{groupId}}")
-        //                  .append("&allowManualCommit=false")
-        //                  .append("&autoCommitEnable=true")
-        //                  .append("&isolationLevel={{isolationLevel}}")
-        //                  .toString())
-        .from(kafka("kafkaDefaultConsumer", "{{topic}}")
-                .groupId("{{groupId}}")
-                .allowManualCommit(false)
-                .autoCommitEnable(true)
-                .advanced()
-                .isolationLevel("{{isolationLevel}}"))
+        .from(kafkaEndpointAutoCommitConsumer)
         .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}")
         .to("direct:logger")
         .choice()

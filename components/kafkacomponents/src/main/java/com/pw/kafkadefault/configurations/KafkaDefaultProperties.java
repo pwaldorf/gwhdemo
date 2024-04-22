@@ -9,12 +9,17 @@ import lombok.Setter;
 @Setter
 @Getter
 @Configuration
-@ConfigurationProperties(prefix = "gwh.component.kafka.default.consumer")
-public class KafkaDefaultConsumerProperties {
+@ConfigurationProperties(prefix = "gwh.component.kafka.default")
+public class KafkaDefaultProperties {
 
     /**
-     * Kafka broker url
+     * Kafka consumer broker url
      */
-    String brokers;
+    String consumerBrokers;
+
+    /**
+     * Kafka producer broker url
+     */
+    String producerBrokers;
 
 }
