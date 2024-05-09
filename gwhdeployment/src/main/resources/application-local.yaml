@@ -88,6 +88,30 @@ gwh:
         privateKeyPassword: XXXXXXXX
         privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
 
+  jpa:
+    db:
+      datasource:
+        className: org.h2.Driver
+        url: jdbc:h2:mem:gwh
+        userName: pwaldorf
+        password: pwaldorf
+        minpoolsize: 0
+        maxpoolsize: 50
+        increment: 2
+        maxidleTime: 300
+        retryDelay: 600000
+        databaseType: H2
+        jpa-dialect: org.hibernate.dialect.H2Dialect
+        jpa-ddl-auto: validate
+        jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        jpa-properties:
+          hibernate:
+            hbm2ddl:
+              auto: validate
+            physical:
+              naming:
+                strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+
   core:
     db:
       datasource:

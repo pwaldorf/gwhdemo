@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.pw.gwhcore.gwhroutes.GwhRoutesLoader;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -13,11 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class CustomCamelContextConfig {
 
-    @Autowired
-    GwhRoutesLoader gwhRoutesLoader;
+    private GwhRoutesLoader gwhRoutesLoader;
 
-    @Autowired
-    GwhCacheLoader gwhCacheLoader;
+    private GwhCacheLoader gwhCacheLoader;
+
+    public CustomCamelContextConfig(GwhRoutesLoader gwhRoutesLoader, GwhCacheLoader gwhCacheLoader) {
+        this.gwhRoutesLoader = gwhRoutesLoader;
+        this.gwhCacheLoader = gwhCacheLoader;
+    }
 
     @Bean
     public CamelContextConfiguration camelContextConfiguration() {

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.kafka.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.kafka.default.enabled", havingValue = "true", matchIfMissing = false)
 public class KafkaDefaultConfigurations {
 
     KafkaDefaultProperties kafkaDefaultProperties;

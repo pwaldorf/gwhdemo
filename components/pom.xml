@@ -25,6 +25,8 @@
 		<module>pgpcomponents</module>
 		<module>parsercomponents</module>
 		<module>routemanagementcomponents</module>
+		<module>configurationloadercomponents</module>
+		<module>datasourcecomponents</module>
 	</modules>
 
 </project>

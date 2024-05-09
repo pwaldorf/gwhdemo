@@ -13,9 +13,5 @@ import lombok.Setter;
 public class GwhCoreProperties {
 
     private String profile;
-    private String configTableName = "gwh_configs";
-    private String configKeyColumnName = "config_key";
-    private String configValueColumnName = "config_value";
-    private String configNameColumnName = "config_name";
 
 }
