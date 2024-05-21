@@ -11,6 +11,7 @@ import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.ClearTextPasswordEncryptor;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
+import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.config.spring.factorybeans.ConnectionConfigFactoryBean;
 import org.apache.ftpserver.config.spring.factorybeans.DataConnectionConfigurationFactoryBean;
@@ -88,6 +89,11 @@ public class FtpServerConfigs {
         userManagerFactory.setPasswordEncryptor(new ClearTextPasswordEncryptor());
         userManagerFactory.setAdminName("admin");
         UserManager userManager = userManagerFactory.createUserManager();
+        BaseUser user = new BaseUser();
+        user.setName("pwaldorf");
+        user.setPassword("password");
+        user.setHomeDirectory("/tmp");
+        userManager.save(user);
         return userManager;
     }
 

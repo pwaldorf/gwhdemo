@@ -19,9 +19,9 @@
 
 	<properties>
 		<!-- <maven.test.skip>true</maven.test.skip> -->
-		<maven.compiler.source>17</maven.compiler.source>
-    	<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>11</maven.compiler.source>
+    	<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 
 	<profiles>
@@ -52,22 +52,22 @@
 				</dependency>
 				<dependency>
 					<groupId>com.pw</groupId>
-					<artifactId>jpadatasourcecomponent</artifactId>
+					<artifactId>jpadatasource</artifactId>
 					<version>1.1.1-SNAPSHOT</version>
 				</dependency>
 				<dependency>
 					<groupId>com.pw</groupId>
-					<artifactId>jpapropertiesloadercomponent</artifactId>
+					<artifactId>jpapropertiesloader</artifactId>
 					<version>1.1.1-SNAPSHOT</version>
 				</dependency>
 				<dependency>
 					<groupId>com.pw</groupId>
-					<artifactId>jparoutesloadercomponent</artifactId>
+					<artifactId>jparoutesloader</artifactId>
 					<version>1.1.1-SNAPSHOT</version>
 				</dependency>
 				<dependency>
 					<groupId>com.pw</groupId>
-					<artifactId>jparoutetemplatesloadercomponent</artifactId>
+					<artifactId>jparoutetemplatesloader</artifactId>
 					<version>1.1.1-SNAPSHOT</version>
 				</dependency>
 
@@ -84,8 +84,8 @@
 
 	<dependencies>
 		<dependency>
-				<groupId>org.apache.camel.springboot</groupId>
-				<artifactId>camel-spring-boot-starter</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
@@ -94,22 +94,22 @@
 
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>gwhcore</artifactId>
+			<artifactId>gwh-core</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>jmscomponents</artifactId>
+			<artifactId>activemq</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>kafkacomponents</artifactId>
+			<artifactId>kafkadefault</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>pgpcomponents</artifactId>
+			<artifactId>pgp</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -124,7 +124,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>ftpcomponent</artifactId>
+			<artifactId>ftp</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 
@@ -150,12 +150,14 @@
 		<!-- activemq dependencies-->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			<artifactId>artemis-jakarta-server</artifactId>
+			<!-- <artifactId>artemis-jakarta-server</artifactId> -->
+			<artifactId>artemis-jms-server</artifactId>
 		</dependency>
 
 		<dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-jakarta-client</artifactId>
+            <!-- <artifactId>artemis-jakarta-client</artifactId> -->
+			<artifactId>artemis-jms-client</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>

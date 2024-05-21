@@ -1,1 +1,3 @@
-spring.application.name=ftpserver
+spring:
+  application:
+    name: ftpserver

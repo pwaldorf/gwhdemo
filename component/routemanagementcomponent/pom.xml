@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.pw</groupId>
+	<artifactId>routemanagementcomponent</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>routemanagementcomponent</name>
+
+	<modules>
+		<module>route-management-rest</module>
+	</modules>
+
+	<parent>
+		<groupId>com.pw</groupId>
+		<artifactId>component</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
+	</parent>
+
+	<description>Route Mangement Components Parent POM</description>
+
+</project>

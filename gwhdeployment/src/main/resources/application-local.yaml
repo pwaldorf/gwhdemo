@@ -54,6 +54,10 @@ gwh:
       activemq:
         default:
           enabled: true
+        consumer:
+          enabled: true
+        producer:
+          enabled: true
       kafka:
         default:
           enabled: true

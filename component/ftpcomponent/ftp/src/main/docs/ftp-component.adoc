@@ -1,0 +1,19 @@
+= FTP Component
+:doctitle: FTP
+:shortname: ftp
+:artificatid: ftpcomponent
+:description: send and receive messages over ftp
+
+This component allows messages to be send to or consumed from an ftp server. It uses Camel's FTP component as the base and further documentation can be found on the camel's website.
+
+For Maven, add the following dependency to the 'pom.xml':
+
+[source,xml]
+----------------------------------------------------------
+<dependency>
+    <groupId>com.pw</groupId>
+    <artifactId>ftpcomponent</artifactId>
+    <version>x.x.x</version>
+    <!-- use same version as gwhcore version -->
+</dependency>
+----------------------------------------------------------

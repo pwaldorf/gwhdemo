@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.pw</groupId>
+	<artifactId>gwh-core</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>gwh-core</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>com.pw</groupId>
+		<artifactId>core</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<!-- <spring-boot.repackage.skip>true</spring-boot.repackage.skip> -->
+	</properties>
+
+	<dependencies>
+
+		<!-- gwh core dependencies -->
+		<dependency>
+            <groupId>com.pw</groupId>
+			<artifactId>gwh-configuration</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+            <groupId>com.pw</groupId>
+			<artifactId>gwh-support</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+        </dependency>
+
+	</dependencies>
+
+</project>

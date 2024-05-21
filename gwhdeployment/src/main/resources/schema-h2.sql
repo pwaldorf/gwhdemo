@@ -15,10 +15,6 @@ CREATE TABLE routes (
   PRIMARY KEY (`id`)
 );
 
-create sequence route_template_params_seq start with 1 increment by 50;
-create sequence routes_seq start with 1 increment by 50;
-create sequence properties_seq start with 1 increment by 50;
-
 CREATE TABLE gwh_configs (
    config_name  VARCHAR(50) NOT NULL,
    config_key   VARCHAR(50) NOT NULL,
@@ -34,3 +30,8 @@ CREATE TABLE properties (
    property_value VARCHAR(250),
    PRIMARY KEY (`id`)
 );
+
+create sequence route_template_params_seq start with 1 increment by 50;
+create sequence routes_seq start with 1 increment by 50;
+create sequence properties_seq start with 1 increment by 50;
+create sequence hibernate_sequence start with 1 increment by 1;

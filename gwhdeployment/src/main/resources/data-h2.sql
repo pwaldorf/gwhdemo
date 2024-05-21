@@ -14,10 +14,10 @@ INSERT INTO route_template_params (id, profile, route_id, template_param_name, t
 
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (7, 'dispatcher', 'dispatch_reader_2a', 'templateId', 'ftp_reader_v1');
-       INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
+INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (8, 'dispatcher', 'dispatch_reader_2a', 'directName', 'logger');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
-       VALUES (9, 'dispatcher', 'dispatch_reader_2a', 'user', 'anonymous');
+       VALUES (9, 'dispatcher', 'dispatch_reader_2a', 'username', 'anonymous');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
        VALUES (10, 'dispatcher', 'dispatch_reader_2a', 'password', '1234');
 INSERT INTO route_template_params (id, profile, route_id, template_param_name, template_param_value)
