@@ -1,26 +1,19 @@
-package com.pw.ftpcomponent.routetemplates;
+package com.pw.ftpcomponent.consumer.routetemplates;
 
-import org.apache.camel.builder.EndpointConsumerBuilder;
-import org.apache.camel.spi.RoutePolicy;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import com.pw.support.route.AbstractReaderTemplate;
-
-import java.util.List;
-
+import com.pw.ftpcomponent.consumer.configurations.FtpConsumerEndpointBuilder;
+import com.pw.ftpcomponent.consumer.configurations.FtpConsumerRoutePolicies;
+import com.pw.support.route.AbstractConsumerTemplate;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.ftp.reader.enabled", havingValue = "true", matchIfMissing = false)
-public class FtpReaderTemplate extends AbstractReaderTemplate {
+@ConditionalOnProperty(value = "gwh.framework.component.ftp.consumer.enabled", havingValue = "true")
+public class FtpConsumerTemplate extends AbstractConsumerTemplate<FtpConsumerEndpointBuilder> {
 
-    private List<RoutePolicy> routePolicies;
-
-    public FtpReaderTemplate(@Qualifier("ftpEndpointConsumer") EndpointConsumerBuilder endpointConsumerBuilder,
-                             @Qualifier("ftpRoutePolicies") List<RoutePolicy> routePolicies) {
-        super(endpointConsumerBuilder);
-        this.routePolicies = routePolicies;
+    public FtpConsumerTemplate(FtpConsumerEndpointBuilder endpointConsumerBuilder, @Nullable FtpConsumerRoutePolicies routePolicies) {
+        super(endpointConsumerBuilder, routePolicies);
     }
 
     @Override
@@ -42,8 +35,9 @@ public class FtpReaderTemplate extends AbstractReaderTemplate {
             .templateParameter("bridgeErrorHandler", "true")
             .templateParameter("completedFolder", "completed")
             .templateParameter("errorFolder", "error")
-            .from(endpointConsumerBuilder)
-                .routePolicy(routePolicies(routePolicies)).autoStartup("{{autoStart}}")
+            .from(super.getEndpointConsumerBuilder().getConsumerEndpoint())
+                .routePolicy(super.getRoutePolicies().getRoutePolicies().toArrayRoutePolicies())
+                .autoStartup("{{autoStart}}")
                 .routeConfigurationId(".*ftpError.*,.*ftpConfig.*")
                 .to("direct:{{directName}}");
 

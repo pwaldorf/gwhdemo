@@ -2,7 +2,6 @@ package com.pw.activemqdefault.components;
 
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.support.DefaultHeaderFilterStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,17 +14,21 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.producer.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqProducerComponent {
 
-    @Autowired
-    private ConnectionFactory activeMqDefaultConnectionFactory;
+    private ConnectionFactory connectionFactory;
 
-    @Autowired
     private PlatformTransactionManager activeMqDefaultTransactionManager;
+
+    public ActiveMqProducerComponent(ConnectionFactory connectionFactory, PlatformTransactionManager activeMqDefaultTransactionManager) {
+        this.connectionFactory = connectionFactory;
+        this.activeMqDefaultTransactionManager = activeMqDefaultTransactionManager;
+    }
 
     @Bean("activeMqDefaultProducer")
     public JmsComponent activeMqDefaultProducer() throws Exception {
 
         log.debug("jmsProducer Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
+        jmsComponent.setConnectionFactory(connectionFactory);
         jmsComponent.setCacheLevelName("CACHE_PRODUCER");
         jmsComponent.setHeaderFilterStrategy(activeMqDefaultHeaderFilterStrategy());
         return jmsComponent;
@@ -36,7 +39,7 @@ public class ActiveMqProducerComponent {
 
         log.debug("jmsProducerTransacted Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
-        jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
+        jmsComponent.setConnectionFactory(connectionFactory);
         jmsComponent.setTransacted(true);
         jmsComponent.setCacheLevelName("CACHE_PRODUCER");
         jmsComponent.setTransactionManager(activeMqDefaultTransactionManager);

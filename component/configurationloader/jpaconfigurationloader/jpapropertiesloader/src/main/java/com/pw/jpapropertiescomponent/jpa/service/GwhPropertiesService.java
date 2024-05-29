@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import com.pw.jpapropertiescomponent.jpa.model.GwhPropertiesEntity;
 import com.pw.jpapropertiescomponent.jpa.repository.GwhPropertiesRepository;
 
 @Service
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhPropertiesService {
 
     @Autowired

@@ -28,11 +28,11 @@
 		<profile>
 			<id>local</id>
 			<activation>
-				<!-- <activeByDefault>true</activeByDefault> -->
-				<property>
+				<activeByDefault>true</activeByDefault>
+				<!-- <property>
 					<name>env.GWH_ENVIRONMENT</name>
 					<value>local</value>
-				</property>
+				</property> -->
 			</activation>
 			<dependencies>
 				<dependency>
@@ -70,6 +70,11 @@
 					<artifactId>jparoutetemplatesloader</artifactId>
 					<version>1.1.1-SNAPSHOT</version>
 				</dependency>
+				<dependency>
+					<groupId>com.pw</groupId>
+					<artifactId>jpacaffeinecachesloader</artifactId>
+					<version>1.1.1-SNAPSHOT</version>
+				</dependency>
 
 				<!-- local h2 dependencies-->
 				<dependency>
@@ -94,7 +99,12 @@
 
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>gwh-core</artifactId>
+			<artifactId>gwh-support</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pw</groupId>
+			<artifactId>gwh-configuration</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -150,13 +160,15 @@
 		<!-- activemq dependencies-->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			<!-- <artifactId>artemis-jakarta-server</artifactId> -->
+			<!-- <artifactId>artemis-jakarta-server</artifactId>
+			<version>2.21.0</version> -->
 			<artifactId>artemis-jms-server</artifactId>
 		</dependency>
 
 		<dependency>
             <groupId>org.apache.activemq</groupId>
-            <!-- <artifactId>artemis-jakarta-client</artifactId> -->
+            <!-- <artifactId>artemis-jakarta-client</artifactId>
+			<version>2.21.0</version> -->
 			<artifactId>artemis-jms-client</artifactId>
 			<exclusions>
 				<exclusion>

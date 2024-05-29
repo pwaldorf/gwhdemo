@@ -2,7 +2,6 @@ package com.pw.gwhcore.beans;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,11 +18,11 @@ public class CustomCamelContextConfig {
 
     private GwhRoutesLoader gwhRoutesLoader;
 
-    // private GwhCacheLoader gwhCacheLoader;
+    private GwhCacheLoader gwhCacheLoader;
 
-    public CustomCamelContextConfig(GwhRoutesLoader gwhRoutesLoader) { //}, GwhCacheLoader gwhCacheLoader) {
+    public CustomCamelContextConfig(GwhRoutesLoader gwhRoutesLoader, GwhCacheLoader gwhCacheLoader) {
         this.gwhRoutesLoader = gwhRoutesLoader;
-        // this.gwhCacheLoader = gwhCacheLoader;
+        this.gwhCacheLoader = gwhCacheLoader;
     }
 
     @Bean
@@ -39,8 +38,8 @@ public class CustomCamelContextConfig {
                 log.info("Adding new routes");
                 gwhRoutesLoader.loadRoutes();
 
-                // log.info("Adding new caches");
-                // gwhCacheLoader.load();
+                log.info("Adding new caches");
+                gwhCacheLoader.load();
 
                 // // Load YAML or XML DSL Route from String.
                 // try {

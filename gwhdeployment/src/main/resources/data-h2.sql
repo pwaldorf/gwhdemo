@@ -32,6 +32,9 @@ INSERT INTO route_template_params (id, profile, route_id, template_param_name, t
 INSERT INTO routes (id, profile, route_id, route)
        VALUES (1, 'dispatcher', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
 
+INSERT INTO cache_configuration (id, profile, region, cache_name, cache_initial_capacity, cache_maximum_size, cache_eviction_type, cache_expire_after_access_time, cache_expire_after_write_time, cache_stats_enabled, cache_stats_name, cache_loader_name)
+       VALUES (1, 'dispatcher', 'dev', 'testcache', 1000, 10000, 'size_based', 0, 0, 0, '', '');
+
 INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'test', 'test');
 INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
 INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'management.server.port', '8086');
@@ -39,3 +42,4 @@ INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatc
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (1, 'dispatcher', 'local', 'test', 'test');
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (2, 'dispatcher', 'local', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (3, 'dispatcher', 'local', 'management.server.port', '8086');
+INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (4, 'dispatcher', 'local', 'gwh.component.ftp.protocol"', 'sftp');

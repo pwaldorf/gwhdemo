@@ -1,53 +1,28 @@
 package com.pw.activemqdefault.configurations;
 
 
-import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import javax.jms.ConnectionFactory;
-import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
 @Configuration
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.default.enabled", havingValue = "true", matchIfMissing = false)
-@Profile("dev")
 public class ActiveMqDefaultConfigurations {
 
-    private final ActiveMqDefaultProperties activeMqDefaultProperties;
+    private final ConnectionFactory connectionFactory;
 
-    public ActiveMqDefaultConfigurations(ActiveMqDefaultProperties activeMqDefaultProperties) {
-        this.activeMqDefaultProperties = activeMqDefaultProperties;
+    public ActiveMqDefaultConfigurations(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
     }
-
-    @Bean("activeMqDefaultConnectionFactory")
-	public ConnectionFactory activeMqDefaultConnectionFactory() {
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-
-		try {
-			log.debug("Set Connection Parms");
-			connectionFactory.setBrokerURL(activeMqDefaultProperties.getBroker());
-			connectionFactory.setUser(activeMqDefaultProperties.getUsername());
-			connectionFactory.setPassword(activeMqDefaultProperties.getPassword());
-			log.debug("Connection Parms Set");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		WrapCachingConnectionFactory wrapConnectionFactory = new WrapCachingConnectionFactory(connectionFactory);
-		wrapConnectionFactory.setSessionCacheSize(activeMqDefaultProperties.getSessionCacheSize());
-
-		return wrapConnectionFactory;
-	}
 
     @Bean("activeMqDefaultTransactionManager")
     public PlatformTransactionManager activeMqDefaultTransactionManager() {
-        JmsTransactionManager transactionManager = new JmsTransactionManager(activeMqDefaultConnectionFactory());
+        JmsTransactionManager transactionManager = new JmsTransactionManager(connectionFactory);
         return transactionManager;
     }
 

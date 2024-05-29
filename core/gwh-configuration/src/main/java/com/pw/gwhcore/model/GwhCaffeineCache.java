@@ -17,8 +17,8 @@ public class GwhCaffeineCache {
     String evictionType;
     Integer expireAfterAccessTime;
     Integer expireAfterWriteTime;
-    boolean statsEnabled;
+    Boolean statsEnabled;
     String statsCounter;
-    String loaderName;
+    String cacheLoader;
 
 }

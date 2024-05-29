@@ -5,8 +5,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.component.caffeine.CaffeineConfiguration;
 import org.apache.camel.component.caffeine.EvictionType;
 import org.apache.camel.component.caffeine.load.CaffeineLoadCacheComponent;
-import org.hibernate.cache.internal.QueryResultsCacheImpl.CacheItem;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import com.github.benmanes.caffeine.cache.CacheLoader;
@@ -17,16 +16,16 @@ import com.pw.gwhcore.model.GwhCaffeineCache;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-// @Component
+@Component
 public class GwhCaffeineCacheLoader implements GwhCacheLoader {
 
     CamelContext camelContext;
 
     ApplicationContext context;
 
-    GwhCaffeineCaches gwhCaffeineCaches;
+    GwhConfigurationLoader<GwhCaffeineCache> gwhCaffeineCaches;
 
-    public GwhCaffeineCacheLoader(CamelContext camelContext, ApplicationContext context, GwhCaffeineCaches gwhCaffeineCaches) {
+    public GwhCaffeineCacheLoader(CamelContext camelContext, ApplicationContext context, GwhConfigurationLoader<GwhCaffeineCache> gwhCaffeineCaches) {
         this.camelContext = camelContext;
         this.context = context;
         this.gwhCaffeineCaches = gwhCaffeineCaches;
@@ -47,19 +46,27 @@ public class GwhCaffeineCacheLoader implements GwhCacheLoader {
     }
 
     public Map<String, CaffeineConfiguration> cacheConfigs() {
-    return gwhCaffeineCaches.getCaches().stream()
+    return gwhCaffeineCaches.getAll().stream()
         .collect(Collectors.toMap(
             GwhCaffeineCache::getName,
             item -> {
                 CaffeineConfiguration configuration = new CaffeineConfiguration();
-                configuration.setStatsEnabled(item.isStatsEnabled());
+                configuration.setStatsEnabled(item.getStatsEnabled());
                 configuration.setEvictionType(EvictionType.getEvictionType(item.getEvictionType()));
                 configuration.setInitialCapacity(item.getInitialCapacity());
                 configuration.setMaximumSize(item.getMaximumSize());
                 configuration.setExpireAfterWriteTime(item.getExpireAfterWriteTime());
                 configuration.setExpireAfterAccessTime(item.getExpireAfterAccessTime());
-                //configuration.setStatsCounter(context.getBean(item.getStatsCounter(), StatsCounter.class));
-                //configuration.setCacheLoader(context.getBean(item.getLoaderName(), CacheLoader.class));
+                if (StringUtils.isNotEmpty(item.getStatsCounter())) {
+                    if (item.getStatsCounter().equals("default")) {
+                        configuration.setStatsCounter(new ConcurrentStatsCounter());
+                    } else {
+                        configuration.setStatsCounter(context.getBean(item.getStatsCounter(), StatsCounter.class));
+                    }
+                }
+                if (StringUtils.isNotEmpty(item.getCacheLoader())) {
+                    configuration.setCacheLoader(context.getBean(item.getCacheLoader(), CacheLoader.class));
+                }
                 return configuration;
             }
         ));

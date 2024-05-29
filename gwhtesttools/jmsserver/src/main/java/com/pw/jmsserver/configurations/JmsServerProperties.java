@@ -12,6 +12,6 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "gwh.local.jms.server")
 public class JmsServerProperties {
 
-    private String broker = "tcp://localhost:61617";
+    private String brokerUrl = "tcp://localhost:61617";
 
 }

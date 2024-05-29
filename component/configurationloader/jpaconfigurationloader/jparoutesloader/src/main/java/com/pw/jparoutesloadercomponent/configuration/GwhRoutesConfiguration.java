@@ -3,15 +3,17 @@ package com.pw.jparoutesloadercomponent.configuration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import com.pw.gwhcore.configurations.GwhCoreProperties;
-import com.pw.gwhcore.gwhroutes.GwhRoutes;
+import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
 import com.pw.gwhcore.model.GwhRoute;
 import com.pw.jparoutesloadercomponent.jpa.service.GwhRouteService;
 
 @Component
-public class GwhRoutesConfiguration implements GwhRoutes {
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa.enabled", havingValue = "true", matchIfMissing = false)
+public class GwhRoutesConfiguration implements GwhConfigurationLoader<GwhRoute> {
 
     private GwhCoreProperties gwhCoreProperties;
     private GwhRouteService gwhRouteService;
@@ -22,7 +24,7 @@ public class GwhRoutesConfiguration implements GwhRoutes {
     }
 
     @Override
-    public List<GwhRoute> getRoutes() {
+    public List<GwhRoute> getAll() {
 
         List<GwhRoute> gwhRoutes = (gwhRouteService.getByProfile(gwhCoreProperties.getProfile()))
              .stream()
@@ -30,6 +32,18 @@ public class GwhRoutesConfiguration implements GwhRoutes {
              .collect(Collectors.toList());
 
         return gwhRoutes;
+    }
+
+    @Override
+    public List<GwhRoute> getByProfile() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getByProfile'");
+    }
+
+    @Override
+    public List<GwhRoute> getByProfileAndRegion() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getByProfileAndRegion'");
     }
 
 }

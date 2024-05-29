@@ -3,7 +3,6 @@ package com.pw.activemqdefault.components;
 import javax.jms.ConnectionFactory;
 
 import org.apache.camel.component.jms.JmsComponent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,18 +15,21 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.consumer.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqConsumerComponent {
 
-    @Autowired
-    private ConnectionFactory activeMqDefaultConnectionFactory;
+    private ConnectionFactory connectionFactory;
 
-    @Autowired
     private PlatformTransactionManager activeMqDefaultTransactionManager;
+
+    public ActiveMqConsumerComponent(ConnectionFactory connectionFactory, PlatformTransactionManager activeMqDefaultTransactionManager) {
+        this.connectionFactory = connectionFactory;
+        this.activeMqDefaultTransactionManager = activeMqDefaultTransactionManager;
+    }
 
     @Bean("activeMqDefaultConsumer")
     public JmsComponent activeMqDefaultConsumer() throws Exception {
 
         log.debug("jmsConsumer Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
-        jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
+        jmsComponent.setConnectionFactory(connectionFactory);
         jmsComponent.setTransacted(false);
         jmsComponent.setCacheLevelName("CACHE_NONE");
         return jmsComponent;
@@ -37,9 +39,9 @@ public class ActiveMqConsumerComponent {
     @Bean("activeMqDefaultConsumerTx")
     public JmsComponent activeMqDefaultConsumerTransacted() throws Exception {
 
-        log.debug("jmsConsumerTransacted Component Creation");
+        log.info("jmsConsumerTransacted Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
-        jmsComponent.setConnectionFactory(activeMqDefaultConnectionFactory);
+        jmsComponent.setConnectionFactory(connectionFactory);
         jmsComponent.setTransacted(true);
         jmsComponent.setCacheLevelName("CACHE_CONSUMER");
         jmsComponent.setTransactionManager(activeMqDefaultTransactionManager);

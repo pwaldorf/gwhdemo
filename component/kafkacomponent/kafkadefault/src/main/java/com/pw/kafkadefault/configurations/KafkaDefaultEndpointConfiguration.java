@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.pw.kafkadefault.components.KafkaDefaultComponents;
 
-@Configuration
-@ConditionalOnBean(KafkaDefaultComponents.class)
+// @Configuration
+// @ConditionalOnBean(KafkaDefaultComponents.class)
 public class KafkaDefaultEndpointConfiguration {
 
     @Bean("kafkaEndpointManualCommitConsumer")

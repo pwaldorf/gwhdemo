@@ -3,15 +3,17 @@ package com.pw.jparoutetemplatesloadercomponent.configuration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import com.pw.gwhcore.configurations.GwhCoreProperties;
-import com.pw.gwhcore.gwhroutetemplates.GwhRouteTemplates;
+import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
 import com.pw.gwhcore.model.GwhRouteTemplate;
 import com.pw.jparoutetemplatesloadercomponent.jpa.service.GwhRouteTemplateService;
 
 @Component
-public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa.enabled", havingValue = "true", matchIfMissing = false)
+public class GwhRouteTemplatesConfiguration implements GwhConfigurationLoader<GwhRouteTemplate> {
 
     private GwhCoreProperties gwhCoreProperties;
     private GwhRouteTemplateService gwhRouteTemplateService;
@@ -22,7 +24,7 @@ public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
     }
 
     @Override
-    public List<GwhRouteTemplate> getTemplatesByProfile() {
+    public List<GwhRouteTemplate> getByProfile() {
 
         List<GwhRouteTemplate> gwhRouteTemplates = (gwhRouteTemplateService.getByProfile(gwhCoreProperties.getProfile()))
              .stream()
@@ -34,13 +36,13 @@ public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
     }
 
     @Override
-    public List<GwhRouteTemplate> getTemplatesByProfileAndRegion() {
+    public List<GwhRouteTemplate> getByProfileAndRegion() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTemplatesByProfileAndRegion'");
     }
 
     @Override
-    public List<GwhRouteTemplate> getAllTemplates() {
+    public List<GwhRouteTemplate> getAll() {
 
         List<GwhRouteTemplate> gwhRouteTemplates = (gwhRouteTemplateService.getAllRouteTemplates())
              .stream()

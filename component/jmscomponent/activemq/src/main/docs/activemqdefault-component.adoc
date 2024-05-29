@@ -1,10 +1,10 @@
 = ActiveMQ Component
 :doctitle: ActiveMQ
 :shortname: activemq
-:artificatid: jmscomponents
+:artificatid: activemq
 :description: send and receive messages over activemq queue or topic
 
-This component allows messages to be send to or consumed from and ActiveMQ queue or topic. It uses Camel's JMS component as the base and further documentation can be found on the camel's website.
+This component allows messages to be send to or consumed from an ActiveMQ queue or topic. It uses Camel's JMS component as the base and further documentation can be found on the camel's website.
 
 For Maven, add the following dependency to the 'pom.xml':
 
@@ -14,6 +14,6 @@ For Maven, add the following dependency to the 'pom.xml':
     <groupId>com.pw</groupId>
     <artifactId>jmscomponents</artifactId>
     <version>x.x.x</version>
-    <!-- use same version as gwhcore version -->
+    <!-- use same version as gwh-core version -->
 </dependency>
 ----------------------------------------------------------

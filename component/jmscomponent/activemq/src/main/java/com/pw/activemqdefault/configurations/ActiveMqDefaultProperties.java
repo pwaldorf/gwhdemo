@@ -15,7 +15,7 @@ public class ActiveMqDefaultProperties {
     /**
      * JMS broker url
      */
-    private String broker;
+    private String brokerUrl;
 
     /**
      * The Username to be used to autenticate with the JMS Broker

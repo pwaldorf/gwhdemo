@@ -1,4 +1,4 @@
-package com.pw.ftpcomponent.routetemplates;
+package com.pw.ftpcomponent.consumer.routetemplates;
 
 
 import org.apache.camel.builder.RouteBuilder;
@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.ftpcomponent.configurations.GwhDataFormat;
+import com.pw.dataformats.dataformat.dataformat.GwhDataFormat;
+
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.ftp.reader.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.ftp.consumer.enabled", havingValue = "true", matchIfMissing = false)
 public class FtpParseAndSplit extends RouteBuilder {
 
     @Autowired(required = false)

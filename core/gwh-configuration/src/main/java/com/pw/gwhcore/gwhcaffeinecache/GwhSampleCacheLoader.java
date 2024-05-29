@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Component("GwhSampleCacheLoader")
+//@Component("GwhSampleCacheLoader")
 public class GwhSampleCacheLoader implements CacheLoader<String, String> {
 
     @Autowired

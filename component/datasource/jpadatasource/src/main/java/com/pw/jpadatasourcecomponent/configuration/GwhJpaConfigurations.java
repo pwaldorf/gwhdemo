@@ -25,6 +25,7 @@ import com.pw.support.datasource.GwhDataSource;
 @EnableJpaRepositories(basePackages = {"com.pw.jpapropertiescomponent.jpa.repository",
                                        "com.pw.jparoutesloadercomponent.jpa.repository",
                                        "com.pw.jparoutetemplatesloadercomponent.jpa.repository",
+                                       "com.pw.jpacaffeinecachesloader.jpa.repository",
                                        "com.pw.gwhcore.jpa.repository"},
                        entityManagerFactoryRef = "gwhEntityManagerFactory",
                        transactionManagerRef = "gwhTransactionManager")
@@ -48,6 +49,7 @@ public class GwhJpaConfigurations {
         sessionFactory.setPackagesToScan(new String[] {"com.pw.jpapropertiescomponent.jpa.model",
                                                        "com.pw.jparoutesloadercomponent.jpa.model",
                                                        "com.pw.jparoutetemplatesloadercomponent.jpa.model",
+                                                       "com.pw.jpacaffeinecachesloader.jpa.model",
                                                        "com.pw.gwhcore.jpa.model"});
         sessionFactory.setJpaVendorAdapter(gwhJpaVendorAdapter());
         sessionFactory.setJpaProperties(gwhJpaProperties());

@@ -19,6 +19,7 @@
 	<description>Jpa Loader Components Parent POM</description>
 
 	<modules>
+		<module>jpacaffeinecachesloader</module>
 		<module>jpapropertiesloader</module>
 		<module>jparoutesloader</module>
 		<module>jparoutetemplatesloader</module>

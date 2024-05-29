@@ -1,4 +1,4 @@
-package com.pw.ftpcomponent.configurations;
+package com.pw.ftpcomponent.consumer.configurations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.ftp.reader.enabled", havingValue = "true", matchIfMissing = false)
-public class FtpConfigurations {
+@ConditionalOnProperty(value = "gwh.framework.component.ftp.consumer.enabled", havingValue = "true", matchIfMissing = false)
+public class FtpConsumerConfigurations {
 
-    FtpProperties ftpDefaultProperties;
+    FtpConsumerProperties ftpProperties;
 
-    public FtpConfigurations(FtpProperties ftpDefaultProperties) {
-        this.ftpDefaultProperties = ftpDefaultProperties;
+    public FtpConsumerConfigurations(FtpConsumerProperties ftpProperties) {
+        this.ftpProperties = ftpProperties;
     }
 
     @Bean("ftpRoutePolicies")
@@ -29,7 +29,7 @@ public class FtpConfigurations {
     @Bean("ftpCronScheduledRoutePolicy")
     public CronScheduledRoutePolicy cronScheduledRoutePolicy() {
         CronScheduledRoutePolicy cronScheduledRoutePolicy = new CronScheduledRoutePolicy();
-        cronScheduledRoutePolicy.setRouteStartTime(ftpDefaultProperties.routeStartTime);
+        cronScheduledRoutePolicy.setRouteStartTime(ftpProperties.getRouteStartTime());
         return cronScheduledRoutePolicy;
     }
 }

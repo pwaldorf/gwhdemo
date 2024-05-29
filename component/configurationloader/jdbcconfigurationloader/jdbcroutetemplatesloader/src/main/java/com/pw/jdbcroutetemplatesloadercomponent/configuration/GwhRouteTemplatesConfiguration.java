@@ -3,16 +3,17 @@ package com.pw.jdbcroutetemplatesloadercomponent.configuration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import com.pw.gwhcore.configurations.GwhCoreProperties;
-import com.pw.gwhcore.gwhroutetemplates.GwhRouteTemplates;
+import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
 import com.pw.gwhcore.model.GwhRouteTemplate;
 import com.pw.jdbcroutetemplatesloadercomponent.jdbc.dao.GwhRouteTemplateDao;
-import com.pw.jdbcroutetemplatesloadercomponent.jdbc.mapper.GwhRouteTemplateRowMapper;
 
-//@Component
-public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
+@Component
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jdbc.enabled", havingValue = "true", matchIfMissing = false)
+public class GwhRouteTemplatesConfiguration implements GwhConfigurationLoader<GwhRouteTemplate> {
 
     private GwhCoreProperties gwhCoreProperties;
     private GwhRouteTemplateDao gwhRouteTemplateDao;
@@ -23,7 +24,7 @@ public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
     }
 
     @Override
-    public List<GwhRouteTemplate> getTemplatesByProfile() {
+    public List<GwhRouteTemplate> getByProfile() {
 
         List<GwhRouteTemplate> gwhRouteTemplates = gwhRouteTemplateDao.getRouteTemplatesByProfile(gwhCoreProperties.getProfile()).stream()
             .map(item -> new GwhRouteTemplate(item.getRouteId(), item.getTemplateParamName(), item.getTemplateParamValue()))
@@ -34,7 +35,7 @@ public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
     }
 
     @Override
-    public List<GwhRouteTemplate> getTemplatesByProfileAndRegion() {
+    public List<GwhRouteTemplate> getByProfileAndRegion() {
 
         // List<GwhRouteTemplate> gwhRouteTemplates = (gwhRouteTemplateService.getByProfile(gwhCoreProperties.getProfile()))
         //      .stream()
@@ -47,7 +48,7 @@ public class GwhRouteTemplatesConfiguration implements GwhRouteTemplates {
     }
 
     @Override
-    public List<GwhRouteTemplate> getAllTemplates() {
+    public List<GwhRouteTemplate> getAll() {
 
         List<GwhRouteTemplate> gwhRouteTemplates = gwhRouteTemplateDao.getAllRouteTemplates().stream()
             .map(item -> new GwhRouteTemplate(item.getRouteId(), item.getTemplateParamName(), item.getTemplateParamValue()))

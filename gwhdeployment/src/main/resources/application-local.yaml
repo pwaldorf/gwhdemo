@@ -5,7 +5,9 @@ spring:
     user: artemis
     password: artemis
     embedded:
+      server-id: 54321
       enabled: true
+      queues: test.queue1
   jms:
     template:
       default-destination: default.queue
@@ -50,6 +52,10 @@ gwh:
       load:
         params:
           enabled: true
+    configuration:
+      loader:
+        jpa:
+          enabled: true
     component:
       activemq:
         default:
@@ -61,16 +67,23 @@ gwh:
       kafka:
         default:
           enabled: true
+        consumer:
+          enabled: true
+        producer:
+          enabled: true
       ftp:
-        reader:
+        consumer:
           enabled: true
       pgpencryption:
-        enabled: true
+        enabled: false
       routemanagement:
         rest:
           enabled: true
 
   component:
+    ftp:
+      consumer:
+        protocol: ftp
     activemq:
       default:
         broker-url: tcp://localhost:61617
@@ -147,9 +160,9 @@ logging:
     org:
       apache:
         camel: INFO
-      #springframework:
-      #  transaction:
-      #    interceptor: TRACE
+      springframework:
+       transaction:
+         interceptor: TRACE
       hibernate:
         SQL: DEBUG
         type:
@@ -158,5 +171,5 @@ logging:
             BasicBinder: TRACE
       activemq:
         audit:
-          base: DEBUG
-          message: DEBUG
+          base: INFO
+          message: INFO

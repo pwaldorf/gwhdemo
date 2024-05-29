@@ -10,7 +10,7 @@ import com.pw.jparoutesloadercomponent.jpa.model.GwhRouteEntity;
 
 
 @Repository
-//@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa.enabled", havingValue = "true", matchIfMissing = false)
 public interface GwhRouteRepository extends JpaRepository<GwhRouteEntity, Long> {
 
     List<GwhRouteEntity> findByProfile(String profile);

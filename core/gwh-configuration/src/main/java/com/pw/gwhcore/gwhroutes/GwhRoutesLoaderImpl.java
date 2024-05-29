@@ -11,14 +11,17 @@ import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
 import org.springframework.stereotype.Component;
 
+import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
+import com.pw.gwhcore.model.GwhRoute;
+
 @Component
 public class GwhRoutesLoaderImpl implements GwhRoutesLoader {
 
     CamelContext camelContext;
 
-    GwhRoutes gwhRoutes;
+    GwhConfigurationLoader<GwhRoute> gwhRoutes;
 
-    public GwhRoutesLoaderImpl(CamelContext camelContext, GwhRoutes gwhRoutes) {
+    public GwhRoutesLoaderImpl(CamelContext camelContext, GwhConfigurationLoader<GwhRoute> gwhRoutes) {
         this.camelContext = camelContext;
         this.gwhRoutes = gwhRoutes;
     }
@@ -28,7 +31,7 @@ public class GwhRoutesLoaderImpl implements GwhRoutesLoader {
 
         List<Resource> resourceList = new ArrayList<>();
         AtomicInteger atomicInteger = new AtomicInteger();
-        gwhRoutes.getRoutes().stream().forEach(routeEntity
+        gwhRoutes.getAll().stream().forEach(routeEntity
                 -> resourceList.add(ResourceHelper.fromString("MyRoute" + atomicInteger.incrementAndGet() +
                                                                 ".xml", routeEntity.getRoute())));
 

@@ -12,7 +12,7 @@ import com.pw.jparoutesloadercomponent.jpa.repository.GwhRouteRepository;
 
 
 @Service
-@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteService {
 
     @Autowired

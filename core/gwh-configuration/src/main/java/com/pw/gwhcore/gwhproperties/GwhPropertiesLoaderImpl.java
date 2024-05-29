@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class GwhPropertiesLoaderImpl implements ApplicationListener<ContextRefreshedEvent> {
 
+
     private final GwhProperties gwhProperties;
 
     private final ConfigurableEnvironment configurableEnvironment;
@@ -25,7 +26,7 @@ public class GwhPropertiesLoaderImpl implements ApplicationListener<ContextRefre
     }
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(@SuppressWarnings("null") ContextRefreshedEvent event) {
 
         Map<String, Object> propertySource = new HashMap<>();
         gwhProperties.getProperties().forEach((key, value) -> propertySource.put((String) key, value));

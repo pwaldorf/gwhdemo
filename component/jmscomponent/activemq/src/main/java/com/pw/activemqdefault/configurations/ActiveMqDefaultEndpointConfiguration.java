@@ -10,14 +10,12 @@ import org.apache.camel.component.jms.JmsMessageType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
-@Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default.enabled", havingValue = "true", matchIfMissing = false)
+// @Configuration
+// @ConditionalOnProperty(value = "gwh.framework.component.activemq.default.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqDefaultEndpointConfiguration {
 
-    @Bean("activeMqEndpointConsumer")
-    @Profile("!local")
+    // @Bean("activeMqEndpointConsumer")
     public EndpointConsumerBuilder activeMqEndpointTransactedConsumerBuilder() {
 
         JmsEndpointConsumerBuilder activeMqEndpointConsumerBuilder =
@@ -27,19 +25,7 @@ public class ActiveMqDefaultEndpointConfiguration {
         return activeMqEndpointConsumerBuilder;
     }
 
-    @Bean("activeMqEndpointConsumer")
-    @Profile("local")
-    public EndpointConsumerBuilder activeMqEndpointConsumerBuilder() {
-
-        JmsEndpointConsumerBuilder activeMqEndpointConsumerBuilder =
-                jms("activeMqDefaultConsumer", "queue:{{queue}}")
-                    .jmsMessageType(JmsMessageType.Text);
-
-        return activeMqEndpointConsumerBuilder;
-    }
-
-    @Bean("activeMqEndpointProducer")
-    @Profile("!local")
+    // @Bean("activeMqEndpointProducer")
     public EndpointProducerBuilder activeMqEndpointTransactedProducerBuilder() {
 
         JmsEndpointProducerBuilder activeEndpointProducerBuilder =
@@ -49,14 +35,4 @@ public class ActiveMqDefaultEndpointConfiguration {
         return activeEndpointProducerBuilder;
     }
 
-    @Bean("activeMqEndpointProducer")
-    @Profile("local")
-    public EndpointProducerBuilder activeMqEndpointProducerBuilder() {
-
-        JmsEndpointProducerBuilder activeEndpointProducerBuilder =
-                jms("activeMqDefaultProducer", "queue:{{queue}}")
-                    .jmsMessageType(JmsMessageType.Text);
-
-        return activeEndpointProducerBuilder;
-    }
 }

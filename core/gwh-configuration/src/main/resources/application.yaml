@@ -14,19 +14,22 @@ gwh:
         enabled: true
       kafka:
         enabled: true
+      ftp:
+        reader:
+          enabled: true
   core:
     db:
       datasource:
         className: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://192.168.6.2:3306/gwh
-        userName: root        
+        userName: root
         minpoolsize: 0
         maxpoolsize: 50
         increment: 2
         maxidleTime: 300
-        retryDelay: 600000                
-        jpa-dialect: org.hibernate.dialect.MySQLDialect        
-        jpa-ddl-auto: validate          
+        retryDelay: 600000
+        jpa-dialect: org.hibernate.dialect.MySQLDialect
+        jpa-ddl-auto: validate
         jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
 
 management:
@@ -38,7 +41,7 @@ management:
         include:
           - info
           - health
-          - camel      
+          - camel
   endpoint:
     info:
       enabled: true
@@ -46,7 +49,7 @@ management:
       enabled: true
     camel:
       enabled: true
-        
+
 
 camel:
   main:
@@ -54,26 +57,26 @@ camel:
   springboot:
     name: GWHDispatcher
    # tracing-standby: true
-   # tracing: true    
+   # tracing: true
     dev-console-enabled: true
-                                 
+
     #routes-include-pattern: "classpath:camel/routeManagement/v1/*.yaml,\
     #                         classpath:camel/errorHandelers/v1/*.yaml,\
     #                         classpath:camel/routeConfigurations/v1/*.yaml,\
     #                         classpath:camel/routeTemplates/v1/*.yaml,\
     #                         classpath:camel/routes/dispatcher/v1/*.yaml,\
-    #                         classpath:camel/testRoute/*.yaml"    
+    #                         classpath:camel/testRoute/*.yaml"
   servlet:
     mapping:
       context-path: /api/*
-    
+
 logging:
   level:
     org:
       apache:
         camel: INFO
       #springframework:
-      #  transaction: 
+      #  transaction:
       #    interceptor: TRACE
       hibernate:
         SQL: DEBUG

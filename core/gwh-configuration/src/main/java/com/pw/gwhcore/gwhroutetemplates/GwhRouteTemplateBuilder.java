@@ -7,6 +7,10 @@ import java.util.Set;
 import org.apache.camel.spi.RouteTemplateParameterSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+
+import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
+import com.pw.gwhcore.model.GwhRouteTemplate;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,10 +25,10 @@ public class GwhRouteTemplateBuilder implements RouteTemplateParameterSource {
 
     private final Map<String, Map<String, Object>> parameters = new LinkedHashMap<>();
 
-    public GwhRouteTemplateBuilder(GwhRouteTemplates gwhRouteTemplates) {
+    public GwhRouteTemplateBuilder(GwhConfigurationLoader<GwhRouteTemplate> gwhRouteTemplates) {
 
         log.debug("Adding new routes from template params");
-        gwhRouteTemplates.getAllTemplates().stream().forEach(routeTemplate -> {
+        gwhRouteTemplates.getAll().stream().forEach(routeTemplate -> {
             parameters.computeIfAbsent(routeTemplate.getRouteId(),
                                         k -> new HashMap<>()).put(routeTemplate.getTemplateParamName(),
                                                                     routeTemplate.getTemplateParamValue());
