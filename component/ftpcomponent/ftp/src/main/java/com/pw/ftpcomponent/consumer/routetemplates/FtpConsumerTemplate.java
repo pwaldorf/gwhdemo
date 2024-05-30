@@ -28,7 +28,7 @@ public class FtpConsumerTemplate extends AbstractConsumerTemplate<FtpConsumerEnd
             .templateParameter("port", "21")
             .templateParameter("directory", "pub")
             .templateParameter("fileName")
-            .templateParameter("autoStart", "false")
+            .templateParameter("autoStart", "true")
             .templateParameter("delay", "10000")
             .templateParameter("streamDownload", "true")
             .templateParameter("stepwise", "false")
