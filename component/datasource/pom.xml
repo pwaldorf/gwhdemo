@@ -20,6 +20,7 @@
 	<modules>
 		<module>jpadatasource</module>
 		<module>jdbcdatasource</module>
-	</modules>
+        <module>mybatisdatasource</module>
+    </modules>
 
 </project>

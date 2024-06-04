@@ -3,7 +3,6 @@ package com.pw.jpadatasourcecomponent.configuration;
 import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,18 +33,18 @@ public class GwhJpaConfigurations {
 
     private GwhJpaDataSourceProperties gwhJpaDataSourceProperties;
 
-    private GwhDataSource gwhDataSource;
+    private GwhJpaDataSourceConfiguration gwhJpaDataSourceConfiguration;
 
     public GwhJpaConfigurations(GwhJpaDataSourceProperties gwhJpaDataSourceProperties,
-                                GwhDataSource gwhDataSource) {
+                                GwhJpaDataSourceConfiguration gwhJpaDataSourceConfiguration) {
         this.gwhJpaDataSourceProperties = gwhJpaDataSourceProperties;
-        this.gwhDataSource = gwhDataSource;
+        this.gwhJpaDataSourceConfiguration = gwhJpaDataSourceConfiguration;
     }
 
     @Bean(name = "gwhEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
-        sessionFactory.setDataSource(gwhDataSource.getDataSource());
+        sessionFactory.setDataSource(gwhJpaDataSourceConfiguration.getDataSource());
         sessionFactory.setPackagesToScan(new String[] {"com.pw.jpapropertiescomponent.jpa.model",
                                                        "com.pw.jparoutesloadercomponent.jpa.model",
                                                        "com.pw.jparoutetemplatesloadercomponent.jpa.model",

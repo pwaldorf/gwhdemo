@@ -1,13 +1,16 @@
 package com.pw.gwhcore.beans;
 
+import com.pw.gwhcore.gwhcaffeinecache.GwhCaffeineCacheBuilder;
+import com.pw.gwhcore.gwhroutes.GwhRouteBuilder;
+import com.pw.support.configuration.GwhBuilder;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.pw.gwhcore.gwhcaffeinecache.GwhCacheLoader;
-import com.pw.gwhcore.gwhroutes.GwhRoutesLoader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,12 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
 public class CustomCamelContextConfig {
 
-    private GwhRoutesLoader gwhRoutesLoader;
+    private final ApplicationContext applicationContext;
+    private final GwhRouteBuilder gwhRoutesBuilder;
 
-    private GwhCacheLoader gwhCacheLoader;
+    private final GwhCaffeineCacheBuilder gwhCacheLoader;
 
-    public CustomCamelContextConfig(GwhRoutesLoader gwhRoutesLoader, GwhCacheLoader gwhCacheLoader) {
-        this.gwhRoutesLoader = gwhRoutesLoader;
+    public CustomCamelContextConfig(ApplicationContext applicationContext, GwhRouteBuilder gwhRoutesBuilder, GwhCaffeineCacheBuilder gwhCacheLoader) {
+        this.applicationContext = applicationContext;
+        this.gwhRoutesBuilder = gwhRoutesBuilder;
         this.gwhCacheLoader = gwhCacheLoader;
     }
 
@@ -35,11 +40,16 @@ public class CustomCamelContextConfig {
             @Override
             public void beforeApplicationStart(CamelContext camelContext) {
 
-                log.info("Adding new routes");
-                gwhRoutesLoader.loadRoutes();
-
-                log.info("Adding new caches");
-                gwhCacheLoader.load();
+                applicationContext.getBeansOfType(GwhBuilder.class).forEach((beanName, bean) -> {
+                    System.out.println("PJWB: " + beanName);
+                    bean.build();
+                });
+//
+//                log.info("Adding new routes");
+//                gwhRoutesBuilder.build();
+//
+//                log.info("Adding new caches");
+//                gwhCacheLoader.build();
 
                 // // Load YAML or XML DSL Route from String.
                 // try {

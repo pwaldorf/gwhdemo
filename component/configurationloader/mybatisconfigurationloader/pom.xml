@@ -2,25 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.pw</groupId>
-	<artifactId>configurationloader</artifactId>
+	<artifactId>mybatisconfigurationloader</artifactId>
 	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>configurationloader</name>
+	<name>mybatisconfigurationloader</name>
 
 	<parent>
 		<groupId>com.pw</groupId>
-		<artifactId>component</artifactId>
+		<artifactId>configurationloader</artifactId>
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<description>Configuration Loader Components Parent POM</description>
+	<description>MyBatis Loader Components Parent POM</description>
 
 	<modules>
-		<module>jpaconfigurationloader</module>
-		<module>jdbcconfigurationloader</module>
-		<module>mybatisconfigurationloader</module>
+<!--		<module>mybatiscaffeinecachesloader</module>-->
+<!--		<module>mybatispropertiesloader</module>-->
+<!--		<module>mybatisroutesloader</module>-->
+		<module>mybatisroutetemplatesloader</module>
 	</modules>
 
 </project>

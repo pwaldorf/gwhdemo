@@ -89,11 +89,11 @@ public class FtpServerConfigs {
         userManagerFactory.setPasswordEncryptor(new ClearTextPasswordEncryptor());
         userManagerFactory.setAdminName("admin");
         UserManager userManager = userManagerFactory.createUserManager();
-        BaseUser user = new BaseUser();
-        user.setName("pwaldorf");
-        user.setPassword("password");
-        user.setHomeDirectory("/tmp");
-        userManager.save(user);
+//        BaseUser user = new BaseUser();
+//        user.setName("pwaldorf");
+//        user.setPassword("password");
+//        user.setHomeDirectory("/tmp");
+//        userManager.save(user);
         return userManager;
     }
 

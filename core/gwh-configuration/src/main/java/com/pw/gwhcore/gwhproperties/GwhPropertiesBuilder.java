@@ -3,6 +3,9 @@ package com.pw.gwhcore.gwhproperties;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pw.gwhcore.model.GwhProperty;
+import com.pw.support.configuration.GwhLoader;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -13,14 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class GwhPropertiesLoaderImpl implements ApplicationListener<ContextRefreshedEvent> {
+@ConditionalOnProperty(value = "gwh.framework.routes.load.params.enabled", havingValue = "true", matchIfMissing = false)
+public class GwhPropertiesBuilder implements ApplicationListener<ContextRefreshedEvent> {
 
 
-    private final GwhProperties gwhProperties;
+    private final GwhLoader<GwhProperty> gwhProperties;
 
     private final ConfigurableEnvironment configurableEnvironment;
 
-    public GwhPropertiesLoaderImpl(ConfigurableEnvironment configurableEnvironment, GwhProperties gwhProperties) {
+    public GwhPropertiesBuilder(ConfigurableEnvironment configurableEnvironment, GwhLoader<GwhProperty> gwhProperties) {
         this.configurableEnvironment = configurableEnvironment;
         this.gwhProperties = gwhProperties;
     }
@@ -29,7 +33,8 @@ public class GwhPropertiesLoaderImpl implements ApplicationListener<ContextRefre
     public void onApplicationEvent(@SuppressWarnings("null") ContextRefreshedEvent event) {
 
         Map<String, Object> propertySource = new HashMap<>();
-        gwhProperties.getProperties().forEach((key, value) -> propertySource.put((String) key, value));
+//        gwhProperties.getAll().forEach((key, value) -> propertySource.put((key, value));
+        gwhProperties.getAll().stream().forEach(property -> propertySource.put(property.getKey(), property.getValue()));
         log.info("Loaded configurations");
         configurableEnvironment.getPropertySources().addFirst(new MapPropertySource("database", propertySource));
 

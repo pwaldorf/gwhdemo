@@ -1,8 +1,8 @@
-package com.pw.gwhcore.gwhcaffeinecache;
+package com.pw.support.configuration;
 
 import java.util.List;
 
-public interface GwhConfigurationLoader<T> {
+public interface GwhLoader<T> {
 
     List<T> getAll();
 

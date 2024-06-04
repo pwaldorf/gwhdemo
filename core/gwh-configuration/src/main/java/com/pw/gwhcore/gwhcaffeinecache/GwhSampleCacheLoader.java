@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.benmanes.caffeine.cache.CacheLoader;
-import com.pw.gwhcore.gwhroutetemplates.GwhRouteTemplates;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +13,6 @@ import java.util.Set;
 
 //@Component("GwhSampleCacheLoader")
 public class GwhSampleCacheLoader implements CacheLoader<String, String> {
-
-    @Autowired
-    private GwhRouteTemplates gwhRouteTemplates;
 
     @Override
     public @Nullable String load(@NonNull String arg0) throws Exception {

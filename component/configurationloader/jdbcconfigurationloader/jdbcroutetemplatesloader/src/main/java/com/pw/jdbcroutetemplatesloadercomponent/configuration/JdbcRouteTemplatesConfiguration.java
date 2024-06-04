@@ -3,39 +3,33 @@ package com.pw.jdbcroutetemplatesloadercomponent.configuration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.pw.gwhcore.gwhroutetemplates.GwhRouteTemplateResource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.gwhcore.configurations.GwhCoreProperties;
-import com.pw.gwhcore.gwhcaffeinecache.GwhConfigurationLoader;
 import com.pw.gwhcore.model.GwhRouteTemplate;
 import com.pw.jdbcroutetemplatesloadercomponent.jdbc.dao.GwhRouteTemplateDao;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.configuration.loader.jdbc.enabled", havingValue = "true", matchIfMissing = false)
-public class GwhRouteTemplatesConfiguration implements GwhConfigurationLoader<GwhRouteTemplate> {
+public class JdbcRouteTemplatesConfiguration implements GwhRouteTemplateResource {
 
-    private GwhCoreProperties gwhCoreProperties;
-    private GwhRouteTemplateDao gwhRouteTemplateDao;
+    private final GwhRouteTemplateDao gwhRouteTemplateDao;
 
-    public GwhRouteTemplatesConfiguration(GwhCoreProperties gwhCoreProperties, GwhRouteTemplateDao gwhRouteTemplateDao) {
-        this.gwhCoreProperties = gwhCoreProperties;
+    public JdbcRouteTemplatesConfiguration(GwhRouteTemplateDao gwhRouteTemplateDao) {
         this.gwhRouteTemplateDao = gwhRouteTemplateDao;
     }
 
     @Override
-    public List<GwhRouteTemplate> getByProfile() {
+    public List<GwhRouteTemplate> getResourceByProfile(String profile) {
 
-        List<GwhRouteTemplate> gwhRouteTemplates = gwhRouteTemplateDao.getRouteTemplatesByProfile(gwhCoreProperties.getProfile()).stream()
+        return gwhRouteTemplateDao.getRouteTemplatesByProfile(profile).stream()
             .map(item -> new GwhRouteTemplate(item.getRouteId(), item.getTemplateParamName(), item.getTemplateParamValue()))
             .collect(Collectors.toList());
-
-        return gwhRouteTemplates;
-
     }
 
     @Override
-    public List<GwhRouteTemplate> getByProfileAndRegion() {
+    public List<GwhRouteTemplate> getResourceByProfileAndRegion(String profile, String region) {
 
         // List<GwhRouteTemplate> gwhRouteTemplates = (gwhRouteTemplateService.getByProfile(gwhCoreProperties.getProfile()))
         //      .stream()
@@ -48,13 +42,12 @@ public class GwhRouteTemplatesConfiguration implements GwhConfigurationLoader<Gw
     }
 
     @Override
-    public List<GwhRouteTemplate> getAll() {
+    public List<GwhRouteTemplate> getResourceAll() {
 
-        List<GwhRouteTemplate> gwhRouteTemplates = gwhRouteTemplateDao.getAllRouteTemplates().stream()
+        return gwhRouteTemplateDao.getAllRouteTemplates()
+            .stream()
             .map(item -> new GwhRouteTemplate(item.getRouteId(), item.getTemplateParamName(), item.getTemplateParamValue()))
             .collect(Collectors.toList());
-
-        return gwhRouteTemplates;
     }
 
 }

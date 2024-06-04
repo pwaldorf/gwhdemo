@@ -1,11 +1,10 @@
-package com.pw.kafkabroker;
+package com.pw.jparoutetemplatesloadercomponent;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KafkabrokerApplicationTests {
+class JparoutetemplatesloadercomponentApplicationTests {
 
 	@Test
 	void contextLoads() {
@@ -14,4 +13,5 @@ class KafkabrokerApplicationTests {
 	@SpringBootApplication
 	static class TestClass {
 	}
+
 }
