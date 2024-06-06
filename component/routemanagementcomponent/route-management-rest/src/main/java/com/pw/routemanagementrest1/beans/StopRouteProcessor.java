@@ -1,0 +1,29 @@
+package com.pw.routemanagementrest1.beans;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.apache.camel.Route;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
+
+
+@Component("stopRouteProcessor")
+@ConditionalOnProperty(value = "gwh.framework.component.routemanagement.rest1.enabled", havingValue = "true", matchIfMissing = false)
+public class StopRouteProcessor implements Processor {
+    
+    @Override
+    public void process(Exchange exchange) throws Exception {
+        
+        String routeId = exchange.getIn().getHeader("routeId", String.class);
+        System.out.println("Requested Stop Route: " + routeId);
+        Route route = exchange.getContext().getRoute(routeId);
+
+        if (route != null) {
+            exchange.getContext().getRouteController().stopRoute(routeId);
+            System.out.println("Stop Requested for Route: " + routeId);
+        } else {
+            exchange.getMessage().setHeader(Exchange.HTTP_RESPONSE_CODE, 404);
+            exchange.getMessage().setBody("Route not found");
+        }        
+    }
+}

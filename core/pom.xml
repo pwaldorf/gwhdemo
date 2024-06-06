@@ -19,7 +19,6 @@
 	<description>Components Parent POM</description>
 
 	<modules>
-		<module>gwh-core</module>
 		<module>gwh-configuration</module>
 		<module>gwh-support</module>
 	</modules>
