@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-@Configuration
-@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
+//@Configuration
+//@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
 public class GwhJpaDataSourceImpl {
 
     GwhJpaDataSourceProperties gwhJpaDataSourceProperties;

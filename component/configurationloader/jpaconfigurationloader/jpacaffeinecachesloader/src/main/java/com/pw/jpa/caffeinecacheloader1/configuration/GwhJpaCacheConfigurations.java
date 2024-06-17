@@ -1,5 +1,8 @@
 package com.pw.jpa.caffeinecacheloader1.configuration;
 
+import com.pw.gwhdatasource1.GwhDataSourceConfiguration;
+import com.pw.gwhdatasource1.GwhDataSourceProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

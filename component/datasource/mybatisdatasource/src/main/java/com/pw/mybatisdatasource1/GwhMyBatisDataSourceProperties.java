@@ -11,9 +11,9 @@ import java.util.Map;
 
 @Setter
 @Getter
-@Configuration
-@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
-@ConfigurationProperties(prefix = "gwh.mybatis.db.datasource")
+//@Configuration
+//@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
+//@ConfigurationProperties(prefix = "gwh.mybatis.db.datasource")
 public class GwhMyBatisDataSourceProperties {
 
     private String className;

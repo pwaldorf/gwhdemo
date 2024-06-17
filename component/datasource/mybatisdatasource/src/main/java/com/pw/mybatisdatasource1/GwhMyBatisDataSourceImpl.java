@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
-@Configuration
-@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
+//@Configuration
+//@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
 public class GwhMyBatisDataSourceImpl {
 
     GwhMyBatisDataSourceProperties gwhMyBatisDataSourceProperties;

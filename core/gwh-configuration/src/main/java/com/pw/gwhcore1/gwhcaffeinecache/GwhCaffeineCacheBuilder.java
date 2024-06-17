@@ -1,35 +1,32 @@
 package com.pw.gwhcore1.gwhcaffeinecache;
 
-import com.pw.support1.configuration.GwhBuilder;
-import com.pw.support1.configuration.GwhLoader;
+import com.pw.api1.GwhBuilder;
+import com.pw.gwhcore1.GwhConfigurationProperties;
+import com.pw.gwhcore1.GwhDefaultResourceLoader;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.caffeine.CaffeineConfiguration;
 import org.apache.camel.component.caffeine.EvictionType;
 import org.apache.camel.component.caffeine.load.CaffeineLoadCacheComponent;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.stats.ConcurrentStatsCounter;
 import com.github.benmanes.caffeine.cache.stats.StatsCounter;
-import com.pw.gwhcore1.model.GwhCaffeineCache;
+import com.pw.api1.configuration.GwhCaffeineCache;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
-@ConditionalOnProperty(value = "gwh.framework.load.caches.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhCaffeineCacheBuilder implements GwhBuilder {
 
-    CamelContext camelContext;
+    private final GwhConfigurationProperties gwhConfigurationProperties;
+    private final CamelContext camelContext;
+    private final ApplicationContext context;
+    private final GwhDefaultResourceLoader<GwhCaffeineCache> gwhCaffeineCaches;
 
-    ApplicationContext context;
-
-    GwhLoader<GwhCaffeineCache> gwhCaffeineCaches;
-
-    public GwhCaffeineCacheBuilder(CamelContext camelContext, ApplicationContext context,
-                                   GwhLoader<GwhCaffeineCache> gwhCaffeineCaches) {
+    public GwhCaffeineCacheBuilder(GwhConfigurationProperties gwhConfigurationProperties, CamelContext camelContext, ApplicationContext context,
+                                   GwhDefaultResourceLoader<GwhCaffeineCache> gwhCaffeineCaches) {
+        this.gwhConfigurationProperties = gwhConfigurationProperties;
         this.camelContext = camelContext;
         this.context = context;
         this.gwhCaffeineCaches = gwhCaffeineCaches;
@@ -40,7 +37,7 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
 
         Map<String, CaffeineConfiguration> configs = cacheConfigs();
 
-        configs.entrySet().stream().forEach(config -> {
+        configs.entrySet().forEach(config -> {
             camelContext.getRegistry().bind(config.getKey(), new CaffeineLoadCacheComponent() {
                 {
                     setConfiguration(config.getValue());
@@ -50,7 +47,7 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
     }
 
     public Map<String, CaffeineConfiguration> cacheConfigs() {
-    return gwhCaffeineCaches.getAll().stream()
+    return gwhCaffeineCaches.getResource(gwhConfigurationProperties).stream()
         .collect(Collectors.toMap(
             GwhCaffeineCache::getName,
             item -> {
@@ -74,7 +71,6 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
                 return configuration;
             }
         ));
-}
-
+    }
 
 }

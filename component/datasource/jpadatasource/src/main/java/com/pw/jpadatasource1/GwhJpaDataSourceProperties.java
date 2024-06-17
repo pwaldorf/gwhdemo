@@ -12,9 +12,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Configuration
-@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
-@ConfigurationProperties(prefix = "gwh.jpa.db.datasource")
+//@Configuration
+//@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
+//@ConfigurationProperties(prefix = "gwh.jpa.db.datasource")
 public class GwhJpaDataSourceProperties {
 
     private String className;

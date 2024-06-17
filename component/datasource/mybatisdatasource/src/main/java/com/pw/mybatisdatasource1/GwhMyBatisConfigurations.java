@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@MapperScan("com.pw.mybatisroutetemplatesloader1.mybatis.mapper")
-@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
+//@Configuration
+//@MapperScan("com.pw.mybatisroutetemplatesloader1.mybatis.mapper")
+//@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
 public class GwhMyBatisConfigurations {
 
     private GwhMyBatisDataSourceProperties gwhMyBatisDataSourceProperties;

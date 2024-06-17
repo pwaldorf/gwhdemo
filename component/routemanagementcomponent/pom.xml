@@ -8,10 +8,7 @@
 	<packaging>pom</packaging>
 
 	<name>routemanagementcomponent</name>
-
-	<modules>
-		<module>route-management-rest</module>
-	</modules>
+	<description>Route Mangement Components Parent POM</description>
 
 	<parent>
 		<groupId>com.pw</groupId>
@@ -19,6 +16,8 @@
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<description>Route Mangement Components Parent POM</description>
+	<modules>
+		<module>route-management-rest</module>
+	</modules>
 
 </project>

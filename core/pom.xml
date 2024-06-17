@@ -21,6 +21,8 @@
 	<modules>
 		<module>gwh-configuration</module>
 		<module>gwh-support</module>
-	</modules>
+        <module>gwh-route-management</module>
+        <module>gwh-core-api</module>
+    </modules>
 
 </project>

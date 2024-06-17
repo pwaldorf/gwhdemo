@@ -40,6 +40,7 @@ public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate<Ac
             .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
                 .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
                 .to("direct:{{directname}}")
-            .end();
+            .end()
+        .routeGroup("Consumer");
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.pw.support1.datasource.GwhDataSource;
 
-@Component
-@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
+//@Component
+//@ConditionalOnProperty(prefix = "gwh.mybatis.db.datasource", name = "className", matchIfMissing = false)
 public class GwhMyBatisDataSourceConfiguration implements GwhDataSource {
 
     DataSource dataSource;

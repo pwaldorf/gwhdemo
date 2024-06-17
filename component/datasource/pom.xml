@@ -18,9 +18,9 @@
 	<description>Datasource Components Parent POM</description>
 
 	<modules>
-		<module>jpadatasource</module>
-		<module>jdbcdatasource</module>
-        <module>mybatisdatasource</module>
+<!--		<module>jpadatasource</module>-->
+		<module>gwhdatasource</module>
+<!--        <module>mybatisdatasource</module>-->
     </modules>
 
 </project>

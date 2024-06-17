@@ -3,9 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.pw</groupId>
 	<artifactId>gwh-support</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
 
 	<name>gwh-support</name>
 	<description>Demo project for Spring Boot</description>
@@ -16,19 +14,17 @@
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<!-- <spring-boot.repackage.skip>true</spring-boot.repackage.skip> -->
-	</properties>
-
 	<dependencies>
-
-		<!-- spring dependencies -->
-
-
 		<!-- camel dependencies -->
 		<dependency>
   			<groupId>org.apache.camel.springboot</groupId>
   			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.pw</groupId>
+			<artifactId>gwh-core-api</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>

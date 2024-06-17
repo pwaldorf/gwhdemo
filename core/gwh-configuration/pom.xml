@@ -96,9 +96,10 @@
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
 		</dependency>
+
         <dependency>
             <groupId>com.pw</groupId>
-            <artifactId>gwh-support</artifactId>
+            <artifactId>gwh-core-api</artifactId>
             <version>1.1.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

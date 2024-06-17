@@ -43,6 +43,6 @@
 			<artifactId>camel-xml-io-dsl-starter</artifactId>
 	  	</dependency>
 
-	</dependencies>
+    </dependencies>
 
 </project>

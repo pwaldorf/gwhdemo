@@ -1,28 +1,26 @@
 package com.pw.gwhcore1.gwhroutes;
 
-import com.pw.gwhcore1.model.GwhRoute;
-import com.pw.support1.configuration.GwhBuilder;
-import com.pw.support1.configuration.GwhLoader;
+import com.pw.api1.configuration.GwhRoute;
+import com.pw.api1.GwhBuilder;
+import com.pw.gwhcore1.GwhConfigurationProperties;
+import com.pw.gwhcore1.GwhDefaultResourceLoader;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
-@ConditionalOnProperty(value = "gwh.framework.load.routes.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteBuilder implements GwhBuilder {
 
+    private final GwhConfigurationProperties gwhConfigurationProperties;
     private final CamelContext camelContext;
+    private final GwhDefaultResourceLoader<GwhRoute> gwhRoutes;
 
-    private final GwhLoader<GwhRoute> gwhRoutes;
-
-    public GwhRouteBuilder(CamelContext camelContext, GwhLoader<GwhRoute> gwhRoutes) {
+    public GwhRouteBuilder(GwhConfigurationProperties gwhConfigurationProperties, CamelContext camelContext, GwhDefaultResourceLoader<GwhRoute> gwhRoutes) {
+        this.gwhConfigurationProperties = gwhConfigurationProperties;
         this.camelContext = camelContext;
         this.gwhRoutes = gwhRoutes;
     }
@@ -31,7 +29,7 @@ public class GwhRouteBuilder implements GwhBuilder {
 
         List<Resource> resourceList = new ArrayList<>();
         AtomicInteger atomicInteger = new AtomicInteger();
-        gwhRoutes.getAll().stream().forEach(routeEntity
+        gwhRoutes.getResource(gwhConfigurationProperties).forEach(routeEntity
                 -> resourceList.add(ResourceHelper.fromString("MyRoute" + atomicInteger.incrementAndGet() +
                 ".xml", routeEntity.getRoute())));
 

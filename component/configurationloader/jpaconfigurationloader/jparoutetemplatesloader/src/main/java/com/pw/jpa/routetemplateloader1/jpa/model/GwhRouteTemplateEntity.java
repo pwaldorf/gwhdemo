@@ -30,6 +30,9 @@ public class GwhRouteTemplateEntity {
     @Column(name = "profile")
     private String profile;
 
+    @Column(name = "region")
+    private String region;
+
     @Column(name = "route_id")
     private String routeId;
 

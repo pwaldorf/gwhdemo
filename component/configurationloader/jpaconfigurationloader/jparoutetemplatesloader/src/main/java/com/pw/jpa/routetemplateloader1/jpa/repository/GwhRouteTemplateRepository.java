@@ -15,4 +15,6 @@ public interface GwhRouteTemplateRepository extends JpaRepository<GwhRouteTempla
 
     List<GwhRouteTemplateEntity> findByProfile(String profile);
 
+    List<GwhRouteTemplateEntity> findByProfileAndRegion(String profile, String region);
+
 }

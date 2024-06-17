@@ -1,6 +1,7 @@
 CREATE TABLE route_template_params (
   id bigint not null AUTO_INCREMENT,
   profile varchar(50) NOT NULL,
+  region varchar(50) NOT NULL,
   route_id varchar(50) NOT NULL,
   template_param_name varchar(50) NOT NULL,
   template_param_value varchar(100) NOT NULL,
@@ -10,17 +11,18 @@ CREATE TABLE route_template_params (
 CREATE TABLE routes (
   id bigint not null AUTO_INCREMENT,
   profile varchar(50) NOT NULL,
+  region varchar(50) NOT NULL,
   route_id varchar(50) NOT NULL,
   route varchar(4000) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE gwh_configs (
-   config_name  VARCHAR(50) NOT NULL,
-   config_key   VARCHAR(50) NOT NULL,
-   config_value VARCHAR(50),
-   PRIMARY KEY (config_name, config_key)
-);
+-- CREATE TABLE gwh_configs (
+--    config_name  VARCHAR(50) NOT NULL,
+--    config_key   VARCHAR(50) NOT NULL,
+--    config_value VARCHAR(50),
+--    PRIMARY KEY (config_name, config_key)
+-- );
 
 CREATE TABLE properties (
    id bigint not null AUTO_INCREMENT,
@@ -28,7 +30,7 @@ CREATE TABLE properties (
    region  VARCHAR(50) NOT NULL,
    property_key   VARCHAR(250) NOT NULL,
    property_value VARCHAR(250),
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (id)
 );
 
 CREATE TABLE cache_configuration (
@@ -44,7 +46,7 @@ CREATE TABLE cache_configuration (
    cache_stats_enabled BOOLEAN NOT NULL,
    cache_stats_name VARCHAR(45) NOT NULL,
    cache_loader_name VARCHAR(45) NOT NULL,
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (id)
 );
 
 create sequence route_template_params_seq start with 1 increment by 50;

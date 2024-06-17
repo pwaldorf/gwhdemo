@@ -8,6 +8,7 @@ import com.pw.gwhparser1.parser.enums.ParserFormat;
 
 public class GwhJpaGwhDataLoader implements GwhDataLoader<GwhGatewayConfiguration> {
 
+
     private String MY_APP_CONFIG_CSV = "<ElementConfigs>"
             + "<ElementConfig>"
             + "<format></format>"

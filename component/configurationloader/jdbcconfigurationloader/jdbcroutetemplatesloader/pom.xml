@@ -19,14 +19,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>gwh-support</artifactId>
+			<artifactId>gwh-core-api</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
-			<artifactId>gwh-configuration</artifactId>
+			<artifactId>gwh-support</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
+
 
 		<!-- spring dependencies -->
 		<dependency>
@@ -45,6 +48,12 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.5</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.pw</groupId>
+            <artifactId>gwh-core-base</artifactId>
+            <version>1.1.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
