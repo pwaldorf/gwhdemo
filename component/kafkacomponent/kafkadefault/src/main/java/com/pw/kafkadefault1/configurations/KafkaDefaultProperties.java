@@ -15,11 +15,15 @@ public class KafkaDefaultProperties {
     /**
      * Kafka consumer broker url
      */
-    String consumerBrokers;
+    private String consumerBrokers;
+    private String autoCommitConsumerEndpoint = "kafkaDefaultConsumerEndpoint";
+    private String manualCommitConsumerEndpoint = "kafkaDefaultConsumerEndpoint";
 
     /**
      * Kafka producer broker url
      */
-    String producerBrokers;
+    private String producerBrokers;
+    private String defaultProducerEndpoint = "kafkaDefaultProducerEndpoint";
+    private String transactionalProducerEndpoint = "kafkaTransactedProducerEndpoint";
 
 }

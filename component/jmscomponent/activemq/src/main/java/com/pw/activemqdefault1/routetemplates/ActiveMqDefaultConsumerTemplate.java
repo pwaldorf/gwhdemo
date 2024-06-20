@@ -1,20 +1,19 @@
 package com.pw.activemqdefault1.routetemplates;
 
+import com.pw.activemqdefault1.configurations.ActiveMqDefaultProperties;
+import com.pw.support1.route.GwhAbstractRouteTemplate;
 import org.apache.camel.LoggingLevel;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.activemqdefault1.configurations.ActiveMqConsumerEndpointBuilder;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
-
-
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate<ActiveMqConsumerEndpointBuilder> {
+public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate {
 
-    public ActiveMqDefaultConsumerTemplate(ActiveMqConsumerEndpointBuilder endpointConsumerBuilder) {
-        super(endpointConsumerBuilder);
+    private final ActiveMqDefaultProperties activeMqDefaultProperties;
 
+    public ActiveMqDefaultConsumerTemplate(ActiveMqDefaultProperties activeMqDefaultProperties) {
+        this.activeMqDefaultProperties = activeMqDefaultProperties;
     }
 
     @Override
@@ -23,7 +22,7 @@ public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate<Ac
         routeTemplate("activemqdefault_reader_v1")
         .templateParameter("queue")
         .templateParameter("directname")
-        .from(super.getEndpointRouteBuilder().getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(activeMqDefaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
         .transacted("txRequiredActiveMqDefault")
         .setHeader("GWHOriginalMessageID").simple("${headerAs('JMSMessageID', String)}")
         .setHeader("GWHOriginalCorrelationID").simple("${headerAs('JMSCorrelationID', String)}")

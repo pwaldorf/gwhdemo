@@ -13,24 +13,26 @@ INSERT INTO route_template_params (id, profile, region, route_id, template_param
        VALUES (6, 'dispatcher', 'local', 'dispatch_reader_1b', 'topic', 'test_topic');
 
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (7, 'dispatcher', 'local', 'dispatch_reader_2a', 'templateId', 'ftp_reader_v1');
+       VALUES (7, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'templateId', 'ftp_reader_v1');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (8, 'dispatcher', 'local', 'dispatch_reader_2a', 'directName', 'logger');
+       VALUES (8, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'directName', 'logger');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (9, 'dispatcher', 'local', 'dispatch_reader_2a', 'username', 'anonymous');
+       VALUES (9, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'username', 'anonymous');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (10, 'dispatcher', 'local', 'dispatch_reader_2a', 'password', '1234');
+       VALUES (10, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'password', '1234');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (11, 'dispatcher', 'local', 'dispatch_reader_2a', 'server', 'localhost');
+       VALUES (11, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'server', 'localhost');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (12, 'dispatcher', 'local', 'dispatch_reader_2a', 'port', '2021');
+       VALUES (12, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'port', '2021');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (13, 'dispatcher', 'local', 'dispatch_reader_2a', 'directory', 'pub');
+       VALUES (13, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'directory', 'pub');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (14, 'dispatcher', 'local', 'dispatch_reader_2a', 'fileName', 'test.txt');
+       VALUES (14, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'fileName', 'test.txt');
 
 INSERT INTO routes (id, profile, region, route_id, route)
        VALUES (1, 'dispatcher', 'local', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
+INSERT INTO routes (id, profile, region, route_id, route)
+       VALUES (2, 'ftptestprofile', 'local', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
 
 INSERT INTO cache_configuration (id, profile, region, cache_name, cache_initial_capacity, cache_maximum_size, cache_eviction_type, cache_expire_after_access_time, cache_expire_after_write_time, cache_stats_enabled, cache_stats_name, cache_loader_name)
        VALUES (1, 'dispatcher', 'local', 'testcache', 1000, 10000, 'size_based', 0, 0, 0, '', '');
@@ -42,4 +44,4 @@ INSERT INTO cache_configuration (id, profile, region, cache_name, cache_initial_
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (1, 'dispatcher', 'local', 'test', 'test');
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (2, 'dispatcher', 'local', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
 INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (3, 'dispatcher', 'local', 'management.server.port', '8086');
-INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (4, 'dispatcher', 'local', 'gwh.component.ftp.protocol"', 'sftp');
+-- INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (4, 'logger', 'local', 'gwh.component.ftp.protocol"', 'sftp');

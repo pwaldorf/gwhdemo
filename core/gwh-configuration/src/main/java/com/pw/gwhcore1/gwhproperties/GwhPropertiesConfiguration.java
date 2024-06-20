@@ -11,8 +11,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.lang.Nullable;
 
-@Configuration
-@ConditionalOnProperty(value = "gwh.framework.load.properties.core1.enabled", havingValue = "true", matchIfMissing = false)
+//@Configuration
+//@ConditionalOnProperty(value = "gwh.framework.load.properties.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhPropertiesConfiguration {
 
     private final ConfigurableEnvironment configurableEnvironment;

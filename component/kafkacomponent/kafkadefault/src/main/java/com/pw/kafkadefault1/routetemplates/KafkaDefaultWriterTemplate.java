@@ -1,19 +1,17 @@
 package com.pw.kafkadefault1.routetemplates;
 
+import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
 import com.pw.support1.route.GwhAbstractRouteTemplate;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.kafkadefault1.components.KafkaDefaultComponents;
-import com.pw.kafkadefault1.configurations.KafkaProducerEndpointBuilder;
-
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate<KafkaProducerEndpointBuilder> {
+public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate {
 
-    public KafkaDefaultWriterTemplate(@Qualifier("kafkaDefaultProducerEndpoint") KafkaProducerEndpointBuilder endpointProducerBuilder) {
-        super(endpointProducerBuilder);
+    private final KafkaDefaultProperties kafkaDefaultProperties;
+    public KafkaDefaultWriterTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
+        this.kafkaDefaultProperties = kafkaDefaultProperties;
     }
 
     @Override
@@ -24,7 +22,9 @@ public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate<KafkaPr
         .templateParameter("topic")
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
+        .templateParameter("producerEndpoint", "kafkaDefaultProducerEndpoint")
         .from("direct:{{directname}}")
-        .to(getEndpointRouteBuilder().getProducerEndpoint());
+        .to(getProducerEndpointRouteBuilderByName(kafkaDefaultProperties.getDefaultProducerEndpoint()).getProducerEndpoint());
+
     }
 }

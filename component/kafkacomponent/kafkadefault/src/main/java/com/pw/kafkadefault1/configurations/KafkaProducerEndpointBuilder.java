@@ -1,9 +1,6 @@
 package com.pw.kafkadefault1.configurations;
 
-import org.apache.camel.builder.EndpointProducerBuilder;
+import com.pw.support1.route.GwhEndpointProducerBuilder;
 
-public interface KafkaProducerEndpointBuilder {
-
-    EndpointProducerBuilder getProducerEndpoint();
-
+public interface KafkaProducerEndpointBuilder extends GwhEndpointProducerBuilder {
 }

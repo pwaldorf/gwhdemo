@@ -47,13 +47,23 @@ management:
 gwh:
   service:
     profile: dispatcher
+#    profile: ftptestprofile
+  properties:
+    db:
+      table: gwh_configs
+      keyColumn: config_key
+      valueColumn: config_value
+      profileColumn: config_name
+      url: jdbc:mysql://192.168.6.2:3306/gwh
+      userName: root
+      password: XXXXXXXX
   framework:
     load:
       properties:
         core1:
-          enabled: true
+          enabled: false
         jpa1:
-          enabled: true
+          enabled: false
       routes:
         core1:
           enabled: true

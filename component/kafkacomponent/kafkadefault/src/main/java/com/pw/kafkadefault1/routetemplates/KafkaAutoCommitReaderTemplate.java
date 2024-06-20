@@ -1,18 +1,19 @@
 package com.pw.kafkadefault1.routetemplates;
 
+import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
+import com.pw.support1.route.GwhAbstractRouteTemplate;
 import org.apache.camel.LoggingLevel;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.kafkadefault1.configurations.KafkaConsumerEndpointBuilder;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
-
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaAutoCommitReaderTemplate extends GwhAbstractRouteTemplate<KafkaConsumerEndpointBuilder> {
+public class KafkaAutoCommitReaderTemplate extends GwhAbstractRouteTemplate {
 
-    public KafkaAutoCommitReaderTemplate(KafkaConsumerEndpointBuilder endpointConsumerBuilder) {
-        super(endpointConsumerBuilder);
+    private final KafkaDefaultProperties kafkaDefaultProperties;
+
+    public KafkaAutoCommitReaderTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
+        this.kafkaDefaultProperties = kafkaDefaultProperties;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class KafkaAutoCommitReaderTemplate extends GwhAbstractRouteTemplate<Kafk
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directname")
-        .from(getEndpointRouteBuilder().getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(kafkaDefaultProperties.getAutoCommitConsumerEndpoint()).getConsumerEndpoint())
         .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}")
         .to("direct:logger")
         .choice()

@@ -32,5 +32,8 @@ public class ActiveMqDefaultProperties {
      */
     private int sessionCacheSize;
 
+    private String defaultConsumerEndpoint = "activeMqConsumerEndpoint";
+    private String defaultProducerEndpoint = "activeMqProducerEndpoint";
+
 
 }

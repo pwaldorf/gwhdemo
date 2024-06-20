@@ -1,8 +1,7 @@
 package com.pw.activemqdefault1.configurations;
 
-import org.apache.camel.builder.EndpointProducerBuilder;
+import com.pw.support1.route.GwhEndpointProducerBuilder;
 
-public interface ActiveMqProducerEndpointBuilder {
+public interface ActiveMqProducerEndpointBuilder extends GwhEndpointProducerBuilder {
 
-    EndpointProducerBuilder getProducerEndpoint();
 }

@@ -5,6 +5,8 @@ import com.pw.gwhcore1.GwhConfigurationProperties;
 import com.pw.gwhcore1.GwhDefaultResourceLoader;
 import com.pw.api1.GwhLoader;
 import org.apache.camel.CamelContext;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +31,10 @@ public class GwhRoutePropertiesBuilder implements GwhLoader {
         gwhRouteProperties.getResource(gwhConfigurationProperties).forEach(routeProperty
                 -> map.computeIfAbsent(routeProperty.getRouteId(), k -> new ArrayList<>()).add(routeProperty));
 
-        camelContext.getRoutes().forEach( route -> map.get(route.getRouteId()).forEach(
-                routeProperty -> route.getProperties().putIfAbsent(routeProperty.getKey(), routeProperty.getValue())));
+        if (MapUtils.isNotEmpty(map)) {
+            camelContext.getRoutes().forEach(route -> map.get(route.getRouteId()).forEach(
+                    routeProperty -> route.getProperties().putIfAbsent(routeProperty.getKey(), routeProperty.getValue())));
+        }
 
     }
 }

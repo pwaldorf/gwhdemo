@@ -1,19 +1,20 @@
 package com.pw.kafkadefault1.routetemplates;
 
+import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
+import com.pw.support1.route.GwhAbstractRouteTemplate;
 import org.apache.camel.LoggingLevel;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-
 import com.pw.kafkadefault1.beans.KafkaDefaultConsumerManualCommit;
-import com.pw.kafkadefault1.configurations.KafkaConsumerEndpointBuilder;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate<KafkaConsumerEndpointBuilder> {
+public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate {
 
-    public KafkaManualCommitReaderTemplate(KafkaConsumerEndpointBuilder endpointConsumerBuilder) {
-        super(endpointConsumerBuilder);
+    private final KafkaDefaultProperties kafkaDefaultProperties;
+
+    public KafkaManualCommitReaderTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
+        this.kafkaDefaultProperties = kafkaDefaultProperties;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate<Ka
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directname")
-        .from(getEndpointRouteBuilder().getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(kafkaDefaultProperties.getManualCommitConsumerEndpoint()).getConsumerEndpoint())
         .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
                        .bean(KafkaDefaultConsumerManualCommit.class, "process")
                        .end()

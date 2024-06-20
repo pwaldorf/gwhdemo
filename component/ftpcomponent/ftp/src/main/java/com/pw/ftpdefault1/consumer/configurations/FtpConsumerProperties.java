@@ -14,5 +14,6 @@ public class FtpConsumerProperties {
 
     private String routeStartTime = "1 * * * * ?";
     private String protocol = "sftp";
+    private String defaultConsumerEndpoint = "ftpConsumerEndpoint";
 
 }

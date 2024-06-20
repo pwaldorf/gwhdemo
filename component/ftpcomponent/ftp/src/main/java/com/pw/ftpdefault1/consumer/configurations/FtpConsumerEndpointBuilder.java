@@ -1,9 +1,7 @@
 package com.pw.ftpdefault1.consumer.configurations;
 
-import org.apache.camel.builder.EndpointConsumerBuilder;
+import com.pw.support1.route.GwhEndpointConsumerBuilder;
 
-public interface FtpConsumerEndpointBuilder {
-
-    EndpointConsumerBuilder getConsumerEndpoint();
+public interface FtpConsumerEndpointBuilder extends GwhEndpointConsumerBuilder {
 
 }
