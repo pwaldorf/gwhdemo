@@ -3,70 +3,73 @@ package com.pw.gwhcore1.gwhproperties2;
 import com.pw.api1.configuration.GwhPropertiesResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.gwhcore1.GwhConfigurationProperties;
+import com.pw.gwhcore1.gwhproperties.GwhDefaultProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
+import org.springframework.boot.context.properties.bind.Bindable;
+import org.springframework.boot.context.properties.bind.Binder;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
 
-    private final GwhConfigurationProperties gwhConfigurationProperties;
     private final GwhDatabaseProperties gwhDatabaseProperties;
+    private final GwhConfigurationProperties gwhConfigurationProperties;
 
-    public GwhDatabasePropertiesResource(GwhConfigurationProperties gwhConfigurationProperties, GwhDatabaseProperties gwhDatabaseProperties) {
-        this.gwhConfigurationProperties = gwhConfigurationProperties;
-        this.gwhDatabaseProperties = gwhDatabaseProperties;
+    public GwhDatabasePropertiesResource(ApplicationContextInitializedEvent event) {
+
+        gwhDatabaseProperties = Binder.get(
+                event.getApplicationContext().getEnvironment()).bind("gwh.properties.db",
+                Bindable.of(GwhDatabaseProperties.class)).get();
+
+        gwhConfigurationProperties = Binder.get(
+                event.getApplicationContext().getEnvironment()).bind("gwh.service",
+                Bindable.of(GwhConfigurationProperties.class)).get();
     }
 
     @Override
     public List<GwhProperty> getResourceAll() {
-        getPropertiesFromDatabase(gwhConfigurationProperties, gwhDatabaseProperties, getPropertiesQuery(false, false));
-
-        return List.of();
+        return getPropertiesFromDatabase(gwhConfigurationProperties,
+                gwhDatabaseProperties,
+                getPropertiesQuery(false, false));
     }
 
     @Override
     public List<GwhProperty> getResourceByProfile(String profile) {
-        getPropertiesFromDatabase(gwhConfigurationProperties, gwhDatabaseProperties, getPropertiesQuery(true, false));
-        return List.of();
+        return getPropertiesFromDatabase(gwhConfigurationProperties,
+                gwhDatabaseProperties,
+                getPropertiesQuery(true, false));
     }
 
     @Override
     public List<GwhProperty> getResourceByProfileAndRegion(String profile, String region) {
-        getPropertiesFromDatabase(gwhConfigurationProperties, gwhDatabaseProperties, getPropertiesQuery(true, true));
-        return List.of();
+        return getPropertiesFromDatabase(gwhConfigurationProperties,
+                gwhDatabaseProperties,
+                getPropertiesQuery(true, true));
     }
 
     private String getPropertiesQuery(boolean isByProfile, boolean isByRegion) {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT ");
-        query.append(gwhDatabaseProperties.getKeyColumn());
-        query.append(",");
-        query.append(gwhDatabaseProperties.getValueColumn());
-        query.append(" FROM ");
-        query.append(gwhDatabaseProperties.getTable());
+        query.append("SELECT property_key, property_value FROM profile_properties prof ");
+        query.append("JOIN properties prop ON prop.region = prof.region AND prop.property = prof.property");
         if (isByProfile) {
-            query.append(" WHERE ");
-            query.append(gwhDatabaseProperties.getProfileColumn());
-            query.append(" = ? ");
+            query.append(" WHERE prof.profile = ?");
 
             if (isByRegion) {
-                query.append(" AND ");
-                query.append(gwhDatabaseProperties.getRegionColumn());
-                query.append(" = ? ");
+                query.append(" AND prof.region = ?");
             }
         }
         log.info("Properties Query: {}", query.toString());
         return query.toString();
     }
 
-    private Map<String, Object> getPropertiesFromDatabase(GwhConfigurationProperties gwhConfigurationProperties,
+    private List<GwhProperty> getPropertiesFromDatabase(GwhConfigurationProperties gwhConfigurationProperties,
                                                           GwhDatabaseProperties gwhDatabaseProperties, String query) {
-        Map<String, Object> propertySource = new HashMap<>();
+        List<GwhProperty> propertySource = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -90,7 +93,8 @@ public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
                 System.out.println(resultSet.getString(1));
                 final String property_name = resultSet.getString(gwhDatabaseProperties.getKeyColumn());
                 final String property_value = resultSet.getString(gwhDatabaseProperties.getValueColumn());
-                propertySource.put(property_name, property_value);
+                GwhProperty gwhProperty = new GwhDefaultProperty(property_name, property_value);
+                propertySource.add(gwhProperty);
                 log.debug("Loading property key: {} value: {}", property_name, property_value);
             }
         } catch (SQLException e) {
@@ -118,7 +122,6 @@ public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
                 log.info(e.getMessage());
             }
         }
-
         return propertySource;
     }
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "gwh.local.kafka")
 public class KafkaBrokerProperties {
 
-    private String brokers = "PLAINTEXT://localhost:9092,REMOTE://192.168.6.50:9093";
+    private String brokers = "PLAINTEXT://localhost:9092,REMOTE://localhost:9093";
     private int port = 9092;
 
 

@@ -6,6 +6,7 @@ import com.pw.gwhcore1.GwhConfigurationProperties;
 import com.pw.gwhcore1.GwhDefaultResourceLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -21,17 +22,22 @@ public class GwhPropertiesLoader implements ApplicationListener<ApplicationConte
 
     @Override
     public void onApplicationEvent(ApplicationContextInitializedEvent event) {
-        BindResult<GwhDatabaseProperties> databaseProperties = Binder.get(
-                event.getApplicationContext().getEnvironment()).bind("gwh.properties.db", Bindable.of(GwhDatabaseProperties.class));
-        BindResult<GwhConfigurationProperties> configurationProperties = Binder.get(
-                event.getApplicationContext().getEnvironment()).bind("gwh.service", Bindable.of(GwhConfigurationProperties.class));
 
-        GwhPropertiesResource gwhPropertiesResource = new GwhDatabasePropertiesResource(configurationProperties.get(), databaseProperties.get());
+        BindResult<GwhConfigurationProperties> configurationProperties = Binder.get(
+                event.getApplicationContext().getEnvironment()).bind("gwh.service",
+                Bindable.of(GwhConfigurationProperties.class));
+
+        GwhPropertiesResource gwhPropertiesResource = GwhPropertiesFactory.getPropertiesResource(event);
+        if (gwhPropertiesResource == null) {
+            return;
+        }
         GwhDefaultResourceLoader<GwhProperty> defaultResourceLoader = new GwhDefaultResourceLoader<>(gwhPropertiesResource);
         Map<String, Object> propertySource = new HashMap<>();
         defaultResourceLoader.getResource(configurationProperties.get())
                 .forEach(property -> propertySource.put(property.getKey(), property.getValue()));
-        event.getApplicationContext().getEnvironment().getPropertySources().addFirst(new MapPropertySource("gwhdatabase", propertySource));
+        event.getApplicationContext().getEnvironment().getPropertySources().addFirst(
+                new MapPropertySource("gwhproperties", propertySource));
         log.info("Loaded configurations");
+
     }
 }

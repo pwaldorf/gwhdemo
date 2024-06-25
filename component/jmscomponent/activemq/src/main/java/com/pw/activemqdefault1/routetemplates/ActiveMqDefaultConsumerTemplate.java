@@ -21,7 +21,7 @@ public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate {
 
         routeTemplate("activemqdefault_reader_v1")
         .templateParameter("queue")
-        .templateParameter("directname")
+        .templateParameter("directName")
         .from(getConsumerEndpointRouteBuilderByName(activeMqDefaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
         .transacted("txRequiredActiveMqDefault")
         .setHeader("GWHOriginalMessageID").simple("${headerAs('JMSMessageID', String)}")
@@ -32,13 +32,13 @@ public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate {
         .choice()
             .when(header("GWHMessageType").isNull())
                 .setHeader("GWHMessageType").simple("original", String.class)
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .when(header("GWHMessageType").isEqualTo("original"))
                 .log(LoggingLevel.INFO, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
                 .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .end()
         .routeGroup("Consumer");
     }

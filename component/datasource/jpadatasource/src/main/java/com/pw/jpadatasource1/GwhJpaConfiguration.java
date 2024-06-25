@@ -28,9 +28,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
 public class GwhJpaConfiguration {
 
-    private GwhJpaDataSourceProperties gwhJpaDataSourceProperties;
+    private final GwhJpaDataSourceProperties gwhJpaDataSourceProperties;
 
-    private GwhJpaDataSourceConfiguration gwhJpaDataSourceConfiguration;
+    private final GwhJpaDataSourceConfiguration gwhJpaDataSourceConfiguration;
 
     public GwhJpaConfiguration(GwhJpaDataSourceProperties gwhJpaDataSourceProperties,
                                GwhJpaDataSourceConfiguration gwhJpaDataSourceConfiguration) {

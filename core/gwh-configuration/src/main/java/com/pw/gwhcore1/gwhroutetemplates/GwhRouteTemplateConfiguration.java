@@ -1,6 +1,5 @@
 package com.pw.gwhcore1.gwhroutetemplates;
 
-import com.pw.api1.configuration.GwhRouteTemplateFactory;
 import com.pw.api1.configuration.GwhRouteTemplateResource;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import com.pw.gwhcore1.GwhDefaultResourceLoader;

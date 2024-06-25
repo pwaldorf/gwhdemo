@@ -58,10 +58,10 @@ gwh:
     pgp:
       default:
         publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        publicKeyPassword: XXXXXXXX
+        publicKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
         publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
         privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        privateKeyPassword: XXXXXXXX
+        privateKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
         privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
 
   core:
@@ -70,7 +70,7 @@ gwh:
         className: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://192.168.6.2:3306/gwh
         userName: root
-        password: XXXXXXX
+        password: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
         minpoolsize: 0
         maxpoolsize: 50
         increment: 2

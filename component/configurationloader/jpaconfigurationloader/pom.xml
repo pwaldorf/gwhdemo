@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<groupId>com.pw</groupId>
-	<artifactId>jpaconfigurationloader</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.pw</groupId>
+  <artifactId>jpaconfigurationloader</artifactId>
+  <version>1.1.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<name>jpaconfigurationloader</name>
+  <name>jpaconfigurationloader</name>
 
-	<parent>
-		<groupId>com.pw</groupId>
-		<artifactId>configurationloader</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>com.pw</groupId>
+    <artifactId>configurationloader</artifactId>
+    <version>1.1.1-SNAPSHOT</version>
+  </parent>
 
-	<description>Jpa Loader Components Parent POM</description>
+  <description>Jpa Loader Components Parent POM</description>
 
-	<modules>
-		<module>jpacaffeinecachesloader</module>
-		<module>jpapropertiesloader</module>
-		<module>jparoutesloader</module>
-		<module>jparoutetemplatesloader</module>
-	</modules>
+  <modules>
+    <module>jpacaffeinecachesloader</module>
+    <module>jpadataformatloader</module>
+    <module>jparoutepropertiesloader</module>
+    <module>jparoutesloader</module>
+    <module>jparoutetemplatesloader</module>
+  </modules>
 
 </project>

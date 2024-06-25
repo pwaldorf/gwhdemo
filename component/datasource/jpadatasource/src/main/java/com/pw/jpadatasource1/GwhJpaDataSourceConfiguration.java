@@ -12,7 +12,7 @@ import com.pw.support1.datasource.GwhDataSource;
 //@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
 public class GwhJpaDataSourceConfiguration implements GwhDataSource {
 
-    DataSource dataSource;
+    private final DataSource dataSource;
 
     public GwhJpaDataSourceConfiguration(@Qualifier("gwhJpaDataSource") DataSource dataSource) {
         this.dataSource = dataSource;

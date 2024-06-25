@@ -7,6 +7,9 @@ public class GwhFlatpackConfiguration {
     private char delimiter;
     private char textQualifier;
     private boolean ignoreFirstRecord;
+    private boolean allowShortLines;
+    private boolean ignoreExtraColumns;
+
     private String formatDefinition;
 
     public boolean isFixedFile() {
@@ -32,6 +35,18 @@ public class GwhFlatpackConfiguration {
     }
     public void setIgnoreFirstRecord(boolean ignoreFirstRecord) {
         this.ignoreFirstRecord = ignoreFirstRecord;
+    }
+    public boolean isAllowShortLines() {
+        return allowShortLines;
+    }
+    public void setAllowShortLines(boolean allowShortLines) {
+        this.allowShortLines = allowShortLines;
+    }
+    public boolean isIgnoreExtraColumns() {
+        return ignoreExtraColumns;
+    }
+    public void setIgnoreExtraColumns(boolean ignoreExtraColumns) {
+        this.ignoreExtraColumns = ignoreExtraColumns;
     }
     public String getFormatDefinition() {
         return formatDefinition;

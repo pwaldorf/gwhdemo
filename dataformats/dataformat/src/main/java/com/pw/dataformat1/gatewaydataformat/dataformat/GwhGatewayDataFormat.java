@@ -1,18 +1,17 @@
 package com.pw.dataformat1.gatewaydataformat.dataformat;
 
-
 import org.apache.camel.spi.DataFormat;
 
 import com.pw.dataformat1.dataformat.dataformat.GwhDataFormat;
 import com.pw.dataformat1.dataformat.loader.GwhDataLoader;
 import com.pw.dataformat1.gatewaydataformat.configuration.GwhGatewayConfiguration;
 
-
 public class GwhGatewayDataFormat implements GwhDataFormat {
 
-    GwhDataLoader<GwhGatewayConfiguration> dataLoader;
+    private final GwhDataLoader<GwhGatewayConfiguration> dataLoader;
 
-    GwhGatewayConfiguration dataFormatConfig = null;
+    private GwhGatewayConfiguration dataFormatConfig = null;
+    private GatewayDataFormat dataFormat = null;
 
     public GwhGatewayDataFormat(GwhDataLoader<GwhGatewayConfiguration> dataLoader) {
         this.dataLoader = dataLoader;
@@ -20,11 +19,12 @@ public class GwhGatewayDataFormat implements GwhDataFormat {
 
     @Override
     public DataFormat getDataFormat(String formatName) {
+
         if (dataFormatConfig == null) {
             dataFormatConfig = loadDataFormatConfiguration(formatName);
         }
 
-        GatewayDataFormat dataFormat = new GatewayDataFormat();
+        dataFormat = new GatewayDataFormat();
         dataFormat.setCharacterSet(dataFormatConfig.getCharacterSet());
         dataFormat.setDefaultValueType(dataFormatConfig.getDefaultValueType());
         dataFormat.setFormat(dataFormatConfig.getFormat());
@@ -37,8 +37,8 @@ public class GwhGatewayDataFormat implements GwhDataFormat {
         dataFormat.setSkipHeader(dataFormatConfig.isSkipHeader());
         dataFormat.setUseMap(dataFormatConfig.isUseMap());
         dataFormat.setAppConfig(dataFormatConfig.getAppConfig());
-
         return dataFormat;
+
     }
 
     private GwhGatewayConfiguration loadDataFormatConfiguration(String formatName) {

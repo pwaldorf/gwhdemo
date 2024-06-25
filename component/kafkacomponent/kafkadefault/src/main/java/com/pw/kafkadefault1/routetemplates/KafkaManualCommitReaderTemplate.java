@@ -28,7 +28,7 @@ public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("autoCommitEnable", "false")
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
-        .templateParameter("directname")
+        .templateParameter("directName")
         .from(getConsumerEndpointRouteBuilderByName(kafkaDefaultProperties.getManualCommitConsumerEndpoint()).getConsumerEndpoint())
         .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
                        .bean(KafkaDefaultConsumerManualCommit.class, "process")
@@ -38,13 +38,13 @@ public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate {
         .choice()
             .when(header("GWHMessageType").isNull())
                 .setHeader("GWHMessageType").simple("original", String.class)
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .when(header("GWHMessageType").isEqualTo("original"))
             .log(LoggingLevel.INFO, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
             .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directname}}")
+                .to("direct:{{directName}}")
             .end();
     }
 

@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(prefix = "gwh.component.ftp.default1.consumer", name = "protocol", havingValue = "ftp", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.component.ftp.default1.consumer.protocol", havingValue = "ftp", matchIfMissing = true)
 public class FtpConsumerEndpoint implements FtpConsumerEndpointBuilder {
 
     @Override
@@ -17,9 +17,9 @@ public class FtpConsumerEndpoint implements FtpConsumerEndpointBuilder {
 
         AdvancedFtpEndpointConsumerBuilder ftpEndpointConsumerBuilder =
 
-            ftp("ftp", "{{server}}:{{port}}/{{directory}}")
-                    .username("{{username}}")
-                    .password("{{password}}")
+            ftp("ftp", "{{ftpserver}}:{{ftpport}}/{{directory}}")
+                    .username("{{ftpusername}}")
+                    .password("{{ftppassword}}")
                     .fileName("{{fileName}}")
                     .streamDownload("{{streamDownload}}")
                     .move("{{completedFolder}}/${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}")

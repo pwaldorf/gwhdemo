@@ -17,7 +17,7 @@ public class SftpConsumerEndpoint implements FtpConsumerEndpointBuilder {
 
         AdvancedSftpEndpointConsumerBuilder sftpEndpointConsumerBuilder =
 
-            sftp("sftp", "{{server}}:{{port}}/{{directory}}")
+            sftp("sftp", "{{ftpserver}}:{{ftpport}}/{{directory}}")
                     .username("user")
                     .fileName("resourceAttr.getFileName()")
                     .privateKeyFile("{{privateKeyFile}}")

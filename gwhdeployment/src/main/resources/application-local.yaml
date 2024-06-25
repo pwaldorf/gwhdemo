@@ -1,4 +1,5 @@
 spring:
+  # Setup Embedded Services: Artemis, H2 Database
   artemis:
     mode: embedded
     broker-url: tcp://localhost:61617
@@ -28,7 +29,7 @@ server:
 
 management:
   server:
-    port: 8085
+    port: 8086
   endpoints:
     web:
       exposure:
@@ -47,121 +48,119 @@ management:
 gwh:
   service:
     profile: dispatcher
-#    profile: ftptestprofile
+    # profile: ftptestprofile
+    region: ALL
   properties:
     db:
-      table: gwh_configs
-      keyColumn: config_key
-      valueColumn: config_value
-      profileColumn: config_name
-      url: jdbc:mysql://192.168.6.2:3306/gwh
-      userName: root
-      password: XXXXXXXX
-  framework:
-    load:
-      properties:
-        core1:
-          enabled: false
-        jpa1:
-          enabled: false
-      routes:
-        core1:
-          enabled: true
-        jpa1:
-          enabled: true
-      routetemplates:
-        core1:
-          enabled: true
-        jpa1:
-          enabled: true
-      caches:
-        core1:
-          enabled: true
-        jpa1:
-          enabled: true
-    configuration:
-      loader:
-        jpa1:
-          enabled: true
-    core:
-      routemanagement:
-        enabled: true
-    component:
-      activemq:
-        default1:
-          default:
-            enabled: true
-          consumer:
-            enabled: true
-          producer:
-            enabled: true
-      kafka:
-        default1:
-          default:
-            enabled: true
-          consumer:
-            enabled: true
-          producer:
-            enabled: true
-      ftp:
-        default1:
-          consumer:
-            enabled: true
-      pgpencryption:
-        default1:
-          enabled: false
-      routemanagement:
-        rest1:
-          enabled: true
-
-  component:
-    ftp:
-      default1:
-        consumer:
-          protocol: ftp
-    activemq:
-      default1:
-        broker-url: tcp://localhost:61617
-        username: artemis
-        password: artemis
-        session-cache-size: 10
-
-    kafka:
-      default1:
-        consumer-brokers: 192.168.6.50:9093
-        producer-brokers: 192.168.6.50:9093
-
-    pgp:
-      default1:
-        publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        publicKeyPassword: XXXXXXXX
-        publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
-        privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        privateKeyPassword: XXXXXXXX
-        privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
-
-  db:
-    datasource:
-      className: org.h2.Driver
-      url: jdbc:h2:mem:gwh
+      table: properties
+      keyColumn: property_key
+      valueColumn: property_value
+      profileColumn: profile
+      url: jdbc:h2:mem:gwh;INIT=RUNSCRIPT FROM 'classpath:schema-h2.sql'\;RUNSCRIPT FROM 'classpath:data-h2.sql';
       userName: pwaldorf
       password: pwaldorf
-      minpoolsize: 0
-      maxpoolsize: 50
-      increment: 2
-      maxidleTime: 300
-      retryDelay: 600000
-      databaseType: H2
-      jpa-dialect: org.hibernate.dialect.H2Dialect
-      jpa-ddl-auto: validate
-      jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-      jpa-properties:
-        hibernate:
-          hbm2ddl:
-            auto: validate
-          physical:
-            naming:
-              strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+
+#  framework:
+#    load:
+#      properties:
+#        core1:
+#          enabled: false
+#        jpa1:
+#          enabled: false
+#      routes:
+#        core1:
+#          enabled: true
+#        jpa1:
+#          enabled: true
+#      routetemplates:
+#        core1:
+#          enabled: true
+#        jpa1:
+#          enabled: true
+#      caches:
+#        core1:
+#          enabled: true
+#        jpa1:
+#          enabled: true
+#    core:
+#      routemanagement:
+#        enabled: true
+#    component:
+#      activemq:
+#        default1:
+#          default:
+#            enabled: true
+#          consumer:
+#            enabled: true
+#          producer:
+#            enabled: true
+#      kafka:
+#        default1:
+#          default:
+#            enabled: true
+#          consumer:
+#            enabled: true
+#          producer:
+#            enabled: true
+#      ftp:
+#        default1:
+#          consumer:
+#            enabled: true
+#      pgpencryption:
+#        default1:
+#          enabled: false
+#      routemanagement:
+#        rest1:
+#          enabled: true
+
+#  component:
+#    ftp:
+#      default1:
+#        consumer:
+#          protocol: ftp
+#    activemq:
+#      default1:
+#        broker-url: tcp://localhost:61617
+#        username: artemis
+#        password: artemis
+#        session-cache-size: 10
+#
+#    kafka:
+#      default1:
+#        consumer-brokers: 192.168.6.50:9093
+#        producer-brokers: 192.168.6.50:9093
+
+#    pgp:
+#      default1:
+#        publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+#        publicKeyPassword: XXXXXXXX
+#        publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
+#        privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+#        privateKeyPassword: XXXXXXXX
+#        privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
+
+#  db:
+#    datasource:
+#      className: org.h2.Driver
+#      url: jdbc:h2:mem:gwh
+#      userName: pwaldorf
+#      password: pwaldorf
+#      minpoolsize: 0
+#      maxpoolsize: 50
+#      increment: 2
+#      maxidleTime: 300
+#      retryDelay: 600000
+#      databaseType: H2
+#      jpa-dialect: org.hibernate.dialect.H2Dialect
+#      jpa-ddl-auto: validate
+#      jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+#      jpa-properties:
+#        hibernate:
+#          hbm2ddl:
+#            auto: validate
+#          physical:
+#            naming:
+#              strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
 
 camel:
   servlet:
@@ -170,7 +169,7 @@ camel:
   main:
     dev-console-enabled: true
   springboot:
-    name: GWHDispatcher
+    name: GWH
    # tracing-standby: true
    # tracing: true
     dev-console-enabled: true

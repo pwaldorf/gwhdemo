@@ -6,7 +6,6 @@ import java.util.List;
 import com.pw.jpa.routetemplateloader1.jpa.model.GwhRouteTemplateEntity;
 import com.pw.jpa.routetemplateloader1.jpa.repository.GwhRouteTemplateRepository;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(value = "gwh.framework.load.routetemplates.jpa1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteTemplateService {
 
-    //@Autowired
     private final GwhRouteTemplateRepository routeTemplateRepository;
 
     public GwhRouteTemplateService(GwhRouteTemplateRepository routeTemplateRepository) {

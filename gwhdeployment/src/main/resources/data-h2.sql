@@ -1,33 +1,56 @@
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
        VALUES (1, 'dispatcher', 'local', 'dispatch_reader_1a', 'templateId', 'activemqdefault_reader_v1');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (2, 'dispatcher', 'local', 'dispatch_reader_1a', 'queue', 'test.queue1');
+       VALUES (2, 'dispatcher', 'local', 'dispatch_reader_1a', 'queue', 'test.queue2');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (3, 'dispatcher', 'local', 'dispatch_reader_1a', 'directname', 'writeeventstore');
+       VALUES (3, 'dispatcher', 'local', 'dispatch_reader_1a', 'directName', 'writeeventstore');
 
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
        VALUES (4, 'dispatcher', 'local', 'dispatch_reader_1b', 'templateId', 'kafka_writer_v1');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (5, 'dispatcher', 'local', 'dispatch_reader_1b', 'directname', 'writeeventstore');
+       VALUES (5, 'dispatcher', 'local', 'dispatch_reader_1b', 'directName', 'writeeventstore');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
        VALUES (6, 'dispatcher', 'local', 'dispatch_reader_1b', 'topic', 'test_topic');
 
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (7, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'templateId', 'ftp_reader_v1');
+       VALUES (20, 'ftptestprofile', 'local', 'ftp_reader_1a', 'templateId', 'ftp_reader_v1');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (8, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'directName', 'logger');
+       VALUES (21, 'ftptestprofile', 'local', 'ftp_reader_1a', 'directName', 'fileparserandgroup');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (9, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'username', 'anonymous');
+       VALUES (22, 'ftptestprofile', 'local', 'ftp_reader_1a', 'ftpusername', 'anonymous');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (10, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'password', '1234');
+       VALUES (23, 'ftptestprofile', 'local', 'ftp_reader_1a', 'ftppassword', '1234');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (11, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'server', 'localhost');
+       VALUES (24, 'ftptestprofile', 'local', 'ftp_reader_1a', 'ftpserver', 'localhost');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (12, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'port', '2021');
+       VALUES (25, 'ftptestprofile', 'local', 'ftp_reader_1a', 'ftpport', '2021');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (13, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'directory', 'pub');
+       VALUES (26, 'ftptestprofile', 'local', 'ftp_reader_1a', 'directory', 'pub');
 INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
-       VALUES (14, 'ftptestprofile', 'local', 'dispatch_reader_2a', 'fileName', 'test.txt');
+       VALUES (27, 'ftptestprofile', 'local', 'ftp_reader_1a', 'fileName', 'customers-100.csv');
+
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (28, 'ftptestprofile', 'local', 'ftp_reader_1b', 'templateId', 'fileparserandgroup');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (29, 'ftptestprofile', 'local', 'ftp_reader_1b', 'directNameOut', 'writejmsqueue');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (30, 'ftptestprofile', 'local', 'ftp_reader_1b', 'groupCount', '5');
+       INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (31, 'ftptestprofile', 'local', 'ftp_reader_1b', 'formatName', 'customers-100.csv');
+
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (32, 'ftptestprofile', 'local', 'ftp_reader_1c', 'templateId', 'activemqdefault_writer_v1');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (33, 'ftptestprofile', 'local', 'ftp_reader_1c', 'directName', 'writejmsqueue');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (34, 'ftptestprofile', 'local', 'ftp_reader_1c', 'queue', 'test.queue1');
+
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (35, 'ftptestprofile', 'local', 'ftp_reader_1d', 'templateId', 'activemqdefault_reader_v1');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (36, 'ftptestprofile', 'local', 'ftp_reader_1d', 'queue', 'test.queue1');
+INSERT INTO route_template_params (id, profile, region, route_id, template_param_name, template_param_value)
+       VALUES (37, 'ftptestprofile', 'local', 'ftp_reader_1d', 'directName', 'logger');
 
 INSERT INTO routes (id, profile, region, route_id, route)
        VALUES (1, 'dispatcher', 'local', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
@@ -37,11 +60,120 @@ INSERT INTO routes (id, profile, region, route_id, route)
 INSERT INTO cache_configuration (id, profile, region, cache_name, cache_initial_capacity, cache_maximum_size, cache_eviction_type, cache_expire_after_access_time, cache_expire_after_write_time, cache_stats_enabled, cache_stats_name, cache_loader_name)
        VALUES (1, 'dispatcher', 'local', 'testcache', 1000, 10000, 'size_based', 0, 0, 0, '', '');
 
--- INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'test', 'test');
--- INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
--- INSERT INTO gwh_configs (config_name, config_key, config_value) VALUES ('dispatcher', 'management.server.port', '8086');
+INSERT INTO route_properties (id, profile, region, route_id, property_key, property_value) VALUES (1, 'dispatcher', 'local', 'dispatch_reader_1a', 'routeType', 'Consumer');
+INSERT INTO route_properties (id, profile, region, route_id, property_key, property_value) VALUES (2, 'ftptestprofile', 'local', 'ftp_reader_1a', 'routeType', 'Consumer');
 
-INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (1, 'dispatcher', 'local', 'test', 'test');
-INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (2, 'dispatcher', 'local', 'gwh.local.jms.server.broker', 'tcp://localhost:61617');
-INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (3, 'dispatcher', 'local', 'management.server.port', '8086');
--- INSERT INTO properties (id, profile, region, property_key, property_value) VALUES (4, 'logger', 'local', 'gwh.component.ftp.protocol"', 'sftp');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (1, 'ftptestprofile', 'local', 'ftp.consumer');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (2, 'ftptestprofile', 'local', 'routes');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (3, 'ftptestprofile', 'local', 'routetemplates');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (4, 'ftptestprofile', 'local', 'routemanagement');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (5, 'ftptestprofile', 'local', 'routemanagement.rest');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (6, 'ftptestprofile', 'local', 'route.properties');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (7, 'ftptestprofile', 'local', 'datasource');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (8, 'ftptestprofile', 'local', 'splitter');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (9, 'ftptestprofile', 'local', 'dataformat');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (10, 'ftptestprofile', 'local', 'activemq');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (11, 'ftptestprofile', 'local', 'activemq.producer');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (12, 'ftptestprofile', 'local', 'activemq.consumer');
+
+
+INSERT INTO profile_properties (id, profile, region, property) VALUES (20, 'dispatcher', 'local', 'routes');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (21, 'dispatcher', 'local', 'routetemplates');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (22, 'dispatcher', 'local', 'routemanagement');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (23, 'dispatcher', 'local', 'routemanagement.rest');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (24, 'dispatcher', 'local', 'activemq');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (25, 'dispatcher', 'local', 'activemq.consumer');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (26, 'dispatcher', 'local', 'kafka');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (27, 'dispatcher', 'local', 'kafka.producer');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (28, 'dispatcher', 'local', 'datasource');
+INSERT INTO profile_properties (id, profile, region, property) VALUES (29, 'dispatcher', 'local', 'route.properties');
+
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (1, 'local', 'ftp.consumer', 'gwh.component.ftp.default1.consumer.protocol', 'ftp');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (2, 'local', 'ftp.consumer', 'gwh.framework.component.ftp.default1.consumer.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (3, 'local', 'routes', 'gwh.framework.load.routes.core1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (4, 'local', 'routes', 'gwh.framework.load.routes.jpa1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (5, 'local', 'route.properties', 'gwh.framework.load.routes.core1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (6, 'local', 'route.properties', 'gwh.framework.load.route.properties.jpa1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (7, 'local', 'routetemplates', 'gwh.framework.load.routetemplates.core1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (8, 'local', 'routetemplates', 'gwh.framework.load.routetemplates.jpa1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (9, 'local', 'routemanagement', 'gwh.framework.core.routemanagement.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (10, 'local', 'routemanagement.rest', 'gwh.framework.component.routemanagement.rest1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (11, 'local', 'activemq', 'gwh.component.activemq.default1.broker-url', 'tcp://localhost:61617');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (12, 'local', 'activemq', 'gwh.component.activemq.default1.username', 'artemis');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (13, 'local', 'activemq', 'gwh.component.activemq.default1.password', 'artemis');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (14, 'local', 'activemq', 'gwh.component.activemq.default1.session-cache-size', '10');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (15, 'local', 'activemq', 'gwh.framework.component.activemq.default1.default.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (16, 'local', 'activemq.consumer', 'gwh.framework.component.activemq.default1.consumer.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (17, 'local', 'activemq.producer', 'gwh.framework.component.activemq.default1.producer.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (18, 'local', 'kafka', 'gwh.component.kafka.default1.consumerBrokers', 'tcp://localhost:9093');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (19, 'local', 'kafka', 'gwh.component.kafka.default1.producerBrokers', 'tcp://localhost:9093');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (20, 'local', 'kafka', 'gwh.framework.component.kafka.default1.default.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (21, 'local', 'kafka.consumer', 'gwh.framework.component.kafka.default1.consumer.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (22, 'local', 'kafka.producer', 'gwh.framework.component.kafka.default1.producer.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (23, 'local', 'pgp', 'gwh.framework.component.pgpencryption.default1.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (24, 'local', 'pgp', 'gwh.component.pgp.default1.public-key-user-id', 'pw company <philip.waldorf@gmail.com>');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (25, 'local', 'pgp', 'gwh.component.pgp.default1.public-key-password', 'XXXXXXXX');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (26, 'local', 'pgp', 'gwh.component.pgp.default1.public-key-file-name', 'file:/home/pwaldorf/.gnupg/pubring.gpg');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (27, 'local', 'pgp', 'gwh.component.pgp.default1.private-key-user-id', 'pw company <philip.waldorf@gmail.com>');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (28, 'local', 'pgp', 'gwh.component.pgp.default1.private-key-password', 'XXXXXXXX');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (29, 'local', 'pgp', 'gwh.component.pgp.default1.private-key-file-name', 'file:/home/pwaldorf/.gnupg/secring.gpg');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (30, 'local', 'datasource', 'gwh.db.datasource.className', 'org.h2.Driver');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (31, 'local', 'datasource', 'gwh.db.datasource.url', 'jdbc:h2:mem:gwh');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (32, 'local', 'datasource', 'gwh.db.datasource.userName', 'pwaldorf');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (33, 'local', 'datasource', 'gwh.db.datasource.password', 'pwaldorf');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (34, 'local', 'datasource', 'gwh.db.datasource.minpoolsize', '0');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (35, 'local', 'datasource', 'gwh.db.datasource.maxpoolsize', '50');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (36, 'local', 'datasource', 'gwh.db.datasource.increment', '2');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (37, 'local', 'datasource', 'gwh.db.datasource.maxidleTime', '300');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (38, 'local', 'datasource', 'gwh.db.datasource.retryDelay', '600000');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (39, 'local', 'datasource', 'gwh.db.datasource.databaseType', 'H2');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (40, 'local', 'datasource', 'gwh.db.datasource.jpa-dialect', 'org.hibernate.dialect.H2Dialect');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (41, 'local', 'datasource', 'gwh.db.datasource.jpa-ddl-auto', 'validate');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (42, 'local', 'datasource', 'gwh.db.datasource.jpa-physical-naming-strategy', 'org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (43, 'local', 'datasource', 'gwh.db.datasource.jpa-properties.hibernate.hbm2ddl.auto', 'validate');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (44, 'local', 'datasource', 'gwh.db.datasource.jpa-properties.hibernate.physical.naming.strategy', 'org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy');
+
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (45, 'local', 'splitter', 'gwh.framework.component.dataformat.flatpack.enabled', 'true');
+INSERT INTO properties (id, region, property, property_key, property_value) VALUES (46, 'local', 'dataformat', 'gwh.dataformat.format.name', 'customers-100.csv');
+
+INSERT INTO dataformat_configuration (id, profile, region, dataformat_name, dataformat_config, dataformat_definition)
+       VALUES (1, 'ftptestprofile', 'local', 'customers-100.csv',
+              '{
+       "delimiter": ",",
+       "textQualifier": "\"",
+       "fixedFile": false,
+       "formatDefinition": "bean:gwhFlatpackDataResource?method=getDataformatDefinition",
+       "ignoreFirstRecord": false,
+       "allowShortLines": true,
+       "ignoreExtraColumns": false
+       }',
+              '<?xml version="1.0"?>
+                <!DOCTYPE PZMAP SYSTEM "flatpack.dtd" >
+                     <PZMAP>
+                            <RECORD id="header" indicator="Index" elementNumber="1">
+                                   <COLUMN name="Header1" />
+                                   <COLUMN name="Header2" />
+                                   <COLUMN name="Header3" />
+                                   <COLUMN name="Header4" />
+                                   <COLUMN name="Header5" />
+                                   <COLUMN name="Header6" />
+                                   <COLUMN name="Header7" />
+                                   <COLUMN name="Header8" />
+                                   <COLUMN name="Header9" />
+                                   <COLUMN name="Header10" />
+                                   <COLUMN name="Header11" />
+                                   <COLUMN name="Header12" />
+                            </RECORD>
+                            <COLUMN name="Index" />
+                            <COLUMN name="Customer Id" />
+                            <COLUMN name="First Name" />
+                            <COLUMN name="Last Name" />
+                            <COLUMN name="Company" />
+                            <COLUMN name="City" />")
+                            <COLUMN name="Country" />
+                            <COLUMN name="Phone 1" />
+                            <COLUMN name="Phone 2" />
+                            <COLUMN name="Email" />
+                            <COLUMN name="Subscription Data" />
+                            <COLUMN name="Website" />
+                     </PZMAP>');

@@ -19,7 +19,7 @@ public class KafkaTransactionalWriterTemplate extends GwhAbstractRouteTemplate {
     public void configure() throws Exception {
 
         routeTemplate("kafka_writer_tx_v1")
-        .templateParameter("directname")
+        .templateParameter("directName")
         .templateParameter("topic")
         .templateParameter("transactionalId", "gwh01")
         .templateParameter("idempotence", "true")
@@ -27,7 +27,7 @@ public class KafkaTransactionalWriterTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("maxInflightRequests", "1")
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
-        .from("direct:{{directname}}")
+        .from("direct:{{directName}}")
         .to(getProducerEndpointRouteBuilderByName(kafkaDefaultProperties.getTransactionalProducerEndpoint()).getProducerEndpoint());
 
     }

@@ -18,12 +18,12 @@ public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate {
     public void configure() throws Exception {
 
         routeTemplate("kafka_writer_v1")
-        .templateParameter("directname")
+        .templateParameter("directName")
         .templateParameter("topic")
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
         .templateParameter("producerEndpoint", "kafkaDefaultProducerEndpoint")
-        .from("direct:{{directname}}")
+        .from("direct:{{directName}}")
         .to(getProducerEndpointRouteBuilderByName(kafkaDefaultProperties.getDefaultProducerEndpoint()).getProducerEndpoint());
 
     }

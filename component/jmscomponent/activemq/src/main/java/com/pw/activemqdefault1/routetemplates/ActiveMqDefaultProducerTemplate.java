@@ -19,11 +19,11 @@ public class ActiveMqDefaultProducerTemplate extends GwhAbstractRouteTemplate {
     public void configure() throws Exception {
 
         routeTemplate("activemqdefault_writer_v1")
-        .templateParameter("directname")
+        .templateParameter("directName")
         .templateParameter("queue")
-        .templateParameter("targetclient","0")
-        .from("direct:{{directname}}")
-        .setHeader("CamelJmsDestinationName", constant("queue://{{queue}}?targetclient={{targetclient}}"))
+        .templateParameter("targetClient","0")
+        .from("direct:{{directName}}")
+        // .setHeader("CamelJmsDestinationName", constant("queue:{{queue}}?targetClient={{targetClient}}"))
         .to(getProducerEndpointRouteBuilderByName(activeMqDefaultProperties.getDefaultProducerEndpoint()).getProducerEndpoint());
 
     }

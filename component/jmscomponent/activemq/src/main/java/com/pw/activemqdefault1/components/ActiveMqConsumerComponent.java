@@ -27,7 +27,7 @@ public class ActiveMqConsumerComponent {
     @Bean("activeMqDefaultConsumer")
     public JmsComponent activeMqDefaultConsumer() throws Exception {
 
-        log.debug("jmsConsumer Component Creation");
+        log.info("jmsConsumer Component Creation");
         JmsComponent jmsComponent = new JmsComponent();
         jmsComponent.setConnectionFactory(connectionFactory);
         jmsComponent.setTransacted(false);

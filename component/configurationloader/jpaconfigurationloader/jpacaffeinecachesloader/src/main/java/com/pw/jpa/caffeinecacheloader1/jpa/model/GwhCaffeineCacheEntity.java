@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-@ConditionalOnProperty(value = "gwh.framework.configuration.loader.jpa1.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.load.caches.jpa1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhCaffeineCacheEntity {
 
     @Id

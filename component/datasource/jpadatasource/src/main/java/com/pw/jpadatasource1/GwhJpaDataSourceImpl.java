@@ -14,7 +14,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 //@ConditionalOnProperty(prefix = "gwh.jpa.db.datasource", name = "className", matchIfMissing = false)
 public class GwhJpaDataSourceImpl {
 
-    GwhJpaDataSourceProperties gwhJpaDataSourceProperties;
+    private final GwhJpaDataSourceProperties gwhJpaDataSourceProperties;
 
     public GwhJpaDataSourceImpl(GwhJpaDataSourceProperties gwhJpaDataSourceProperties) {
         this.gwhJpaDataSourceProperties = gwhJpaDataSourceProperties;

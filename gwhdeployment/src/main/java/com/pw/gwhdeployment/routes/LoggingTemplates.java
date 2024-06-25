@@ -17,7 +17,7 @@ public class LoggingTemplates extends RouteBuilder {
         .routeId("test_message_route")
         .setBody(constant("This is a test MQ Message"))
         //  .to("activeMqDefaultProducer:queue:test.queue1");
-        .to("jms:queue:test.queue1");
+        .to("jms:queue:test.queue2");
 
     }
 
