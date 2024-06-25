@@ -1,4 +1,4 @@
-package com.pw.jpa.propertiesloader1.jpa.model;
+package com.pw.jpa.routepropertiesloader1.jpa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +12,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "properties")
+@Table(name = "route_properties")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
-public class GwhPropertiesEntity {
+public class GwhRoutePropertiesEntity {
 
     @Id
     @GeneratedValue
@@ -29,6 +29,9 @@ public class GwhPropertiesEntity {
 
     @Column(name = "region")
     private String region;
+
+    @Column(name = "route_id")
+    private String routeId;
 
     @Column(name = "property_key")
     private String propertyKey;

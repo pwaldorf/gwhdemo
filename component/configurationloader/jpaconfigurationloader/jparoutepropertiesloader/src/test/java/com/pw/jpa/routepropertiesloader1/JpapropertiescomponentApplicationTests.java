@@ -1,4 +1,4 @@
-package com.pw.jpa.propertiesloader1;
+package com.pw.jpa.routepropertiesloader1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

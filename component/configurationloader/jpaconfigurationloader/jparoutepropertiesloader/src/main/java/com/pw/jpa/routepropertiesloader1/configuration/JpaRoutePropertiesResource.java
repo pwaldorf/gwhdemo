@@ -1,10 +1,9 @@
-package com.pw.jpa.propertiesloader1.configuration;
+package com.pw.jpa.routepropertiesloader1.configuration;
 
 import com.pw.api1.configuration.GwhPropertiesResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.api1.configuration.GwhPropertyFactory;
-import com.pw.gwhcore1.gwhproperties.GwhDefaultProperty;
-import com.pw.jpa.propertiesloader1.jpa.service.GwhPropertiesService;
+import com.pw.jpa.routepropertiesloader1.jpa.service.GwhRoutePropertiesService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.load.properties.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaPropertiesResource implements GwhPropertiesResource {
+@ConditionalOnProperty(value = "gwh.framework.load.route.properties.jpa1.enabled", havingValue = "true", matchIfMissing = false)
+public class JpaRoutePropertiesResource implements GwhPropertiesResource {
 
-    private final GwhPropertiesService propertiesService;
+    private final GwhRoutePropertiesService propertiesService;
     private final GwhPropertyFactory gwhPropertyFactory;
 
-    public JpaPropertiesResource(GwhPropertiesService propertiesService, GwhPropertyFactory gwhPropertyFactory) {
+    public JpaRoutePropertiesResource(GwhRoutePropertiesService propertiesService, GwhPropertyFactory gwhPropertyFactory) {
         this.propertiesService = propertiesService;
         this.gwhPropertyFactory = gwhPropertyFactory;
     }
