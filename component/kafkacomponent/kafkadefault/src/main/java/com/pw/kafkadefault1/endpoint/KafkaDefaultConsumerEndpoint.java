@@ -3,6 +3,7 @@ package com.pw.kafkadefault1.endpoint;
 import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.kafka;
 
 import org.apache.camel.builder.EndpointConsumerBuilder;
+
 import org.apache.camel.builder.endpoint.dsl.KafkaEndpointBuilderFactory.AdvancedKafkaEndpointConsumerBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
