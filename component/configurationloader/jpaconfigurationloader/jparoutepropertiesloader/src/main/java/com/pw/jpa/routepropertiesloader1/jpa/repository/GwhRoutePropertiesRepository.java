@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface GwhRoutePropertiesRepository extends JpaRepository<GwhRoutePropertiesEntity, Long>{
 
     List<GwhRoutePropertiesEntity> findByProfile(String profile);
-    List<GwhRoutePropertiesEntity> findByProfileAndRegion(String profile, String region);
+    List<GwhRoutePropertiesEntity> findByProfileAndRegionAndVersion(String profile, String region, String version);
 
 }

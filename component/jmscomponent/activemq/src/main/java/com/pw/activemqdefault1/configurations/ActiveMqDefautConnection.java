@@ -11,13 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.default.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqDefautConnection {
 
-    private final ActiveMqDefaultProperties activeMqDefaultProperties;
+    private final ActiveMqDefaultConsumerProperties defaultProperties;
 
-    public ActiveMqDefautConnection(ActiveMqDefaultProperties activeMqDefaultProperties) {
-        this.activeMqDefaultProperties = activeMqDefaultProperties;
+    public ActiveMqDefautConnection(ActiveMqDefaultConsumerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Bean("activeMqDefaultConnectionFactory")
@@ -27,16 +27,16 @@ public class ActiveMqDefautConnection {
 
 		try {
 			log.debug("Set Connection Parms");
-			connectionFactory.setBrokerURL(activeMqDefaultProperties.getBrokerUrl());
-			connectionFactory.setUser(activeMqDefaultProperties.getUsername());
-			connectionFactory.setPassword(activeMqDefaultProperties.getPassword());
+			connectionFactory.setBrokerURL(defaultProperties.getBrokerUrl());
+			connectionFactory.setUser(defaultProperties.getUsername());
+			connectionFactory.setPassword(defaultProperties.getPassword());
 			log.debug("Connection Parms Set");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		WrapCachingConnectionFactory wrapConnectionFactory = new WrapCachingConnectionFactory(connectionFactory);
-		wrapConnectionFactory.setSessionCacheSize(activeMqDefaultProperties.getSessionCacheSize());
+		wrapConnectionFactory.setSessionCacheSize(defaultProperties.getSessionCacheSize());
 
 		return wrapConnectionFactory;
 	}

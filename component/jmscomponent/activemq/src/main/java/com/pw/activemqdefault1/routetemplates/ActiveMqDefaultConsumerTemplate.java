@@ -1,19 +1,20 @@
 package com.pw.activemqdefault1.routetemplates;
 
-import com.pw.activemqdefault1.configurations.ActiveMqDefaultProperties;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.activemqdefault1.configurations.ActiveMqDefaultConsumerProperties;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate {
+public class ActiveMqDefaultConsumerTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private final ActiveMqDefaultProperties activeMqDefaultProperties;
+    private final ActiveMqDefaultConsumerProperties defaultProperties;
 
-    public ActiveMqDefaultConsumerTemplate(ActiveMqDefaultProperties activeMqDefaultProperties) {
-        this.activeMqDefaultProperties = activeMqDefaultProperties;
+    public ActiveMqDefaultConsumerTemplate(ActiveMqDefaultConsumerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Override
@@ -22,7 +23,9 @@ public class ActiveMqDefaultConsumerTemplate extends GwhAbstractRouteTemplate {
         routeTemplate("activemqdefault_reader_v1")
         .templateParameter("queue")
         .templateParameter("directName")
-        .from(getConsumerEndpointRouteBuilderByName(activeMqDefaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
+        .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
         .transacted("txRequiredActiveMqDefault")
         .setHeader("GWHOriginalMessageID").simple("${headerAs('JMSMessageID', String)}")
         .setHeader("GWHOriginalCorrelationID").simple("${headerAs('JMSCorrelationID', String)}")

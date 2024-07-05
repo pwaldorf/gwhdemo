@@ -20,9 +20,9 @@
 
 	<modules>
 		<module>gwh-configuration</module>
-		<module>gwh-support</module>
-        <module>gwh-route-management</module>
         <module>gwh-core-api</module>
+		<module>gwh-route-management</module>
+		<module>gwh-support</module>
     </modules>
 
 </project>

@@ -1,14 +1,19 @@
 package com.pw.gwhcore1.gwhcaffeinecache;
 
 import com.pw.api1.GwhBuilder;
+import com.pw.api1.GwhResource;
 import com.pw.gwhcore1.GwhConfigurationProperties;
-import com.pw.gwhcore1.GwhDefaultResourceLoader;
+import com.pw.support1.util.ApplicationContextProvider;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.caffeine.CaffeineConfiguration;
 import org.apache.camel.component.caffeine.EvictionType;
 import org.apache.camel.component.caffeine.load.CaffeineLoadCacheComponent;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.stats.ConcurrentStatsCounter;
 import com.github.benmanes.caffeine.cache.stats.StatsCounter;
@@ -17,19 +22,18 @@ import com.pw.api1.configuration.GwhCaffeineCache;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Configuration
+@ConditionalOnProperty(value = "gwh.framework.load.caches.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhCaffeineCacheBuilder implements GwhBuilder {
+
+    private GwhResource<GwhCaffeineCache> gwhResource;
 
     private final GwhConfigurationProperties gwhConfigurationProperties;
     private final CamelContext camelContext;
-    private final ApplicationContext context;
-    private final GwhDefaultResourceLoader<GwhCaffeineCache> gwhCaffeineCaches;
 
-    public GwhCaffeineCacheBuilder(GwhConfigurationProperties gwhConfigurationProperties, CamelContext camelContext, ApplicationContext context,
-                                   GwhDefaultResourceLoader<GwhCaffeineCache> gwhCaffeineCaches) {
+    public GwhCaffeineCacheBuilder(GwhConfigurationProperties gwhConfigurationProperties, CamelContext camelContext) {
         this.gwhConfigurationProperties = gwhConfigurationProperties;
         this.camelContext = camelContext;
-        this.context = context;
-        this.gwhCaffeineCaches = gwhCaffeineCaches;
     }
 
     @Override
@@ -47,7 +51,8 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
     }
 
     public Map<String, CaffeineConfiguration> cacheConfigs() {
-    return gwhCaffeineCaches.getResource(gwhConfigurationProperties).stream()
+    return gwhResource.getResource(gwhConfigurationProperties.getProfile(), gwhConfigurationProperties.getRegion(), gwhConfigurationProperties.getVersion())
+        .stream()
         .collect(Collectors.toMap(
             GwhCaffeineCache::getName,
             item -> {
@@ -62,15 +67,22 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
                     if (item.getStatsCounter().equals("default")) {
                         configuration.setStatsCounter(new ConcurrentStatsCounter());
                     } else {
-                        configuration.setStatsCounter(context.getBean(item.getStatsCounter(), StatsCounter.class));
+                        configuration.setStatsCounter(ApplicationContextProvider.applicationContext.getBean(
+                            item.getStatsCounter(), StatsCounter.class));
                     }
                 }
                 if (StringUtils.isNotEmpty(item.getCacheLoader())) {
-                    configuration.setCacheLoader(context.getBean(item.getCacheLoader(), CacheLoader.class));
+                    configuration.setCacheLoader(ApplicationContextProvider.applicationContext.getBean(
+                        item.getCacheLoader(), CacheLoader.class));
                 }
                 return configuration;
             }
         ));
+    }
+
+    @Autowired
+    public void setGwhResource(GwhResource<GwhCaffeineCache> gwhResource) {
+        this.gwhResource = gwhResource;
     }
 
 }

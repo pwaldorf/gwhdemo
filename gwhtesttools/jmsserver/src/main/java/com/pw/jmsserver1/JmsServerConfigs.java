@@ -2,6 +2,7 @@ package com.pw.jmsserver1;
 
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
 import org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnectorFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jms.artemis.ArtemisConfigurationCustomizer;
 import org.springframework.boot.autoconfigure.jms.artemis.ArtemisProperties;
 import org.springframework.context.annotation.Profile;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Profile("local")
+@ConditionalOnProperty(value = "gwh.framework.devtool.activemq.server.enabled", havingValue = "true")
 public class JmsServerConfigs implements ArtemisConfigurationCustomizer {
 
     ArtemisProperties artemisProperties;

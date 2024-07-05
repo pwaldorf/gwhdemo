@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gwh.component.ftp.default1.consumer.protocol", havingValue = "sftp", matchIfMissing = true)
+@ConditionalOnProperty(value = "gwh.framework.component.ftp.default1.consumer.enabled", havingValue = "true")
 public class SftpConsumerEndpoint implements FtpConsumerEndpointBuilder {
 
     @Override

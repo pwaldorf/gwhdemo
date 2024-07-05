@@ -2,6 +2,7 @@ CREATE TABLE route_template_params (
   id bigint not null AUTO_INCREMENT,
   profile varchar(50) NOT NULL,
   region varchar(50) NOT NULL,
+  version varchar(10) NOT NULL,
   route_id varchar(50) NOT NULL,
   template_param_name varchar(50) NOT NULL,
   template_param_value varchar(100) NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE routes (
   id bigint not null AUTO_INCREMENT,
   profile varchar(50) NOT NULL,
   region varchar(50) NOT NULL,
+  version varchar(10) NOT NULL,
   route_id varchar(50) NOT NULL,
   route varchar(4000) NOT NULL,
   PRIMARY KEY (id)
@@ -21,6 +23,7 @@ CREATE TABLE profile_properties (
    id bigint not null AUTO_INCREMENT,
    profile VARCHAR(50) NOT NULL,
    region  VARCHAR(50) NOT NULL,
+   version varchar(10) NOT NULL,
    property  VARCHAR(50) NOT NULL,
    PRIMARY KEY (id)
 );
@@ -28,6 +31,7 @@ CREATE TABLE profile_properties (
 CREATE TABLE properties (
     id bigint not null AUTO_INCREMENT,
     region  VARCHAR(50) NOT NULL,
+    version varchar(10) NOT NULL,
     property VARCHAR(50) NOT NULL,
     property_key   VARCHAR(250) NOT NULL,
     property_value VARCHAR(250),
@@ -38,6 +42,7 @@ CREATE TABLE route_properties (
     id bigint not null AUTO_INCREMENT,
     profile VARCHAR(50) NOT NULL,
     region  VARCHAR(50) NOT NULL,
+    version varchar(10) NOT NULL,
     route_id varchar(50) NOT NULL,
     property_key   VARCHAR(250) NOT NULL,
     property_value VARCHAR(250),
@@ -48,6 +53,7 @@ CREATE TABLE cache_configuration (
    id bigint not null AUTO_INCREMENT,
    profile VARCHAR(50) NOT NULL,
    region  VARCHAR(50) NOT NULL,
+   version varchar(10) NOT NULL,
    cache_name VARCHAR(45) NOT NULL,
    cache_initial_capacity INT NOT NULL,
    cache_maximum_size INT NOT NULL,
@@ -64,6 +70,7 @@ CREATE TABLE dataformat_configuration (
     id bigint not null AUTO_INCREMENT,
     profile VARCHAR(50) NOT NULL,
     region  VARCHAR(50) NOT NULL,
+    version varchar(10) NOT NULL,
     dataformat_name varchar(50) NOT NULL,
     dataformat_config   VARCHAR(1000) NOT NULL,
     dataformat_definition VARCHAR(3000),

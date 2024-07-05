@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Configuration
-@ConfigurationProperties(prefix = "gwh.component.activemq.default1")
-public class ActiveMqDefaultProperties {
+@ConfigurationProperties(prefix = "gwh.component.activemq.default1.producer")
+public class ActiveMqDefaultProducerProperties {
 
     /**
      * JMS broker url
@@ -32,8 +32,8 @@ public class ActiveMqDefaultProperties {
      */
     private int sessionCacheSize;
 
-    private String defaultConsumerEndpoint = "activeMqConsumerEndpoint";
+    private String defaultRoutePolicy = "activeMqProducer";
+    private String defaultRouteConfigurationPattern = ".*activeMqProducerError.*,.*activeMqProducerConfig.*";
     private String defaultProducerEndpoint = "activeMqProducerEndpoint";
-
 
 }

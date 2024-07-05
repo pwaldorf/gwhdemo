@@ -7,11 +7,12 @@ import org.apache.camel.builder.endpoint.dsl.KafkaEndpointBuilderFactory.KafkaEn
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.kafkadefault1.configurations.KafkaProducerEndpointBuilder;
+import com.pw.support1.route.GwhEndpointProducerBuilder;
+
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaDefaultProducerEndpoint implements KafkaProducerEndpointBuilder {
+public class KafkaDefaultProducerEndpoint implements GwhEndpointProducerBuilder {
 
     @Override
     public EndpointProducerBuilder getProducerEndpoint() {

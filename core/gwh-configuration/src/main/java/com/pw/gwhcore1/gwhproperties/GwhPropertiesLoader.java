@@ -1,12 +1,9 @@
-package com.pw.gwhcore1.gwhproperties2;
+package com.pw.gwhcore1.gwhproperties;
 
-import com.pw.api1.configuration.GwhPropertiesResource;
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.gwhcore1.GwhConfigurationProperties;
-import com.pw.gwhcore1.GwhDefaultResourceLoader;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -27,13 +24,14 @@ public class GwhPropertiesLoader implements ApplicationListener<ApplicationConte
                 event.getApplicationContext().getEnvironment()).bind("gwh.service",
                 Bindable.of(GwhConfigurationProperties.class));
 
-        GwhPropertiesResource gwhPropertiesResource = GwhPropertiesFactory.getPropertiesResource(event);
-        if (gwhPropertiesResource == null) {
+        GwhResource<GwhProperty> gwhResource = GwhPropertiesFactory.getPropertiesResource(event);
+
+        if (gwhResource == null) {
             return;
         }
-        GwhDefaultResourceLoader<GwhProperty> defaultResourceLoader = new GwhDefaultResourceLoader<>(gwhPropertiesResource);
+
         Map<String, Object> propertySource = new HashMap<>();
-        defaultResourceLoader.getResource(configurationProperties.get())
+        gwhResource.getResource(configurationProperties.get().getProfile(), configurationProperties.get().getRegion(), configurationProperties.get().getVersion())
                 .forEach(property -> propertySource.put(property.getKey(), property.getValue()));
         event.getApplicationContext().getEnvironment().getPropertySources().addFirst(
                 new MapPropertySource("gwhproperties", propertySource));

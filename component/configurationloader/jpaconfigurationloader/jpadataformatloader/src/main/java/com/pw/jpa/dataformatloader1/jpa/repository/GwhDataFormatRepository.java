@@ -12,6 +12,6 @@ public interface GwhDataFormatRepository extends JpaRepository<GwhDataFormatEnti
 
     List<GwhDataFormatEntity> findByProfile(String profile);
 
-    List<GwhDataFormatEntity> findByProfileAndRegion(String profile, String region);
+    List<GwhDataFormatEntity> findByProfileAndRegionAndVersion(String profile, String region, String version);
 
 }

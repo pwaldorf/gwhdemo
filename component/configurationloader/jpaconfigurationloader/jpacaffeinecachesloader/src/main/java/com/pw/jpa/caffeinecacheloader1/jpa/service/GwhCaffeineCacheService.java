@@ -39,8 +39,8 @@ public class GwhCaffeineCacheService {
         }
     }
 
-    public List<GwhCaffeineCacheEntity> getByProfileAndRegion(String profile, String region) {
-        List<GwhCaffeineCacheEntity> caffeineCaches = caffeineCacheRepository.findByProfileAndRegion(profile, region);
+    public List<GwhCaffeineCacheEntity> getByProfileAndRegionAndVersion(String profile, String region, String version) {
+        List<GwhCaffeineCacheEntity> caffeineCaches = caffeineCacheRepository.findByProfileAndRegionAndVersion(profile, region, version);
 
         if(CollectionUtils.isNotEmpty(caffeineCaches)) {
             return caffeineCaches;

@@ -8,11 +8,11 @@ import org.apache.camel.component.jms.JmsMessageType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
-import com.pw.activemqdefault1.configurations.ActiveMqProducerEndpointBuilder;
+import com.pw.support1.route.GwhEndpointProducerBuilder;
 
 @Configuration
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqProducerEndpoint implements ActiveMqProducerEndpointBuilder {
+public class ActiveMqProducerEndpoint implements GwhEndpointProducerBuilder {
 
     @Override
     public EndpointProducerBuilder getProducerEndpoint() {

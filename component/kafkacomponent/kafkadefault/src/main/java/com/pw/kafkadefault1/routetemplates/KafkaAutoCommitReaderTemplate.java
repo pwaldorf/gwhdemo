@@ -1,19 +1,20 @@
 package com.pw.kafkadefault1.routetemplates;
 
-import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.kafkadefault1.configurations.KafkaDefaultConsumerProperties;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaAutoCommitReaderTemplate extends GwhAbstractRouteTemplate {
+public class KafkaAutoCommitReaderTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private final KafkaDefaultProperties kafkaDefaultProperties;
+    private final KafkaDefaultConsumerProperties defaultProperties;
 
-    public KafkaAutoCommitReaderTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
-        this.kafkaDefaultProperties = kafkaDefaultProperties;
+    public KafkaAutoCommitReaderTemplate(KafkaDefaultConsumerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Override
@@ -28,7 +29,9 @@ public class KafkaAutoCommitReaderTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directName")
-        .from(getConsumerEndpointRouteBuilderByName(kafkaDefaultProperties.getAutoCommitConsumerEndpoint()).getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getAutoCommitEndpoint()).getConsumerEndpoint())
+        .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
         .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}")
         .to("direct:logger")
         .choice()

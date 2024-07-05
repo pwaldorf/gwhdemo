@@ -1,9 +1,10 @@
 package com.pw.jpa.routetemplateloader1.configuration;
 
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhRouteTemplate;
 import com.pw.api1.configuration.GwhRouteTemplateFactory;
-import com.pw.api1.configuration.GwhRouteTemplateResource;
 import com.pw.jpa.routetemplateloader1.jpa.service.GwhRouteTemplateService;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.routetemplates.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaRouteTemplateResource implements GwhRouteTemplateResource {
+public class JpaRouteTemplateResource implements GwhResource<GwhRouteTemplate> {
 
     private final GwhRouteTemplateService gwhRouteTemplateService;
     private final GwhRouteTemplateFactory gwhRouteTemplateFactory;
@@ -43,7 +44,7 @@ public class JpaRouteTemplateResource implements GwhRouteTemplateResource {
     }
 
     @Override
-    public List<GwhRouteTemplate> getResourceByProfileAndRegion(String profile, String region) {
+    public List<GwhRouteTemplate> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
         return List.of();
     }
 }

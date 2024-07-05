@@ -1,18 +1,20 @@
 package com.pw.kafkadefault1.routetemplates;
 
-import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.kafkadefault1.configurations.KafkaDefaultProducerProperties;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
+
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaTransactionalWriterTemplate extends GwhAbstractRouteTemplate {
+public class KafkaTransactionalWriterTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private final KafkaDefaultProperties kafkaDefaultProperties;
+    private final KafkaDefaultProducerProperties defaultProperties;
 
-    public KafkaTransactionalWriterTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
-        this.kafkaDefaultProperties = kafkaDefaultProperties;
+    public KafkaTransactionalWriterTemplate(KafkaDefaultProducerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Override
@@ -28,7 +30,9 @@ public class KafkaTransactionalWriterTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
         .from("direct:{{directName}}")
-        .to(getProducerEndpointRouteBuilderByName(kafkaDefaultProperties.getTransactionalProducerEndpoint()).getProducerEndpoint());
+        .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
+        .to(getProducerEndpointRouteBuilderByName(defaultProperties.getTransactionalEndpoint()).getProducerEndpoint());
 
     }
 

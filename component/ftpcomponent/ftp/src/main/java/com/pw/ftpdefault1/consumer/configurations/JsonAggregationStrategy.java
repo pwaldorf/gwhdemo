@@ -1,11 +1,6 @@
 package com.pw.ftpdefault1.consumer.configurations;
 
-import org.apache.camel.AggregationStrategy;
-import org.apache.camel.Exchange;
-import org.springframework.stereotype.Component;
-
-// @Component("jsonAggregationStrategy")
-public class JsonAggregationStrategy { //} implements AggregationStrategy {
+public class JsonAggregationStrategy {
 
     //@Override
     public String aggregate(String oldExchange, String newExchange) {
@@ -15,8 +10,6 @@ public class JsonAggregationStrategy { //} implements AggregationStrategy {
             return newExchange;
         }
 
-        // String oldBody = oldExchange.getIn().getBody(String.class);
-        // String newBody = newExchange.getIn().getBody(String.class);
         String tempNewExchange = null;
         String tempOldExchange = null;
 

@@ -23,6 +23,9 @@ public class GwhDataFormatEntity {
     @Column(name = "region")
     private String region;
 
+    @Column(name = "version")
+    private String version;
+
     @Column(name = "dataformat_name")
     private String dataFormatName;
 

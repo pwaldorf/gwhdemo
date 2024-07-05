@@ -42,8 +42,8 @@ public class GwhRouteService {
         }
     }
 
-    public List<GwhRouteEntity> getByProfileAndRegion(String profile, String region) {
-        List<GwhRouteEntity> routes = routeRepository.findByProfileAndRegion(profile, region);
+    public List<GwhRouteEntity> getByProfileAndRegionAndVersion(String profile, String region, String version) {
+        List<GwhRouteEntity> routes = routeRepository.findByProfileAndRegionAndVersion(profile, region, version);
 
         if(CollectionUtils.isNotEmpty(routes)) {
             return routes;

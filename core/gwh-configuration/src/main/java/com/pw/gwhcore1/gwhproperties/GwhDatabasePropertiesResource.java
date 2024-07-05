@@ -1,9 +1,8 @@
-package com.pw.gwhcore1.gwhproperties2;
+package com.pw.gwhcore1.gwhproperties;
 
-import com.pw.api1.configuration.GwhPropertiesResource;
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.gwhcore1.GwhConfigurationProperties;
-import com.pw.gwhcore1.gwhproperties.GwhDefaultProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
+public class GwhDatabasePropertiesResource implements GwhResource<GwhProperty> {
 
     private final GwhDatabaseProperties gwhDatabaseProperties;
     private final GwhConfigurationProperties gwhConfigurationProperties;
@@ -46,7 +45,7 @@ public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
     }
 
     @Override
-    public List<GwhProperty> getResourceByProfileAndRegion(String profile, String region) {
+    public List<GwhProperty> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
         return getPropertiesFromDatabase(gwhConfigurationProperties,
                 gwhDatabaseProperties,
                 getPropertiesQuery(true, true));
@@ -55,12 +54,13 @@ public class GwhDatabasePropertiesResource implements GwhPropertiesResource {
     private String getPropertiesQuery(boolean isByProfile, boolean isByRegion) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT property_key, property_value FROM profile_properties prof ");
-        query.append("JOIN properties prop ON prop.region = prof.region AND prop.property = prof.property");
+        query.append("JOIN properties prop ON prop.region = prof.region AND prop.property = prof.property AND prop.version = prof.version");
         if (isByProfile) {
             query.append(" WHERE prof.profile = ?");
 
             if (isByRegion) {
                 query.append(" AND prof.region = ?");
+                query.append(" AND prof.version = ?");
             }
         }
         log.info("Properties Query: {}", query.toString());

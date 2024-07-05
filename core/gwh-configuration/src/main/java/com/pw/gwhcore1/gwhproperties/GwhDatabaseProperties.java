@@ -1,4 +1,4 @@
-package com.pw.gwhcore1.gwhproperties2;
+package com.pw.gwhcore1.gwhproperties;
 
 import lombok.Getter;
 import lombok.Setter;

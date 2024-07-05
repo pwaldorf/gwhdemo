@@ -11,12 +11,12 @@ import javax.jms.ConnectionFactory;
 
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.default.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqDefaultConfigurations {
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
+public class ActiveMqDefaultConsumerConfiguration {
 
     private final ConnectionFactory connectionFactory;
 
-    public ActiveMqDefaultConfigurations(ConnectionFactory connectionFactory) {
+    public ActiveMqDefaultConsumerConfiguration(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 

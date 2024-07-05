@@ -11,6 +11,6 @@ import java.util.List;
 public interface GwhCaffeineCacheRepository extends JpaRepository<GwhCaffeineCacheEntity, Long> {
 
     List<GwhCaffeineCacheEntity> findByProfile(String profile);
-    List<GwhCaffeineCacheEntity> findByProfileAndRegion(String profile, String region);
+    List<GwhCaffeineCacheEntity> findByProfileAndRegionAndVersion(String profile, String region, String version);
 
 }

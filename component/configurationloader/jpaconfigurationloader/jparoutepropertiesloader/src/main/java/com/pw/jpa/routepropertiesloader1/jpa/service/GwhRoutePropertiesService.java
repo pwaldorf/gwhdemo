@@ -39,8 +39,8 @@ public class GwhRoutePropertiesService {
         }
     }
 
-    public List<GwhRoutePropertiesEntity> getByProfileAndRegion(String profile, String region) {
-        List<GwhRoutePropertiesEntity> properties = propertiesRepository.findByProfileAndRegion(profile, region);
+    public List<GwhRoutePropertiesEntity> getByProfileAndRegionAndVersion(String profile, String region, String version) {
+        List<GwhRoutePropertiesEntity> properties = propertiesRepository.findByProfileAndRegionAndVersion(profile, region, version);
 
         if(CollectionUtils.isNotEmpty(properties)) {
             return properties;

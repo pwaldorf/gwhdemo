@@ -1,20 +1,21 @@
 package com.pw.kafkadefault1.routetemplates;
 
-import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.kafkadefault1.configurations.KafkaDefaultConsumerProperties;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import com.pw.kafkadefault1.beans.KafkaDefaultConsumerManualCommit;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate {
+public class KafkaManualCommitReaderTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private final KafkaDefaultProperties kafkaDefaultProperties;
+    private final KafkaDefaultConsumerProperties defaultProperties;
 
-    public KafkaManualCommitReaderTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
-        this.kafkaDefaultProperties = kafkaDefaultProperties;
+    public KafkaManualCommitReaderTemplate(KafkaDefaultConsumerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Override
@@ -29,7 +30,9 @@ public class KafkaManualCommitReaderTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directName")
-        .from(getConsumerEndpointRouteBuilderByName(kafkaDefaultProperties.getManualCommitConsumerEndpoint()).getConsumerEndpoint())
+        .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getManualCommitEndpoint()).getConsumerEndpoint())
+        .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
         .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
                        .bean(KafkaDefaultConsumerManualCommit.class, "process")
                        .end()

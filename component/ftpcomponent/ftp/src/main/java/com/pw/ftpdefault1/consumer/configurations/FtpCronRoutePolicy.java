@@ -5,7 +5,10 @@ import org.apache.camel.spi.RoutePolicy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import com.pw.support1.annotation.GwhRoutePolicy;
+
 @Component
+@GwhRoutePolicy(values = {"ftp", "sftp"})
 @ConditionalOnProperty(value = "gwh.framework.component.ftp.default1.consumer.enabled", havingValue = "true")
 public class FtpCronRoutePolicy implements FtpConsumerRoutePolicyBuilder {
 

@@ -9,6 +9,8 @@ public class GwhRouteTemplateEntity implements Serializable {
 
     private Long id;
     private String profile;
+    private String region;
+    private String version;
     private String routeId;
     private String templateParamName;
     private String templateParamValue;

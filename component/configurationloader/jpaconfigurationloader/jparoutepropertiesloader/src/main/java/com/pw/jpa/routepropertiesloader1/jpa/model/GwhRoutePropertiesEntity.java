@@ -30,6 +30,9 @@ public class GwhRoutePropertiesEntity {
     @Column(name = "region")
     private String region;
 
+    @Column(name = "version")
+    private String version;
+
     @Column(name = "route_id")
     private String routeId;
 

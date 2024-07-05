@@ -37,8 +37,8 @@ public class GwhDataFormatService {
         }
     }
 
-    public List<GwhDataFormatEntity> getByProfileAndRegion(String profile, String region) {
-        List<GwhDataFormatEntity> dataFormats = dataformatRepository.findByProfileAndRegion(profile, region);
+    public List<GwhDataFormatEntity> getByProfileAndRegionAndVersion(String profile, String region, String version) {
+        List<GwhDataFormatEntity> dataFormats = dataformatRepository.findByProfileAndRegionAndVersion(profile, region, version);
 
         if(CollectionUtils.isNotEmpty(dataFormats)) {
             return dataFormats;

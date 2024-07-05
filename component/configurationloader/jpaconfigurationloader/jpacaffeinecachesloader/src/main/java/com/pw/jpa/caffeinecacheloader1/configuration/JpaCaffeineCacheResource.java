@@ -1,9 +1,8 @@
 package com.pw.jpa.caffeinecacheloader1.configuration;
 
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhCaffeineCache;
 import com.pw.api1.configuration.GwhCaffeineCacheFactory;
-import com.pw.api1.configuration.GwhCaffeineCacheResource;
-import com.pw.gwhcore1.gwhcaffeinecache.GwhDefaultCaffeineCache;
 import com.pw.jpa.caffeinecacheloader1.jpa.service.GwhCaffeineCacheService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.caches.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaCaffeineCacheResource implements GwhCaffeineCacheResource {
+public class JpaCaffeineCacheResource implements GwhResource<GwhCaffeineCache> {
 
     private final GwhCaffeineCacheService gwhCaffeineCacheService;
     private final GwhCaffeineCacheFactory gwhCaffeineCacheFactory;
@@ -39,7 +38,7 @@ public class JpaCaffeineCacheResource implements GwhCaffeineCacheResource {
     }
 
     @Override
-    public List<GwhCaffeineCache> getResourceByProfileAndRegion(String profile, String region) {
+    public List<GwhCaffeineCache> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
         return List.of();
     }
 }

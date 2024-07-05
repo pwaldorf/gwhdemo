@@ -1,22 +1,20 @@
 package com.pw.ftpdefault1.consumer.routetemplates;
 
 import com.pw.ftpdefault1.consumer.configurations.FtpConsumerProperties;
-import com.pw.ftpdefault1.consumer.configurations.FtpConsumerRoutePolicyBuilder;
-import com.pw.support1.model.GwhRoutePolicies;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
+
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.ftp.default1.consumer.enabled", havingValue = "true")
-public class FtpConsumerTemplate extends GwhAbstractRouteTemplate {
+public class FtpConsumerTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private GwhRoutePolicies routePolicies = new GwhRoutePolicies();
     private final FtpConsumerProperties ftpConsumerProperties;
 
     public FtpConsumerTemplate(FtpConsumerProperties ftpConsumerProperties) {
         this.ftpConsumerProperties = ftpConsumerProperties;
-        routePolicies = getRoutePolicies(FtpConsumerRoutePolicyBuilder.class);
     }
 
     @Override
@@ -31,7 +29,7 @@ public class FtpConsumerTemplate extends GwhAbstractRouteTemplate {
             .templateParameter("ftpport", "21")
             .templateParameter("directory", "pub")
             .templateParameter("fileName")
-            .templateParameter("autoStart", "true")
+            .templateParameter("autoStart", "false")
             .templateParameter("delay", "10000")
             .templateParameter("streamDownload", "true")
             .templateParameter("stepwise", "false")
@@ -39,9 +37,10 @@ public class FtpConsumerTemplate extends GwhAbstractRouteTemplate {
             .templateParameter("completedFolder", "completed")
             .templateParameter("errorFolder", "error")
             .from(getConsumerEndpointRouteBuilderByName(ftpConsumerProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
-                .routePolicy(routePolicies.toArrayRoutePolicies())
+                // .routePolicy(getRoutePolicies(FtpConsumerRoutePolicyBuilder.class))
+                .routePolicy(getRoutePoliciesByAnnotation(ftpConsumerProperties.getDefaultRoutePolicy()))
                 .autoStartup("{{autoStart}}")
-                .routeConfigurationId(".*ftpError.*,.*ftpConfig.*")
+                .routeConfigurationId(ftpConsumerProperties.getDefaultRouteConfigurationPattern())
                 .to("direct:{{directName}}");
 
     }

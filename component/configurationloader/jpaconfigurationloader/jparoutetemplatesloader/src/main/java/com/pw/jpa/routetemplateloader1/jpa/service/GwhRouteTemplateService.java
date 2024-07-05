@@ -40,8 +40,8 @@ public class GwhRouteTemplateService {
         }
     }
 
-    public List<GwhRouteTemplateEntity> getByProfileAndRegion(String profile, String region) {
-        List<GwhRouteTemplateEntity> routeTemplates = routeTemplateRepository.findByProfileAndRegion(profile, region);
+    public List<GwhRouteTemplateEntity> getByProfileAndRegionAndVersion(String profile, String region, String version) {
+        List<GwhRouteTemplateEntity> routeTemplates = routeTemplateRepository.findByProfileAndRegionAndVersion(profile, region, version);
 
         if(CollectionUtils.isNotEmpty(routeTemplates)) {
             return routeTemplates;

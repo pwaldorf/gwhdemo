@@ -1,19 +1,18 @@
 package com.pw.gwhcore1.gwhroutetemplates;
 
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.pw.api1.configuration.GwhRouteTemplate;
 
+@Component
+@Scope("prototype")
 public class GwhDefaultRouteTemplate implements GwhRouteTemplate {
 
     private String routeId;
     private String templateParamName;
     private String templateParamValue;
-
-//    public static GwhRouteTemplate createRouteTemplate(String routeId,
-//                                                       String templateParamName,
-//                                                       String templateParamValue) {
-//        return new GwhDefaultRouteTemplate(routeId, templateParamName, templateParamValue);
-//    }
 
     public GwhDefaultRouteTemplate(String routeId, String templateParamName, String templateParamValue) {
         this.routeId = routeId;

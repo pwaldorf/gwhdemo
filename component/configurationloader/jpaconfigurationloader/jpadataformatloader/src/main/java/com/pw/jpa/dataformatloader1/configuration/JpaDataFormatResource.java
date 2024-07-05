@@ -39,8 +39,8 @@ public class JpaDataFormatResource implements GwhResource<GwhDataFormatConfigura
     }
 
     @Override
-    public List<GwhDataFormatConfiguration> getResourceByProfileAndRegion(String profile, String region) {
-        return gwhDataFormatService.getByProfileAndRegion(profile, region)
+    public List<GwhDataFormatConfiguration> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
+        return gwhDataFormatService.getByProfileAndRegionAndVersion(profile, region, version)
              .stream()
              .map(item -> new GwhDataFormatConfiguration(item.getDataFormatName(),
                 item.getDataFormatConfig(),

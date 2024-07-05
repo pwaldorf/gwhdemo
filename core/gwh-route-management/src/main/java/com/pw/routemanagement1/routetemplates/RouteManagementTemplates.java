@@ -3,8 +3,6 @@ package com.pw.routemanagement1.routetemplates;
 import com.pw.routemanagement1.model.GwhListRoute;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.language.simple.Simple;
-import org.apache.camel.language.simple.SimpleLanguage;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 

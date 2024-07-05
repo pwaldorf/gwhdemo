@@ -1,17 +1,19 @@
 package com.pw.kafkadefault1.routetemplates;
 
-import com.pw.kafkadefault1.configurations.KafkaDefaultProperties;
-import com.pw.support1.route.GwhAbstractRouteTemplate;
+import com.pw.kafkadefault1.configurations.KafkaDefaultProducerProperties;
+import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
+
+import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate {
+public class KafkaDefaultWriterTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
-    private final KafkaDefaultProperties kafkaDefaultProperties;
-    public KafkaDefaultWriterTemplate(KafkaDefaultProperties kafkaDefaultProperties) {
-        this.kafkaDefaultProperties = kafkaDefaultProperties;
+    private final KafkaDefaultProducerProperties defaultProperties;
+    public KafkaDefaultWriterTemplate(KafkaDefaultProducerProperties defaultProperties) {
+        this.defaultProperties = defaultProperties;
     }
 
     @Override
@@ -22,9 +24,12 @@ public class KafkaDefaultWriterTemplate extends GwhAbstractRouteTemplate {
         .templateParameter("topic")
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
-        .templateParameter("producerEndpoint", "kafkaDefaultProducerEndpoint")
+        .templateParameter("producerEndpoint", "kafkaProducerEndpoint")
         .from("direct:{{directName}}")
-        .to(getProducerEndpointRouteBuilderByName(kafkaDefaultProperties.getDefaultProducerEndpoint()).getProducerEndpoint());
+        .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
+        .log("pjwa: " + getProducerEndpointRouteBuilderByName(defaultProperties.getDefaultEndpoint()).getProducerEndpoint())
+        .to(getProducerEndpointRouteBuilderByName(defaultProperties.getDefaultEndpoint()).getProducerEndpoint());
 
     }
 }

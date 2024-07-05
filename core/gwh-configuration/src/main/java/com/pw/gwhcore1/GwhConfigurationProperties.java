@@ -13,6 +13,7 @@ public class GwhConfigurationProperties {
 
     private String profile = "ALL";
     private String region = "ALL";
+    private String version = "ALL";
     private String propertiesResource = "database";
 
 }

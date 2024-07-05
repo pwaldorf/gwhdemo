@@ -17,6 +17,7 @@ import org.apache.ftpserver.config.spring.factorybeans.DataConnectionConfigurati
 import org.apache.ftpserver.filesystem.nativefs.NativeFileSystemFactory;
 import org.apache.ftpserver.ftplet.FileSystemFactory;
 import org.apache.ftpserver.ftplet.FtpException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -29,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @Profile("local")
+@ConditionalOnProperty(value = "gwh.framework.devtool.ftp.server.enabled", havingValue = "true")
 public class FtpServerConfigs {
 
     FtpServerProperties properties;

@@ -3,6 +3,7 @@ package com.pw.kafkabroker1;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -10,6 +11,7 @@ import org.springframework.kafka.test.EmbeddedKafkaBroker;
 
 @Configuration
 @Profile("local")
+@ConditionalOnProperty(value = "gwh.framework.devtool.kafka.broker.enabled", havingValue = "true")
 public class KafkaBrokerConfigs {
 
     KafkaBrokerProperties kafkaBrokerProperties;

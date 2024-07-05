@@ -8,11 +8,11 @@ import org.apache.camel.component.jms.JmsMessageType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
-import com.pw.activemqdefault1.configurations.ActiveMqConsumerEndpointBuilder;
+import com.pw.support1.route.GwhEndpointConsumerBuilder;
 
 @Configuration
 @ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqConsumerEndpoint implements ActiveMqConsumerEndpointBuilder {
+public class ActiveMqConsumerEndpoint implements GwhEndpointConsumerBuilder {
 
     @Override
     public EndpointConsumerBuilder getConsumerEndpoint() {

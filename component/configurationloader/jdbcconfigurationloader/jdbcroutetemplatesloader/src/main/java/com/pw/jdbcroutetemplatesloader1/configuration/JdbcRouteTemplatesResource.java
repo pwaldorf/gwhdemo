@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.pw.api1.configuration.GwhRouteTemplateFactory;
-import com.pw.api1.configuration.GwhRouteTemplateResource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhRouteTemplate;
 import com.pw.jdbcroutetemplatesloader1.jdbc.dao.GwhRouteTemplateDao;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.routetemplates.jdbc1.enabled", havingValue = "true", matchIfMissing = false)
-public class JdbcRouteTemplatesResource implements GwhRouteTemplateResource {
+public class JdbcRouteTemplatesResource implements GwhResource<GwhRouteTemplate> {
 
     private final GwhRouteTemplateDao gwhRouteTemplateDao;
     private final GwhRouteTemplateFactory gwhRouteTemplateFactory;
@@ -46,7 +46,7 @@ public class JdbcRouteTemplatesResource implements GwhRouteTemplateResource {
     }
 
     @Override
-    public List<GwhRouteTemplate> getResourceByProfileAndRegion(String profile, String region) {
+    public List<GwhRouteTemplate> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
         return List.of();
     }
 

@@ -4,12 +4,10 @@ import org.apache.camel.Exchange;
 import org.apache.camel.builder.AggregationStrategies;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.DataFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.dataformat1.flatpackdataformat.dataformat.GwhFlatpackDataFormat;
 import com.pw.ftpdefault1.consumer.configurations.JsonAggregationStrategy;
 
 @Component

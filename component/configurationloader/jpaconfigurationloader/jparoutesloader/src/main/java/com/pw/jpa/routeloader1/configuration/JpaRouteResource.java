@@ -1,7 +1,7 @@
 package com.pw.jpa.routeloader1.configuration;
 
 import com.pw.api1.configuration.GwhRouteFactory;
-import com.pw.api1.configuration.GwhRouteResource;
+import com.pw.api1.GwhResource;
 import com.pw.api1.configuration.GwhRoute;
 import com.pw.jpa.routeloader1.jpa.service.GwhRouteService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.routes.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaRouteResource implements GwhRouteResource {
+public class JpaRouteResource implements GwhResource<GwhRoute> {
 
     private final GwhRouteService gwhRouteService;
     private final GwhRouteFactory gwhRouteFactory;
@@ -39,7 +39,7 @@ public class JpaRouteResource implements GwhRouteResource {
     }
 
     @Override
-    public List<GwhRoute> getResourceByProfileAndRegion(String profile, String region) {
+    public List<GwhRoute> getResourceByProfileAndRegionAndVersion(String profile, String region, String version) {
         return List.of();
     }
 }
