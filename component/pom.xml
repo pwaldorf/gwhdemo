@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.pw</groupId>
-	<artifactId>component</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<name>component</name>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.pw</groupId>
+  <artifactId>component</artifactId>
+  <version>1.1.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>component</name>
 
-	<parent>
-		<groupId>com.pw</groupId>
-		<artifactId>gwhparent</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
-		<relativePath>../gwhparent/pom.xml</relativePath> <!-- lookup parent from repository -->
-	</parent>
+  <parent>
+    <groupId>com.pw</groupId>
+    <artifactId>gwhparent</artifactId>
+    <version>1.1.1-SNAPSHOT</version>
+    <relativePath>../gwhparent/pom.xml</relativePath>
+    <!-- lookup parent from repository -->
+  </parent>
 
-	<description>Components Parent POM</description>
+  <description>Components Parent POM</description>
 
-	<modules>
-		<module>ftpcomponent</module>
-		<module>jmscomponent</module>
-		<module>kafkacomponent</module>
-		<module>encryptioncomponent</module>
-		<module>parsercomponent</module>
-		<module>routemanagementcomponent</module>
-		<module>configurationloader</module>
-		<module>datasource</module>
-	</modules>
+  <modules>
+    <module>ftpcomponent</module>
+    <module>jmscomponent</module>
+    <module>kafkacomponent</module>
+    <module>encryptioncomponent</module>
+    <module>parsercomponent</module>
+    <module>routemanagementcomponent</module>
+    <module>configurationloader</module>
+    <module>datasource</module>
+    <module>mybatiscomponent</module>
+  </modules>
 
 </project>

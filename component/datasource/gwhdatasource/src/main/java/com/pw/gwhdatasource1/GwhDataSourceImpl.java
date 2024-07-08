@@ -20,8 +20,8 @@ public class GwhDataSourceImpl {
         this.gwhDataSourceProperties = gwhJdbcDataSourceProperties;
     }
 
-    @Bean(name = "gwhDataSource")
-    public DataSource gwhDataSource() throws PropertyVetoException{
+    @Bean(name = "dataSource")
+    public DataSource dataSource() throws PropertyVetoException{
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass(gwhDataSourceProperties.getClassName());
         dataSource.setJdbcUrl(gwhDataSourceProperties.getUrl());

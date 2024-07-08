@@ -3,7 +3,8 @@ package com.pw.gwhdatasource1.configuration;
 import java.util.Map;
 import java.util.Properties;
 
-import com.pw.gwhdatasource1.GwhDataSourceConfiguration;
+import javax.sql.DataSource;
+
 import com.pw.gwhdatasource1.GwhDataSourceProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -25,18 +26,18 @@ public class GwhJpaConfiguration {
 
     private final GwhDataSourceProperties gwhDataSourceProperties;
 
-    private final GwhDataSourceConfiguration gwhDataSourceConfiguration;
+    private final DataSource dataSource;
 
     public GwhJpaConfiguration(GwhDataSourceProperties gwhDataSourceProperties,
-                               GwhDataSourceConfiguration gwhDataSourceConfiguration) {
+            DataSource dataSource) {
         this.gwhDataSourceProperties = gwhDataSourceProperties;
-        this.gwhDataSourceConfiguration = gwhDataSourceConfiguration;
+        this.dataSource = dataSource;
     }
 
     @Bean(name = "gwhEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
-        sessionFactory.setDataSource(gwhDataSourceConfiguration.getDataSource());
+        sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan(new String[] {"com.pw.jpa.*"});
         sessionFactory.setJpaVendorAdapter(gwhJpaVendorAdapter());
         sessionFactory.setJpaProperties(gwhJpaProperties());

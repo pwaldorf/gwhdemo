@@ -47,8 +47,9 @@ management:
 
 gwh:
   service:
-    profile: dispatcher
+    # profile: dispatcher
     # profile: ftptestprofile
+    profile: ftptest2
     region: ALL
   properties:
     db:
