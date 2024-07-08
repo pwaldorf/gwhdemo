@@ -18,39 +18,23 @@ import lombok.Setter;
 public class GwhDataSourceProperties {
 
     private String className;
-
     private String url;
-
     private String userName;
-
     private String password;
-
     private Integer minPoolSize = 0;
-
     private Integer maxPoolSize = 20;
-
     private Integer increment = 2;
-
     private Integer maxIdleTime = 300;
-
     private Integer retryDelay = 600000;
-
     private Integer acquireRetryAttempts = Integer.MAX_VALUE;
-
     private boolean autoCommitOnClose = false;
-
     private String databaseType = "MYSQL";
-
     private boolean showSql = true;
-
     private boolean generateDdl = false;
 
     private String jpaDdlAuto = "validate";
-
     private String jpaDialect = "org.hibernate.dialect.MySQLDialect";
-
     private String jpaPhysicalNamingStrategy = "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy";
-
     private Map<String, String> jpaProperties = new HashMap<>();
 
 }

@@ -37,7 +37,7 @@ public class FtpParseAndSplit extends RouteBuilder {
                     .streaming()
                     .stopOnException()
                     .unmarshal(ftpDataFormat)
-                    // .bean("testBean")
+                    .bean("testBean")
                     .choice()
                     .when(simple("${body.getErrorCount} > 0"))
                         .log("Parsing error occured: simple(${body.getErrors})")

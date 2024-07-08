@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pw</groupId>
-	<artifactId>datasource</artifactId>
+	<artifactId>mybatiscomponent</artifactId>
 	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>datasource</name>
+	<name>mybatiscomponent</name>
 
 	<parent>
 		<groupId>com.pw</groupId>
@@ -15,10 +15,10 @@
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<description>Datasource Components Parent POM</description>
+	<description>MyBatis Components Parent POM</description>
 
 	<modules>
-		<module>gwhdatasource</module>
-    </modules>
+		<module>mybatisdefault</module>
+	</modules>
 
 </project>

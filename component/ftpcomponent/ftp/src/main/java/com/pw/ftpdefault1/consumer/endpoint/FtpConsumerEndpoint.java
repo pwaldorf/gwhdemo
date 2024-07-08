@@ -3,11 +3,15 @@ package com.pw.ftpdefault1.consumer.endpoint;
 import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.ftp;
 
 import com.pw.ftpdefault1.consumer.configurations.FtpConsumerEndpointBuilder;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.camel.builder.EndpointConsumerBuilder;
 import org.apache.camel.builder.endpoint.dsl.FtpEndpointBuilderFactory.AdvancedFtpEndpointConsumerBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.ftp.default1.consumer.enabled", havingValue = "true")
 public class FtpConsumerEndpoint implements FtpConsumerEndpointBuilder {
@@ -30,6 +34,8 @@ public class FtpConsumerEndpoint implements FtpConsumerEndpointBuilder {
                     .advanced()
                         .stepwise("{{stepwise}}")
                         .bridgeErrorHandler("{{bridgeErrorHandler}}");
+
+        log.info("ftpEndpointConsumerBuilder: {}", ftpEndpointConsumerBuilder);
 
         return ftpEndpointConsumerBuilder;
 
