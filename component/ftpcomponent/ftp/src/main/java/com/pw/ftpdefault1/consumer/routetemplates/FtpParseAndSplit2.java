@@ -6,7 +6,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.support1.transform.GwhNewRouteFileAggregator;
+import com.pw.dataformat1.transform.GwhNewRouteFileAggregator;
 
 
 @Component
@@ -33,12 +33,12 @@ public class FtpParseAndSplit2 extends RouteBuilder {
                 .split(body().tokenize("\n"))
                     .streaming()
                     .stopOnException()
-                    .bean("gwhNewRouteFileParser", "process")
+                    .bean("gwhNewRouteFileDataFormat", "parse")
                     .aggregate(constant(true), new GwhNewRouteFileAggregator()).eagerCheckCompletion()
                         .completionSize("{{groupCount}}")
                         //.completionTimeout(5000) // This is a safety stop
                         .completionPredicate(exchangeProperty(Exchange.SPLIT_COMPLETE).isEqualTo(true))
-                    .bean("gwhNewRouteFileFormatter", "process")
+                    .bean("gwhNewRouteFileDataFormat", "format")
                     .marshal().json()
                     .to("direct:{{directNameOut}}")
                 .end();

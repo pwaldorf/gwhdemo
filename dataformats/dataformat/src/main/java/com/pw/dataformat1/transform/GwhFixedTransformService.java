@@ -1,4 +1,4 @@
-package com.pw.support1.transform;
+package com.pw.dataformat1.transform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +8,16 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.stereotype.Service;
 
 import com.pw.support1.model.ElementConfig;
 import com.pw.support1.model.FormatModel;
 import com.pw.support1.util.GsonUtils;
 
+@Service
 public class GwhFixedTransformService implements GwhTransformService<String, String> {
+
+    public static final String TRANSFORM_ID = "FIXED";
 
     List<ElementConfig> eleConfigs;
     String template;
@@ -23,6 +27,10 @@ public class GwhFixedTransformService implements GwhTransformService<String, Str
         return template;
     }
 
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
     public String trimNewLine(String ori) {
         if (StringUtils.isBlank(ori)) {
             return ori;
@@ -30,9 +38,6 @@ public class GwhFixedTransformService implements GwhTransformService<String, Str
         return ori.replace("\r\n", "").replace("\n", "").replace("\r", "");
     }
 
-    public void setTemplate(String template) {
-        this.template = template;
-    }
 
     private String[] getLengths(String str, String delimiter) {
         if (StringUtils.isBlank(str)) {

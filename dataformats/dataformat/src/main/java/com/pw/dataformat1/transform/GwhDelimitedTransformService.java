@@ -1,4 +1,4 @@
-package com.pw.support1.transform;
+package com.pw.dataformat1.transform;
 
 import java.util.Map;
 
@@ -13,6 +13,8 @@ import java.util.HashMap;
 @Slf4j
 @Service
 public class GwhDelimitedTransformService implements GwhTransformService<String, Object> {
+
+    public static final String TRANSFORM_ID = "DELIMITED";
 
     String newline = "\r\n";
     String[] headers;
