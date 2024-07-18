@@ -14,10 +14,14 @@ import java.util.HashMap;
 @Service
 public class GwhDelimitedTransformService implements GwhTransformService<String, Object> {
 
-    public static final String TRANSFORM_ID = "DELIMITED";
+    public final String name = "DELIMITED";
 
     String newline = "\r\n";
     String[] headers;
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public Map<String, Object> process(String rawMessage, String template, Boolean isHeader) throws Exception {

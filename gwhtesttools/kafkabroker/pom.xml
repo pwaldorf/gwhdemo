@@ -15,9 +15,6 @@
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 	<dependencies>
 		<!-- local kafka dependencies-->
 		<dependency>
@@ -25,6 +22,4 @@
 			<artifactId>spring-kafka-test</artifactId>
 		</dependency>
 	</dependencies>
-
-
 </project>

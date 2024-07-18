@@ -17,11 +17,15 @@ import com.pw.support1.util.GsonUtils;
 @Service
 public class GwhFixedTransformService implements GwhTransformService<String, String> {
 
-    public static final String TRANSFORM_ID = "FIXED";
+    public final String name = "FIXED";
 
     List<ElementConfig> eleConfigs;
     String template;
     String newline = "\r\n";
+
+    public String getName() {
+        return name;
+    }
 
     public String getTemplate() {
         return template;

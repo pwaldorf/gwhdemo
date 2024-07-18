@@ -1,18 +1,33 @@
 package com.pw.dataformat1.transform;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
+import javax.annotation.PostConstruct;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Service
-@RequiredArgsConstructor
+
+@Component
 public class GwhTransformServiceFactory {
 
-    private final Map<String, GwhTransformService> gwhTransformServices;
+    public static Map<String, GwhTransformService> gwhTransformServiceCache = new HashMap<>();
+
+    public final List<GwhTransformService> gwhTransformServices;
+
+    public GwhTransformServiceFactory(List<GwhTransformService> gwhTransformServices) {
+        this.gwhTransformServices = gwhTransformServices;
+    }
+
+    @PostConstruct
+    void initCache() {
+        gwhTransformServices.forEach(gwhTransformService -> gwhTransformServiceCache.put(
+            gwhTransformService.getName(), gwhTransformService
+        ));
+    }
 
     public GwhTransformService getGwhTransformService(String type) {
-        return gwhTransformServices.get(type);
+        return gwhTransformServiceCache.get(type);
     }
 }
