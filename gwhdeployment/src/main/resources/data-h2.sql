@@ -13,6 +13,15 @@ INSERT INTO route_template_params (id, profile, region, version, route_id, templ
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
        VALUES (6, 'dispatcher', 'local', 'v1', 'dispatch_reader_1b', 'topic', 'test_topic');
 
+INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
+       VALUES (7, 'dispatcher', 'local', 'v1', 'dispatch_reader_1c', 'templateId', 'kafka_reader_manual_commit_v1');
+INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
+       VALUES (8, 'dispatcher', 'local', 'v1', 'dispatch_reader_1c', 'directName', 'logger');
+INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
+       VALUES (9, 'dispatcher', 'local', 'v1', 'dispatch_reader_1c', 'topic', 'test_topic');
+INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
+       VALUES (10, 'dispatcher', 'local', 'v1', 'dispatch_reader_1c', 'groupId', 'dispatcher_1c_group');
+
 -- ### ftp Example
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
        VALUES (20, 'ftptestprofile', 'local', 'v1', 'ftp_reader_1a', 'templateId', 'ftp_reader_v1');
@@ -130,6 +139,7 @@ INSERT INTO profile_properties (id, profile, region, version, property) VALUES (
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (29, 'dispatcher', 'local', 'v1', 'route.properties');
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (30, 'dispatcher', 'local', 'v1', 'local.jms');
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (31, 'dispatcher', 'local', 'v1', 'local.kafka');
+INSERT INTO profile_properties (id, profile, region, version, property) VALUES (32, 'dispatcher', 'local', 'v1', 'kafka.consumer');
 
 -- ### FTP 2 Example Properties
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (51, 'ftptest2', 'local', 'v1', 'ftp.consumer');

@@ -1,0 +1,21 @@
+= Kafka UI Tool
+:doctitle: Kafka UI
+:shortname: kafkaui
+:description: Kafka UI Tool
+
+This tool allows for a graphical user interface to view local kafka embedded queues.
+
+Download JAR following site:
+
+
+https://docs.kafka-ui.provectus.io/development/building/without-docker
+
+
+Sample configuration file, kafka-ui.yaml,  is available in the kafkabroker resource directory
+
+Example to run UI and then go to webbrowser http://localhost:{Port}
+
+[source,xml]
+----------------------------------------------------------
+java -Dspring.config.additional-location=./kafka-ui.yaml -jar ./kafka-ui-api-v0.7.2.jar
+----------------------------------------------------------
