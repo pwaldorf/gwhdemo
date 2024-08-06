@@ -22,12 +22,10 @@
     <module>ftpcomponent</module>
     <module>jmscomponent</module>
     <module>kafkacomponent</module>
-    <module>encryptioncomponent</module>
     <module>parsercomponent</module>
     <module>routemanagementcomponent</module>
     <module>configurationloader</module>
     <module>datasource</module>
-    <module>mybatiscomponent</module>
   </modules>
 
 </project>

@@ -25,7 +25,6 @@
 		<module>../gwhdeployment</module>
 		<module>../dataformats</module>
 		<module>../gwhtesttools</module>
-		<module>../gwhservice</module>
 	</modules>
 
 	<properties>

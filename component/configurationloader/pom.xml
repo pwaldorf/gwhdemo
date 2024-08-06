@@ -19,8 +19,6 @@
 
 	<modules>
 		<module>jpaconfigurationloader</module>
-		<module>jdbcconfigurationloader</module>
-		<module>mybatisconfigurationloader</module>
 	</modules>
 
 </project>
