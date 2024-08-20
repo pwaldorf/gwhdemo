@@ -1,6 +1,6 @@
 package com.pw.gwhcore1.gwhproperties;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class GwhPropertiesLoader implements ApplicationListener<ApplicationConte
                 event.getApplicationContext().getEnvironment()).bind("gwh.service",
                 Bindable.of(GwhConfigurationProperties.class));
 
-        GwhResource<GwhProperty> gwhResource = GwhPropertiesFactory.getPropertiesResource(event);
+        GwhProfileResource<GwhProperty> gwhResource = GwhPropertiesFactory.getPropertiesResource(event);
 
         if (gwhResource == null) {
             return;

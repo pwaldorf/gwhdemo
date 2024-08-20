@@ -23,7 +23,7 @@ CREATE TABLE profile_properties (
    id bigint not null AUTO_INCREMENT,
    profile VARCHAR(50) NOT NULL,
    region  VARCHAR(50) NOT NULL,
-   version varchar(10) NOT NULL,
+   version varchar(10) NOT NULL,54+
    property  VARCHAR(50) NOT NULL,
    PRIMARY KEY (id)
 );

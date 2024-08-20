@@ -1,6 +1,6 @@
 package com.pw.jpa.routepropertiesloader1.configuration;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.api1.configuration.*;
 import com.pw.jpa.routepropertiesloader1.jpa.service.GwhRoutePropertiesService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.route.properties.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaRoutePropertiesResource implements GwhResource<GwhRouteProperty> {
+public class JpaRoutePropertiesResource implements GwhProfileResource<GwhRouteProperty> {
 
     private final GwhRoutePropertiesService propertiesService;
     private final GwhRoutePropertyFactory gwhRoutePropertyFactory;

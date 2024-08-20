@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.dataformat1.dataformat.dataformat.GwhDataFormatConfiguration;
 import com.pw.jpa.dataformatloader1.jpa.service.GwhDataFormatService;
 
 @Component
-public class JpaDataFormatResource implements GwhResource<GwhDataFormatConfiguration> {
+public class JpaDataFormatResource implements GwhProfileResource<GwhDataFormatConfiguration> {
 
     private final GwhDataFormatService gwhDataFormatService;
 

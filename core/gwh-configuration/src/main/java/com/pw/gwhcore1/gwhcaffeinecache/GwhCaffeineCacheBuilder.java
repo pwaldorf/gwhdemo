@@ -1,7 +1,7 @@
 package com.pw.gwhcore1.gwhcaffeinecache;
 
 import com.pw.api1.GwhBuilder;
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import com.pw.support1.util.ApplicationContextProvider;
 
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @ConditionalOnProperty(value = "gwh.framework.load.caches.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhCaffeineCacheBuilder implements GwhBuilder {
 
-    private GwhResource<GwhCaffeineCache> gwhResource;
+    private GwhProfileResource<GwhCaffeineCache> gwhResource;
 
     private final GwhConfigurationProperties gwhConfigurationProperties;
     private final CamelContext camelContext;
@@ -81,7 +81,7 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
     }
 
     @Autowired
-    public void setGwhResource(GwhResource<GwhCaffeineCache> gwhResource) {
+    public void setGwhResource(GwhProfileResource<GwhCaffeineCache> gwhResource) {
         this.gwhResource = gwhResource;
     }
 

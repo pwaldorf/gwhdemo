@@ -2,7 +2,7 @@ package com.pw.gwhcore1.gwhroutes;
 
 import com.pw.api1.configuration.GwhRoute;
 import com.pw.api1.GwhBuilder;
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ExtendedCamelContext;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ConditionalOnProperty(value = "gwh.framework.load.routes.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteBuilder implements GwhBuilder {
 
-    private GwhResource<GwhRoute> gwhResource;
+    private GwhProfileResource<GwhRoute> gwhResource;
 
     private final GwhConfigurationProperties gwhConfigurationProperties;
     private final CamelContext camelContext;
@@ -52,7 +52,7 @@ public class GwhRouteBuilder implements GwhBuilder {
     }
 
     @Autowired
-    public void setGwhResource(GwhResource<GwhRoute> gwhResource) {
+    public void setGwhResource(GwhProfileResource<GwhRoute> gwhResource) {
         this.gwhResource = gwhResource;
     }
 }

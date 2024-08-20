@@ -63,40 +63,12 @@ INSERT INTO route_template_params (id, profile, region, version, route_id, templ
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
        VALUES (37, 'ftptestprofile', 'local', 'v1', 'ftp_reader_1d', 'directName', 'logger');
 
--- ### ftp2 Test Example
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (60, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'templateId', 'ftp_reader_v1');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (61, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'directName', 'fileparserandgroup2');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (62, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'ftpusername', 'anonymous');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (63, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'ftppassword', '1234');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (64, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'ftpserver', 'localhost');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (65, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'ftpport', '2021');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (66, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'directory', 'pub');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (67, 'ftptest2', 'local', 'v1', 'ftp2_reader_1a', 'fileName', 'test-ftp2.txt');
-
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (68, 'ftptest2', 'local', 'v1', 'ftp2_reader_1b', 'templateId', 'fileparserandgroup2');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (69, 'ftptest2', 'local', 'v1', 'ftp2_reader_1b', 'directNameOut', 'logger');
-INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (70, 'ftptest2', 'local', 'v1', 'ftp2_reader_1b', 'groupCount', '5');
-
-
 -- ### Example Routes
 -- normalize to make routes reusable
 INSERT INTO routes (id, profile, region, version, route_id, route)
        VALUES (1, 'dispatcher', 'local', 'v1', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
 INSERT INTO routes (id, profile, region, version, route_id, route)
        VALUES (2, 'ftptestprofile', 'local', 'v1', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
-INSERT INTO routes (id, profile, region, version, route_id, route)
-       VALUES (3, 'ftptest2', 'local', 'v1', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
 
 -- ### Example Cache Configuration
 INSERT INTO cache_configuration (id, profile, region, version, cache_name, cache_initial_capacity, cache_maximum_size, cache_eviction_type, cache_expire_after_access_time, cache_expire_after_write_time, cache_stats_enabled, cache_stats_name, cache_loader_name)
@@ -107,8 +79,6 @@ INSERT INTO route_properties (id, profile, region, version, route_id, property_k
        VALUES (1, 'dispatcher', 'local', 'v1', 'dispatch_reader_1a', 'routeType', 'Consumer');
 INSERT INTO route_properties (id, profile, region, version, route_id, property_key, property_value)
        VALUES (20, 'ftptestprofile', 'local', 'v1', 'ftp_reader_1a', 'routeType', 'Consumer');
-INSERT INTO route_properties (id, profile, region, version, route_id, property_key, property_value)
-       VALUES (30, 'ftptest2', 'local', 'v1', 'ftp_reader_1a', 'routeType', 'Consumer');
 
 -- ### FTP Example Properties
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (1, 'ftptestprofile', 'local', 'v1', 'ftp.consumer');
@@ -140,23 +110,6 @@ INSERT INTO profile_properties (id, profile, region, version, property) VALUES (
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (30, 'dispatcher', 'local', 'v1', 'local.jms');
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (31, 'dispatcher', 'local', 'v1', 'local.kafka');
 INSERT INTO profile_properties (id, profile, region, version, property) VALUES (32, 'dispatcher', 'local', 'v1', 'kafka.consumer');
-
--- ### FTP 2 Example Properties
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (51, 'ftptest2', 'local', 'v1', 'ftp.consumer');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (52, 'ftptest2', 'local', 'v1', 'routes');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (53, 'ftptest2', 'local', 'v1', 'routetemplates');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (54, 'ftptest2', 'local', 'v1', 'routemanagement');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (55, 'ftptest2', 'local', 'v1', 'routemanagement.rest');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (56, 'ftptest2', 'local', 'v1', 'route.properties');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (57, 'ftptest2', 'local', 'v1', 'datasource');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (58, 'ftptest2', 'local', 'v1', 'splitter');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (59, 'ftptest2', 'local', 'v1', 'dataformat');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (60, 'ftptest2', 'local', 'v1', 'activemq');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (61, 'ftptest2', 'local', 'v1', 'activemq.producer');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (62, 'ftptest2', 'local', 'v1', 'activemq.consumer');
-INSERT INTO profile_properties (id, profile, region, version, property) VALUES (63, 'ftptest2', 'local', 'v1', 'local.ftp');
--- INSERT INTO profile_properties (id, profile, region, version, property) VALUES (64, 'ftptest2', 'local', 'v1', 'local.jms');
-
 
 -- ### Properties
 INSERT INTO properties (id, region, version, property, property_key, property_value) VALUES (1, 'local', 'v1', 'ftp.consumer', 'gwh.component.ftp.default1.consumer.protocol', 'ftp');

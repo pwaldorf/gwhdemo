@@ -25,6 +25,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.pw</groupId>
+			<artifactId>gwh-utils</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.pw</groupId>
 			<artifactId>gwh-support</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 			<scope>compile</scope>

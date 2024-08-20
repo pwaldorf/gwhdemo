@@ -1,6 +1,6 @@
 package com.pw.gwhcore1.gwhroutetemplates;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.api1.configuration.GwhRouteTemplate;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(value = "gwh.framework.load.routetemplates.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteTemplateConfiguration {
 
-    private GwhResource<GwhRouteTemplate> gwhResource;
+    private GwhProfileResource<GwhRouteTemplate> gwhResource;
 
     private final GwhConfigurationProperties gwhConfigurationProperties;
 
@@ -44,7 +44,7 @@ public class GwhRouteTemplateConfiguration {
     }
 
     @Autowired
-    public void setGwhResource(GwhResource<GwhRouteTemplate> gwhResource) {
+    public void setGwhResource(GwhProfileResource<GwhRouteTemplate> gwhResource) {
         this.gwhResource = gwhResource;
     }
 }

@@ -1,6 +1,6 @@
 package com.pw.gwhcore1.gwhproperties;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.api1.configuration.GwhProperty;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class GwhDatabasePropertiesResource implements GwhResource<GwhProperty> {
+public class GwhDatabasePropertiesResource implements GwhProfileResource<GwhProperty> {
 
     private final GwhDatabaseProperties gwhDatabaseProperties;
     private final GwhConfigurationProperties gwhConfigurationProperties;

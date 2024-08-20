@@ -1,6 +1,6 @@
 package com.pw.jpa.caffeinecacheloader1.configuration;
 
-import com.pw.api1.GwhResource;
+import com.pw.api1.GwhProfileResource;
 import com.pw.api1.configuration.GwhCaffeineCache;
 import com.pw.api1.configuration.GwhCaffeineCacheFactory;
 import com.pw.jpa.caffeinecacheloader1.jpa.service.GwhCaffeineCacheService;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.load.caches.jpa1.enabled", havingValue = "true", matchIfMissing = false)
-public class JpaCaffeineCacheResource implements GwhResource<GwhCaffeineCache> {
+public class JpaCaffeineCacheResource implements GwhProfileResource<GwhCaffeineCache> {
 
     private final GwhCaffeineCacheService gwhCaffeineCacheService;
     private final GwhCaffeineCacheFactory gwhCaffeineCacheFactory;

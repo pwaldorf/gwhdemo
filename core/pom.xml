@@ -23,6 +23,7 @@
         <module>gwh-core-api</module>
 		<module>gwh-route-management</module>
 		<module>gwh-support</module>
+		<module>gwh-utils</module>
     </modules>
 
 </project>
