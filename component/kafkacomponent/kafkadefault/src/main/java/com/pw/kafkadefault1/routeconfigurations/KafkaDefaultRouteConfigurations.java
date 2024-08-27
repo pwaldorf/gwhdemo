@@ -12,10 +12,8 @@ public class KafkaDefaultRouteConfigurations extends RouteConfigurationBuilder {
     public void configuration() throws Exception {
 
         routeConfiguration("kafkaError")
-            .onException(Exception.class)
-            .handled(true)
-            .log("Kafka Error: ${exception.message}")
+            .interceptFrom()
+            .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}")
             .end();
-
     }
 }

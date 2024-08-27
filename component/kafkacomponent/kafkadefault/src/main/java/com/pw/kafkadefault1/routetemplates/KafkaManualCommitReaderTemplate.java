@@ -6,7 +6,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import com.pw.kafkadefault1.beans.KafkaDefaultConsumerManualCommit;
+// import com.pw.kafkadefault1.beans.KafkaDefaultConsumerManualCommit;
 
 @Component
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
@@ -32,23 +32,23 @@ public class KafkaManualCommitReaderTemplate extends EndpointRouteBuilder implem
         .templateParameter("directName")
         .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getManualCommitEndpoint()).getConsumerEndpoint())
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
-        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
-        .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
-                       .bean(KafkaDefaultConsumerManualCommit.class, "process")
-                       .end()
-        .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}")
-        .to("direct:logger")
-        .choice()
-            .when(header("GWHMessageType").isNull())
-                .setHeader("GWHMessageType").simple("original", String.class)
-                .to("direct:{{directName}}")
-            .when(header("GWHMessageType").isEqualTo("original"))
-            .log(LoggingLevel.INFO, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directName}}")
-            .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
-            .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-                .to("direct:{{directName}}")
-            .end();
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern());
+        // .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
+        //                .bean(KafkaDefaultConsumerManualCommit.class, "process")
+        //                .end()
+        // .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}");
+        // .to("direct:logger")
+        // .choice()
+        //     .when(header("GWHMessageType").isNull())
+        //         .setHeader("GWHMessageType").simple("original", String.class)
+        //         .to("direct:{{directName}}")
+        //     .when(header("GWHMessageType").isEqualTo("original"))
+        //     .log(LoggingLevel.INFO, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
+        //         .to("direct:{{directName}}")
+        //     .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
+        //     .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
+        //         .to("direct:{{directName}}")
+        //     .end();
     }
 
 }
