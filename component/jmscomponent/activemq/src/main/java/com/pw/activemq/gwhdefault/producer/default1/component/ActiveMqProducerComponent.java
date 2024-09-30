@@ -1,23 +1,18 @@
-package com.pw.activemqdefault1.components;
+package com.pw.activemq.gwhdefault.producer.default1.component;
 
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.support.DefaultHeaderFilterStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.support.destination.DestinationResolver;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.PlatformTransactionManager;
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Session;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.producer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqProducerComponent {
 
     private ConnectionFactory connectionFactory;

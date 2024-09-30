@@ -37,6 +37,9 @@ public class GwhRouteEntity {
     @Column(name = "route_id")
     private String routeId;
 
+    @Column(name = "route_type")
+    private String routeType;
+
     @Column(name = "route")
     private String route;
 

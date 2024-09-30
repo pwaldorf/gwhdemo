@@ -26,7 +26,7 @@ public class JpaRouteResource implements GwhProfileResource<GwhRoute> {
     public List<GwhRoute> getResourceAll() {
         return gwhRouteService.getAllRoutes()
                 .stream()
-                .map(item -> gwhRouteFactory.createRoute(item.getRouteId(), item.getRoute()))
+                .map(item -> gwhRouteFactory.createRoute(item.getRouteId(), item.getRouteType(), item.getRoute()))
                 .collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class JpaRouteResource implements GwhProfileResource<GwhRoute> {
     public List<GwhRoute> getResourceByProfile(String profile) {
         return gwhRouteService.getByProfile(profile)
                 .stream()
-                .map(item -> gwhRouteFactory.createRoute(item.getRouteId(), item.getRoute()))
+                .map(item -> gwhRouteFactory.createRoute(item.getRouteId(), item.getRouteType(), item.getRoute()))
                 .collect(Collectors.toList());
     }
 

@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 @Slf4j
 @Configuration
+@DependsOn("gwhRouteBuilder")
 @ConditionalOnProperty(value = "gwh.framework.load.routetemplates.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhRouteTemplateConfiguration {
 

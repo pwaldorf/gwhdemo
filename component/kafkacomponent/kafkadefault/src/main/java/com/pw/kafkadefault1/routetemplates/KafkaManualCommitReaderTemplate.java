@@ -27,28 +27,11 @@ public class KafkaManualCommitReaderTemplate extends EndpointRouteBuilder implem
         .templateParameter("groupId")
         .templateParameter("allowManualCommit", "true")
         .templateParameter("autoCommitEnable", "false")
-        .templateParameter("transactionRef","txRequiredActiveMqTest")
         .templateParameter("isolationLevel","read_committed")
         .templateParameter("directName")
         .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getManualCommitEndpoint()).getConsumerEndpoint())
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
-        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern());
-        // .onCompletion().onCompleteOnly().onWhen(header("CamelKafkaManualCommit"))
-        //                .bean(KafkaDefaultConsumerManualCommit.class, "process")
-        //                .end()
-        // .setHeader("GWHOriginalMessageID").simple("${headerAs('kafka.OFFSET', String)}");
-        // .to("direct:logger")
-        // .choice()
-        //     .when(header("GWHMessageType").isNull())
-        //         .setHeader("GWHMessageType").simple("original", String.class)
-        //         .to("direct:{{directName}}")
-        //     .when(header("GWHMessageType").isEqualTo("original"))
-        //     .log(LoggingLevel.INFO, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-        //         .to("direct:{{directName}}")
-        //     .when(header("GWHMessageResendRoutes").in("${routeId}","ALL"))
-        //     .log(LoggingLevel.DEBUG, "Continuing current Route ${routeId} for Message Type ${header.GWHMessageType}")
-        //         .to("direct:{{directName}}")
-        //     .end();
+        .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
+        .to("direct:{{directName}}");
     }
-
 }

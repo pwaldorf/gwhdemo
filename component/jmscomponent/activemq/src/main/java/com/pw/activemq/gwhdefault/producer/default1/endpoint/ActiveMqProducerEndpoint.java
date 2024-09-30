@@ -1,4 +1,4 @@
-package com.pw.activemqdefault1.endpoint;
+package com.pw.activemq.gwhdefault.producer.default1.endpoint;
 
 import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.jms;
 
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.pw.support1.route.GwhEndpointProducerBuilder;
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.producer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqProducerEndpoint implements GwhEndpointProducerBuilder {
 
     @Override

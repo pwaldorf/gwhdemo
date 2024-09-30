@@ -6,6 +6,10 @@ public interface GwhRoute {
 
     public void setRouteId(String routeId);
 
+    public String getRouteType();
+
+    public void setRouteType(String routeType);
+
     public String getRoute();
 
     public void setRoute(String route);

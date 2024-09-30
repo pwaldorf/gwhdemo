@@ -1,4 +1,4 @@
-package com.pw.activemqdefault1.configurations;
+package com.pw.activemq.gwhdefault.consumer.default1.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Configuration
-@ConfigurationProperties(prefix = "gwh.component.activemq.default1.consumer")
+@ConfigurationProperties(prefix = "gwh.component.activemq.consumer.default1")
 public class ActiveMqDefaultConsumerProperties {
 
     /**

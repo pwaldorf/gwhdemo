@@ -14,7 +14,7 @@ public class KafkaDefaultProducerProperties {
 
     private String brokers;
     private String defaultEndpoint = "kafkaDefaultProducerEndpoint";
-    private String transactionalEndpoint = "kafkaDefaultProducerEndpoint";
+    private String transactionalEndpoint = "kafkaTransactionalProducerEndpoint";
 
     private String defaultRoutePolicy = "kafkaProducer";
     private String defaultRouteConfigurationPattern = ".*kafkaProducerError.*,.*kafkaProducerConfig.*";

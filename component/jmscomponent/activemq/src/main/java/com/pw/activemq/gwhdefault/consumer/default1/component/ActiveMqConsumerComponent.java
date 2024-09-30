@@ -1,4 +1,4 @@
-package com.pw.activemqdefault1.components;
+package com.pw.activemq.gwhdefault.consumer.default1.component;
 
 import javax.jms.ConnectionFactory;
 
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqConsumerComponent {
 
     private ConnectionFactory connectionFactory;

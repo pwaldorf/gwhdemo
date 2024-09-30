@@ -2,29 +2,17 @@ package com.pw.gwhcore1.gwhroutes;
 
 import com.pw.api1.configuration.GwhRoute;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class GwhDefaultRoute implements GwhRoute {
 
     private String routeId;
+    private String routeType;
     private String route;
 
-    public GwhDefaultRoute(String routeId, String route) {
-        this.routeId = routeId;
-        this.route = route;
-    }
-
-    public String getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
-    }
-
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route;
-    }
 }

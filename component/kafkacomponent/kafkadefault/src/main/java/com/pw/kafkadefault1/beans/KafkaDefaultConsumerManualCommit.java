@@ -9,17 +9,17 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.default.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
 public class KafkaDefaultConsumerManualCommit {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDefaultConsumerManualCommit.class);
-    
+
     public void process(Exchange exchange) {
         KafkaManualCommit manual =
-            exchange.getIn().getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);                    
+            exchange.getIn().getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);
         manual.commit();
 
         LOGGER.info("Committing offset {}", exchange.getIn().getHeader(KafkaConstants.OFFSET));
     }
-    
+
 }

@@ -34,7 +34,12 @@ public class JpaCaffeineCacheResource implements GwhProfileResource<GwhCaffeineC
 
     @Override
     public List<GwhCaffeineCache> getResourceByProfile(String profile) {
-        return List.of();
+        return (gwhCaffeineCacheService.getByProfile(profile))
+                .stream()
+                .map(item -> gwhCaffeineCacheFactory.createCaffeineCache(item.getCacheName(), item.getCacheInitialCapacity(), item.getCacheMaximumCapacity()
+                        , item.getCacheEvictionType(), item.getCacheExpireAfterAccessTime(), item.getCacheExpireAfterWriteTime()
+                        , item.getCacheStatsEnabled(), item.getCacheStatsName(), item.getCacheLoaderName()))
+                .collect(Collectors.toList());
     }
 
     @Override

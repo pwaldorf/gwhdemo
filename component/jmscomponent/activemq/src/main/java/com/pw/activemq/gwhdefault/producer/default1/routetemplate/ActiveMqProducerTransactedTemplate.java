@@ -1,14 +1,14 @@
-package com.pw.activemqdefault1.routetemplates;
+package com.pw.activemq.gwhdefault.producer.default1.routetemplate;
 
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.pw.activemqdefault1.configurations.ActiveMqDefaultProducerProperties;
+import com.pw.activemq.gwhdefault.producer.default1.configuration.ActiveMqDefaultProducerProperties;
 import com.pw.support1.route.GwhEndpointRouteBuilderExtension;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.producer.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.producer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqProducerTransactedTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
     private final ActiveMqDefaultProducerProperties defaultProperties;

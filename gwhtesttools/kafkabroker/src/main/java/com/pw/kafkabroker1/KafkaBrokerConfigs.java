@@ -24,6 +24,8 @@ public class KafkaBrokerConfigs {
     public EmbeddedKafkaBroker broker(KafkaBrokerProperties kafkaBrokerProperties) {
         Map<String, String> properties = new HashMap<>();
         properties.put("auto.create.topics.enable", "true");
+        properties.put("transaction.state.log.replication.factor", "1");
+        properties.put("transaction.state.log.min.isr", "1");
         properties.put("listeners", kafkaBrokerProperties.getBrokers());
         properties.put("advertised.listeners", kafkaBrokerProperties.getBrokers());
         properties.put("listener.security.protocol.map", "PLAINTEXT:PLAINTEXT,REMOTE:PLAINTEXT");

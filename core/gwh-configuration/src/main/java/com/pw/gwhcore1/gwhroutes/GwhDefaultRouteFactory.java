@@ -9,8 +9,9 @@ public class GwhDefaultRouteFactory implements GwhRouteFactory {
 
     @Override
     public GwhRoute createRoute(String routeId,
-                                       String route) {
-        return new GwhDefaultRoute(routeId, route);
+                                String routeType,
+                                String route) {
+        return new GwhDefaultRoute(routeId, routeType, route);
     }
 
 }

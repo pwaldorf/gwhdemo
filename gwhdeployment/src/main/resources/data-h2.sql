@@ -2,7 +2,7 @@
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
        VALUES (1, 'dispatcher', 'local', 'v1', 'dispatch_reader_1a', 'templateId', 'activemqdefault_reader_v1');
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
-       VALUES (2, 'dispatcher', 'local', 'v1', 'dispatch_reader_1a', 'queue', 'test.queue2');
+       VALUES (2, 'dispatcher', 'local', 'v1', 'dispatch_reader_1a', 'queue', 'test.queue1');
 INSERT INTO route_template_params (id, profile, region, version, route_id, template_param_name, template_param_value)
        VALUES (3, 'dispatcher', 'local', 'v1', 'dispatch_reader_1a', 'directName', 'writeeventstore');
 
@@ -65,10 +65,27 @@ INSERT INTO route_template_params (id, profile, region, version, route_id, templ
 
 -- ### Example Routes
 -- normalize to make routes reusable
-INSERT INTO routes (id, profile, region, version, route_id, route)
-       VALUES (1, 'dispatcher', 'local', 'v1', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
-INSERT INTO routes (id, profile, region, version, route_id, route)
-       VALUES (2, 'ftptestprofile', 'local', 'v1', 'directlogger', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
+INSERT INTO routes (id, profile, region, version, route_id, route_type, route)
+       VALUES (1, 'dispatcher', 'local', 'v1', 'directlogger', 'xml', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
+INSERT INTO routes (id, profile, region, version, route_id, route_type, route)
+       VALUES (2, 'ftptestprofile', 'local', 'v1', 'directlogger', 'xml', '<route id="directlogger"><from uri="direct:logger"/><log message="Direct Logger Table: ${body}"/></route>');
+INSERT INTO routes (id, profile, region, version, route_id, route_type, route)
+       VALUES (3, 'dispatcher', 'local', 'v1', 'testmessage', 'java', '
+       import org.apache.camel.builder.RouteBuilder;
+
+       public class LoggingTemplates extends RouteBuilder {
+
+              @Override
+              public void configure() throws Exception {
+
+                     // This creates a test message for the local routes
+                     from("timer:foo?period=10000")
+                     .routeId("testmessage")
+                     .setBody(constant("This is a test MQ Message"))
+                     .to("jms:queue:test.queue1");
+
+              }
+       }');
 
 -- ### Example Cache Configuration
 INSERT INTO cache_configuration (id, profile, region, version, cache_name, cache_initial_capacity, cache_maximum_size, cache_eviction_type, cache_expire_after_access_time, cache_expire_after_write_time, cache_stats_enabled, cache_stats_name, cache_loader_name)

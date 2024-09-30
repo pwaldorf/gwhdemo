@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.pw.jpa.routeloader1.jpa.model.GwhRouteEntity;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 

@@ -5,6 +5,8 @@ import com.pw.api1.GwhProfileResource;
 import com.pw.gwhcore1.GwhConfigurationProperties;
 import com.pw.support1.util.ApplicationContextProvider;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.caffeine.CaffeineConfiguration;
 import org.apache.camel.component.caffeine.EvictionType;
@@ -22,6 +24,7 @@ import com.pw.api1.configuration.GwhCaffeineCache;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Configuration
 @ConditionalOnProperty(value = "gwh.framework.load.caches.core1.enabled", havingValue = "true", matchIfMissing = false)
 public class GwhCaffeineCacheBuilder implements GwhBuilder {
@@ -41,6 +44,7 @@ public class GwhCaffeineCacheBuilder implements GwhBuilder {
 
         Map<String, CaffeineConfiguration> configs = cacheConfigs();
 
+        log.info("Building Caffeine Caches: {}", configs.keySet());
         configs.entrySet().forEach(config -> {
             camelContext.getRegistry().bind(config.getKey(), new CaffeineLoadCacheComponent() {
                 {

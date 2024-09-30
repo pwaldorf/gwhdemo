@@ -21,7 +21,7 @@ public class KafkaTransactionalWriterTemplate extends EndpointRouteBuilder imple
     public void configure() throws Exception {
 
         routeTemplate("kafka_writer_tx_v1")
-        .templateParameter("directName")
+        .templateParameter("directName", "writetransactionaleventstore")
         .templateParameter("topic")
         .templateParameter("transactionalId", "gwh01")
         .templateParameter("idempotence", "true")
@@ -29,6 +29,7 @@ public class KafkaTransactionalWriterTemplate extends EndpointRouteBuilder imple
         .templateParameter("maxInflightRequests", "1")
         .templateParameter("bufferMemorySize", "33554432")
         .templateParameter("lingerMs", "0")
+        .templateParameter("maxBlocksMs", "60000")
         .from("direct:{{directName}}")
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
         .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())

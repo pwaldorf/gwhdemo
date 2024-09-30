@@ -19,7 +19,9 @@ public class KafkaDefaultProducerEndpoint implements GwhEndpointProducerBuilder 
         KafkaEndpointProducerBuilder kafkaEndpointProducerBuilder =
                 kafka("kafkaDefaultProducer", "{{topic}}")
                         .bufferMemorySize("{{bufferMemorySize}}")
-                        .lingerMs("{{lingerMs}}");
+                        .lingerMs("{{lingerMs}}")
+                        .producerBatchSize("{{producerBatchSize}}")
+                        .compressionCodec("{{compressionCodec}}");
 
         return kafkaEndpointProducerBuilder;
     }

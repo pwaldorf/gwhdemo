@@ -18,6 +18,6 @@ public class KafkaDefaultConsumerProperties {
     private String manualCommitEndpoint = "kafkaDefaultConsumerEndpoint";
 
     private String defaultRoutePolicy = "kafkaConsumer";
-    private String defaultRouteConfigurationPattern = ".*kafkaConsumerError.*,.*kafkaConsumerConfig.*";
+    private String defaultRouteConfigurationPattern = "kafkaConsumerManualCommit"; //".*kafkaConsumerError.*,.*kafkaConsumerConfig.*";
 
 }

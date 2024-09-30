@@ -1,5 +1,4 @@
-package com.pw.activemqdefault1.configurations;
-
+package com.pw.activemq.gwhdefault.configurations.default1;
 
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,12 +10,12 @@ import javax.jms.ConnectionFactory;
 
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqDefaultConsumerConfiguration {
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.configuration.default1.enabled", havingValue = "true", matchIfMissing = false)
+public class ActiveMqDefaultConfiguration {
 
     private final ConnectionFactory connectionFactory;
 
-    public ActiveMqDefaultConsumerConfiguration(ConnectionFactory connectionFactory) {
+    public ActiveMqDefaultConfiguration(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 

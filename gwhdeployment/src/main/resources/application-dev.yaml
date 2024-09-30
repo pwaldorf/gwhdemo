@@ -3,7 +3,7 @@ server:
 
 management:
   server:
-    port: 8085
+    port: 8086
   endpoints:
     web:
       exposure:
@@ -22,69 +22,104 @@ management:
 gwh:
   service:
     profile: dispatcher
-  framework:
-    routes:
-      load:
-        params:
-          enabled: true
-    component:
-      activemq:
-        default:
-          enabled: true
-      kafka:
-        default:
-          enabled: true
-      pgpencryption:
-        enabled: true
-      routemanagement:
-        rest:
-          enabled: true
-
-  component:
-    activemq:
-      default:
-        broker: tcp://192.168.6.1:61616
-        username: artemis
-        password: artemis
-        session-cache-size: 10
-
-    kafka:
-      default:
-        consumer:
-          brokers: 192.168.6.1:29093
-        producer:
-          brokers: 192.168.6.1:29093
-
-    pgp:
-      default:
-        publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        publicKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
-        publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
-        privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
-        privateKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
-        privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
-
-  core:
+    # profile: ftptestprofile
+    # profile: ftptest2
+    region: ALL
+  properties:
     db:
-      datasource:
-        className: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.6.2:3306/gwh
-        userName: root
-        password: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
-        minpoolsize: 0
-        maxpoolsize: 50
-        increment: 2
-        maxidleTime: 300
-        retryDelay: 600000
-        jpa-dialect: org.hibernate.dialect.MySQLDialect
-        jpa-ddl-auto: validate
-        jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+      table: properties
+      keyColumn: property_key
+      valueColumn: property_value
+      profileColumn: profile
+      url: jdbc:mysql://192.168.6.2:3306/gwh
+      userName: root
+      password: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
+
+#   core:
+#     db:
+#       datasource:
+#         className: com.mysql.cj.jdbc.Driver
+#         url: jdbc:mysql://192.168.6.2:3306/gwh
+#         userName: root
+#         password: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
+#         minpoolsize: 0
+#         maxpoolsize: 50
+#         increment: 2
+#         maxidleTime: 300
+#         retryDelay: 600000
+#         jpa-dialect: org.hibernate.dialect.MySQLDialect
+#         jpa-ddl-auto: validate
+#         jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+
+# gwh:
+#   service:
+#     profile: dispatcher
+#   framework:
+#     routes:
+#       load:
+#         params:
+#           enabled: true
+#     component:
+#       activemq:
+#         default:
+#           enabled: true
+#       kafka:
+#         default:
+#           enabled: true
+#       pgpencryption:
+#         enabled: true
+#       routemanagement:
+#         rest:
+#           enabled: true
+
+#   component:
+#     activemq:
+#       default:
+#         broker: tcp://192.168.6.1:61616
+#         username: artemis
+#         password: artemis
+#         session-cache-size: 10
+
+#     kafka:
+#       default:
+#         consumer:
+#           brokers: 192.168.6.1:29093
+#         producer:
+#           brokers: 192.168.6.1:29093
+
+#     pgp:
+#       default:
+#         publicKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+#         publicKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
+#         publicKeyFileName: 'file:/home/pwaldorf/.gnupg/pubring.gpg'
+#         privateKeyUserId: 'pw company <philip.waldorf@gmail.com>'
+#         privateKeyPassword: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
+#         privateKeyFileName: 'file:/home/pwaldorf/.gnupg/secring.gpg'
+
+#   core:
+#     db:
+#       datasource:
+#         className: com.mysql.cj.jdbc.Driver
+#         url: jdbc:mysql://192.168.6.2:3306/gwh
+#         userName: root
+#         password: ${GWH_CORE_DB_DATASOURCE_PASSWORD}
+#         minpoolsize: 0
+#         maxpoolsize: 50
+#         increment: 2
+#         maxidleTime: 300
+#         retryDelay: 600000
+#         jpa-dialect: org.hibernate.dialect.MySQLDialect
+#         jpa-ddl-auto: validate
+#         jpa-physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
 
 camel:
+  servlet:
+    mapping:
+      context-path: /api/*
   main:
     dev-console-enabled: true
   springboot:
-    name: GWHDispatcher
+    name: GWH
    # tracing-standby: true
    # tracing: true
     dev-console-enabled: true
@@ -94,16 +129,26 @@ logging:
     org:
       apache:
         camel: INFO
-      #springframework:
-      #  transaction:
-      #    interceptor: TRACE
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-            BasicBinder: TRACE
-      activemq:
-        audit:
-          base: DEBUG
-          message: DEBUG
+        orm:
+          jpa:
+            JpaTransactionManager: ERROR
+        kafka:
+          transaction: ERROR
+          listener:
+            KafkaMessageListenerContainer: ERROR
+        activemq:
+          transaction: ERROR
+      springframework:
+       transaction:
+         interceptor: ERROR
+
+      # hibernate:
+      #   SQL: DEBUG
+      #   type:
+      #     descriptor:
+      #       sql:
+      #       BasicBinder: TRACE
+      # activemq:
+      #   audit:
+      #     base: DEBUG
+      #     message: DEBUG

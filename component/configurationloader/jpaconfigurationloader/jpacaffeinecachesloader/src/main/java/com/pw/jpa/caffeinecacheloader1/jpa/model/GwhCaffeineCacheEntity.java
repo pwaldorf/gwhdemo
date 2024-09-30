@@ -54,7 +54,7 @@ public class GwhCaffeineCacheEntity {
     @Column(name = "cache_expire_after_write_time")
     private Integer cacheExpireAfterWriteTime;
 
-    @Column(name = "cache_stats_enabled")
+    @Column(name = "cache_stats_enabled", columnDefinition = "TINYINT", length = 1)
     private Boolean cacheStatsEnabled;
 
     @Column(name = "cache_stats_name")

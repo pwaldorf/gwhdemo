@@ -20,15 +20,15 @@ public class KafkaDefaultWriterTemplate extends EndpointRouteBuilder implements 
     public void configure() throws Exception {
 
         routeTemplate("kafka_writer_v1")
-        .templateParameter("directName")
+        .templateParameter("directName", "writeeventstore")
         .templateParameter("topic")
         .templateParameter("bufferMemorySize", "33554432")
-        .templateParameter("lingerMs", "0")
-        .templateParameter("producerEndpoint", "kafkaProducerEndpoint")
+        .templateParameter("lingerMs", "20")
+        .templateParameter("producerBatchSize", "65536")
+        .templateParameter("compressionCodec", "snappy")
         .from("direct:{{directName}}")
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
         .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
-        .log("pjwa: " + getProducerEndpointRouteBuilderByName(defaultProperties.getDefaultEndpoint()).getProducerEndpoint())
         .to(getProducerEndpointRouteBuilderByName(defaultProperties.getDefaultEndpoint()).getProducerEndpoint());
 
     }

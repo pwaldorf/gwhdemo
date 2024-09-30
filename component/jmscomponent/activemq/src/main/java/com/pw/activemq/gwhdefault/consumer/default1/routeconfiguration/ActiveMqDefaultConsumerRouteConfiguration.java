@@ -1,17 +1,17 @@
-package com.pw.activemqdefault1.routeconfigurations;
+package com.pw.activemq.gwhdefault.consumer.default1.routeconfiguration;
 
 import org.apache.camel.builder.RouteConfigurationBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.default1.default.enabled", havingValue = "true", matchIfMissing = false)
-public class ActiveMqDefaultRouteConfigurations extends RouteConfigurationBuilder {
+@ConditionalOnProperty(value = "gwh.framework.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
+public class ActiveMqDefaultConsumerRouteConfiguration extends RouteConfigurationBuilder {
 
     @Override
     public void configuration() throws Exception {
 
-        routeConfiguration("activeMqDefaultError")
+        routeConfiguration("activeMqDefault1ConsumerError")
             .onException(Exception.class)
             .handled(true)
             .log("ActiveMqDefault Error: ${exception.message}")

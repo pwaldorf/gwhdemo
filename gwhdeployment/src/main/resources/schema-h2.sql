@@ -15,6 +15,7 @@ CREATE TABLE routes (
   region varchar(50) NOT NULL,
   version varchar(10) NOT NULL,
   route_id varchar(50) NOT NULL,
+  route_type varchar(50) NOT NULL,
   route varchar(4000) NOT NULL,
   PRIMARY KEY (id)
 );
@@ -23,7 +24,7 @@ CREATE TABLE profile_properties (
    id bigint not null AUTO_INCREMENT,
    profile VARCHAR(50) NOT NULL,
    region  VARCHAR(50) NOT NULL,
-   version varchar(10) NOT NULL,54+
+   version varchar(10) NOT NULL,
    property  VARCHAR(50) NOT NULL,
    PRIMARY KEY (id)
 );

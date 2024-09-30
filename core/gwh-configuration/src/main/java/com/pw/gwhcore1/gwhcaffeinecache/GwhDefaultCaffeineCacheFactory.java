@@ -2,6 +2,8 @@ package com.pw.gwhcore1.gwhcaffeinecache;
 
 import com.pw.api1.configuration.GwhCaffeineCache;
 import com.pw.api1.configuration.GwhCaffeineCacheFactory;
+import com.pw.support1.util.ApplicationContextProvider;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +17,8 @@ public class GwhDefaultCaffeineCacheFactory implements GwhCaffeineCacheFactory {
                                                        Boolean statsEnabled,
                                                        String statsCounter,
                                                        String cacheLoader) {
-        return new GwhDefaultCaffeineCache(name,
+        return ApplicationContextProvider.getApplicationContext().getBean(GwhCaffeineCache.class,
+                name,
                 initialCapacity,
                 maximumSize,
                 evictionType,

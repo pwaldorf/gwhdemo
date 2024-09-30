@@ -1,4 +1,4 @@
-package com.pw.activemqdefault1.configurations;
+package com.pw.activemq.gwhdefault.configurations.default1;
 
 import org.springframework.core.InfrastructureProxy;
 import org.springframework.jms.connection.CachingConnectionFactory;

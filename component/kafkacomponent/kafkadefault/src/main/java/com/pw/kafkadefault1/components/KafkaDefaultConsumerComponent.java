@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnProperty(value = "gwh.framework.component.kafka.default1.consumer.enabled", havingValue = "true", matchIfMissing = false)
-public class KafkaDefaultConsumerComponents {
+public class KafkaDefaultConsumerComponent {
 
     @Autowired
     @Qualifier("kafkaConsumerConfiguration")
