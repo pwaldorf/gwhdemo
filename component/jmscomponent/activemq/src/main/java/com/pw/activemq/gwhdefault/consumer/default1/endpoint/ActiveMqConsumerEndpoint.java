@@ -4,7 +4,6 @@ import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.jms;
 
 import org.apache.camel.builder.EndpointConsumerBuilder;
 import org.apache.camel.builder.endpoint.dsl.JmsEndpointBuilderFactory.JmsEndpointConsumerBuilder;
-import org.apache.camel.component.jms.JmsMessageType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +17,12 @@ public class ActiveMqConsumerEndpoint implements GwhEndpointConsumerBuilder {
     public EndpointConsumerBuilder getConsumerEndpoint() {
         JmsEndpointConsumerBuilder activeMqEndpointConsumerBuilder =
                 jms("activeMqDefaultConsumer", "queue:{{queue}}")
-                    .jmsMessageType(JmsMessageType.Text);
+                    .jmsMessageType("{{jmsMessageType}}")
+                    .asyncConsumer("{{asyncConsumer}}")
+                    .cacheLevelName("{{cacheLevelName}}")
+                    .concurrentConsumers("{{concurrentConsumers}}")
+                    .maxConcurrentConsumers("{{maxConcurrentConsumers}}");
+
 
         return activeMqEndpointConsumerBuilder;
     }

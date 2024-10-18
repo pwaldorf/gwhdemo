@@ -44,6 +44,5 @@ public interface GwhEndpointRouteBuilderExtension {
             }
         });
         return routePolicies.toArray(RoutePolicy[]::new);
-
     }
 }

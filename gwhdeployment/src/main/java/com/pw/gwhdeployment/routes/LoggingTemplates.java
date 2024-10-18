@@ -12,11 +12,13 @@ public class LoggingTemplates extends RouteBuilder {
     public void configure() throws Exception {
 
         // This creates a test message for the local routes
-        from("timer:foo?period=0&delay=-1&repeatCount=1000")
-        .setBody(constant("This is a test MQ Message1"))
-         .to("jms:queue:test.queue1")
-        .setBody(constant("This is a test MQ Message2"))
-         .to("jms:queue:test.queue1");
+        from("timer:foo?period=0&delay=-1&repeatCount=1")
+        // .setBody(constant("This is a test MQ Message1"))
+        //  .to("jms:queue:test.queue1")
+        // .setBody(constant("This is a test MQ Message2"))
+        //  .to("jms:queue:test.queue1");
+            .setBody(constant("<foo><bar>cheese</bar></foo>"))
+                .to("jms:queue:test.queue1");
 
     }
 }

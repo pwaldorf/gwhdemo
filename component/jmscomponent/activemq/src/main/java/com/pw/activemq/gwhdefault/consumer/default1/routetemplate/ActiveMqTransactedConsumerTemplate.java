@@ -23,10 +23,12 @@ public class ActiveMqTransactedConsumerTemplate extends EndpointRouteBuilder imp
         routeTemplate("activemqdefault_reader_tx_v1")
         .templateParameter("queue")
         .templateParameter("directName")
+        .templateParameter("jmsMessageType", "Text")
         .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
         .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())
         .transacted("txRequiredActiveMqDefault")
+        .bean(XPathTest.class, "test")
         .to("direct:{{directName}}")
         .routeGroup("Consumer");
     }
