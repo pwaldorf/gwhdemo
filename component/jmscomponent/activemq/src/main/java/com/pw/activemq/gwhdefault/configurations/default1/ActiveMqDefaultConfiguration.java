@@ -10,7 +10,7 @@ import javax.jms.ConnectionFactory;
 
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.configuration.default1.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.component.activemq.configuration.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqDefaultConfiguration {
 
     private final ConnectionFactory connectionFactory;

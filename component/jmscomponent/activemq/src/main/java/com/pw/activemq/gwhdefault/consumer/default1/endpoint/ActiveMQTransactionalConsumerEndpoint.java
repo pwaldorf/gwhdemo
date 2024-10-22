@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.pw.support1.route.GwhEndpointConsumerBuilder;
 
 @Configuration
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMQTransactionalConsumerEndpoint implements GwhEndpointConsumerBuilder {
 
     @Override

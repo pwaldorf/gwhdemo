@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "gwh.framework.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "gwh.component.activemq.consumer.default1.enabled", havingValue = "true", matchIfMissing = false)
 public class ActiveMqDefaultConsumerTemplate extends EndpointRouteBuilder implements GwhEndpointRouteBuilderExtension {
 
     private final ActiveMqDefaultConsumerProperties defaultProperties;
@@ -19,13 +19,14 @@ public class ActiveMqDefaultConsumerTemplate extends EndpointRouteBuilder implem
     @Override
     public void configure() throws Exception {
 
-        routeTemplate("activemqdefault_reader_v1")
+        routeTemplate("activemqdefault_consumer_v1")
         .templateParameter("queue")
         .templateParameter("directName")
         .templateParameter("jmsMessageType", "Text")
         .templateParameter("cacheLevelName", "CACHE_NONE")
         .templateParameter("concurrentConsumers", "1")
         .templateParameter("maxConcurrentConsumers", "1")
+        .templateParameter("asyncConsumer", "false")
         .from(getConsumerEndpointRouteBuilderByName(defaultProperties.getDefaultConsumerEndpoint()).getConsumerEndpoint())
         .routePolicy(getRoutePoliciesByAnnotation(defaultProperties.getDefaultRoutePolicy()))
         .routeConfigurationId(defaultProperties.getDefaultRouteConfigurationPattern())

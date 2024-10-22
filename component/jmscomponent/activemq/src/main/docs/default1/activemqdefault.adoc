@@ -1,0 +1,120 @@
+= ActiveMQ Component
+:toc: auto
+:table-stripes: even
+:table-caption!:
+
+:doctitle: ActiveMQ
+:shortname: activemq
+:artificatid: activemq
+:description: send and receive messages over activemq queue or topic
+
+This component allows messages to be send to or consumed from an ActiveMQ queue or topic. It uses Camel's JMS component as the base and further documentation can be found on the camel's website.
+
+== Maven Requirement
+For Maven, add the following dependency to the 'pom.xml':
+
+[source,xml]
+----------------------------------------------------------
+<dependency>
+    <groupId>com.pw</groupId>
+    <artifactId>jmscomponents</artifactId>
+    <version>x.x.x</version>
+    <!-- use same version as gwh-core version -->
+</dependency>
+----------------------------------------------------------
+
+== Consumer Options and Properties
+
+=== Route Templates
+
+[width="100%",cols"20%,80%",options="header",]
+|===
+|Tempalate |Description
+
+|activemqdefault_consumer_v1 |Default activeMQ consumer without Transaction
+
+|activemqdefault_consumer_tx_v1 |Default activeMQ consumer with Transaction
+
+|===
+
+==== Route Template Parameters
+[width="100%",cols"10%,10%,10%,70%",options="header",]
+|===
+|Template |Parameter |Default Value |Description
+
+|activemqdefault_consumer_v1 |queue | |Name of MQ Queue
+
+|activemqdefault_consumer_v1 |jmsMessageType |Text | Jms Message Type: 'Text', 'Bytes', 'Map', 'Object', 'Stream'
+
+|activemqdefault_consumer_v1 |cacheLevelName |CACHE_NONE for default consumer, CACHE_CONSUMER for Transactional Consumer | Cache Level Type: CACHE_NONE, CACHE_AUTO, CACHE_CONNECTION, CACHE_CONSUMER, CACHE_SESSION
+
+|activemqdefault_consumer_v1 |concurrentConsumers |1 | Default number of concurrent consumers
+
+|activemqdefault_consumer_v1 |maxConcurrentConsumers |1 | Maximum number of concurrent consumers
+
+|activemqdefault_consumer_v1 |directname | |
+| | | |
+
+|activemqdefault_consumer_tx_v1 |queue | |Name of MQ Queue
+
+|activemqdefault_consumer_tx_v1 |transaction |txRequiredActiveMqDefault | Transactional Propagation Bean Name
+
+|activemqdefault_consumer_tx_v1 |jmsMessageType |Text | Jms Message Type: 'Text', 'Bytes', 'Map', 'Object', 'Stream'
+
+|activemqdefault_consumer_tx_v1 |cacheLevelName |CACHE_NONE for default consumer, CACHE_CONSUMER for Transactional Consumer | Cache Level Type: CACHE_NONE, CACHE_AUTO, CACHE_CONNECTION, CACHE_CONSUMER, CACHE_SESSION
+
+|activemqdefault_consumer_tx_v1 |concurrentConsumers |1 | Default number of concurrent consumers
+
+|activemqdefault_consumer_tx_v1 |maxConcurrentConsumers |1 | Maximum number of concurrent consumers
+
+|activemqdefault_consumer_tx_v1 |directname | |
+|===
+
+=== Properties
+[width="100%",cols"10%,10%,10%,80%",options="header",]
+|===
+|Property |Default Value |Values |Description
+|gwh.component.activemq.configuration.default1.enabled |false | true, false |Enables default consumer configuration for transaction management for ActiveMQ
+
+|gwh.component.activemq.consumer.default1.enabled |false | true, false |Enables default consumer components for ActiveMQ
+
+|gwh.component.activemq.consumer.default1.brokerUrl | |Valid URL |URL of JMS Broker
+
+|gwh.component.activemq.consumer.default1.username | |Valid User Name |JMS User Name
+
+|gwh.component.activemq.consumer.default1.password | |Valid Password |JMS Password
+
+|gwh.component.activemq.consumer.default1.defaultConsumerEndpoint |activeMqConsumerEndpoint |Valid JMS Consumer Endpoint |Allows different configurable endpoints to be used
+
+|gwh.component.activemq.consumer.default1.defaultRoutePolicy |activeMqConsumer |Valid Route Poicly |Used to control routes at runtime
+
+|gwh.component.activemq.consumer.default1.defaultRouteConfigurationPattern |.*activeMqConsumerError.*,.*activeMqConsumerConfig.* |Valid Route Configuration or Pattern |Decouples configuration from routes
+
+|===
+
+=== Endpoints
+[width="100%",cols"20%,80%",options="header",stripes="even"]
+|===
+|Endpoint |Description
+
+|ActiveMqConsumerEndpoint |Default Consumer Endpoint to read a message from a JMS queue without transaction.
+
+|ActiveMQTransactionalConsumerEndpoint |Default Transactional Consumer Endpoint to read a message from a JMS queue with transaction.
+
+|===
+
+=== Route Policies
+[width="100%",cols"20%,80%",options="header",]
+|===
+|Policy Name |Description
+
+|===
+
+=== Route Configurations
+[width="100%",cols"20%,80%",options="header",]
+|===
+|Policy Configuration |Description
+
+|===
+
+== Consumer Examples

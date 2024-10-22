@@ -27,10 +27,6 @@ public class ActiveMqDefaultConsumerProperties {
      */
     private String password;
 
-    /**
-     * JMS Connection factory Cache Size
-     */
-    private int sessionCacheSize;
 
     private String defaultRoutePolicy = "activeMqConsumer";
     private String defaultRouteConfigurationPattern = ".*activeMqConsumerError.*,.*activeMqConsumerConfig.*";
