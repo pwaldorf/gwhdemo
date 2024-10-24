@@ -1,0 +1,9 @@
+// == Abstract
+:notitle: true
+:doctitle: Abstract
+:shortname: abstract
+:artificatid: abstract
+:description: documentation abstract
+
+[abstract]
+Gateway Framework Documentation purpose described here

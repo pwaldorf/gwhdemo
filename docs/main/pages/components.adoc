@@ -1,0 +1,2 @@
+
+* xref::./../../../component/jmscomponent/activemq/src/main/docs/default1/activemqdefault.adoc[ActiveMQ]

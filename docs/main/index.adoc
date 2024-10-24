@@ -1,3 +1,33 @@
-= Reference Documentation
+= Gateway Framework Documentation
+:doctype: book
+:doctitle: Gateway Framework Reference
+:shortname: GWH Framework
+:artificatid: gwhframework
+:description: Gateway Framework Reference Documentation
 
-* xref:./component/pages/activemqdefault.adoc[activemqdefault]
+include::./abstract.adoc[]
+
+'''
+
+== Summary
+
+* <<Components>>
+* <<Dataformats>>
+* <<Core>>
+* <<Test Tools>>
+
+== Components
+
+include::./pages/components.adoc[]
+
+== Dataformats
+
+include::./pages/dataformats.adoc[]
+
+== Core
+
+include::./pages/core.adoc[]
+
+== Test Tools
+
+include::./pages/testtools.adoc[]
